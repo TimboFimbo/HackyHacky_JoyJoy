@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmpnhoymcs802"]
+
+[ext_resource type="PackedScene" uid="uid://jn0dwoe52ofv" path="res://Scenes/map_level_1.tscn" id="1_idtn2"]
+[ext_resource type="Script" path="res://Scenes/Main.cs" id="1_ypcln"]
+[ext_resource type="PackedScene" uid="uid://cuyk8vy73dj7n" path="res://Scenes/player.tscn" id="2_t0eya"]
+
+[node name="main" type="Node"]
+script = ExtResource("1_ypcln")
+
+[node name="map_level1" parent="." instance=ExtResource("1_idtn2")]
+position = Vector2(32, 32)
+
+[node name="player" parent="." instance=ExtResource("2_t0eya")]
+position = Vector2(79, 80)
+
+[connection signal="DirectionPressed" from="player" to="." method="DirectionSignalReceived"]

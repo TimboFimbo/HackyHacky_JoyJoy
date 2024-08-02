@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "Kk+I1iB6k0l6WIK/8qHGD8eFT/8i/hpTtNFvDCENTprWv+icFJRlmtW00qFCHWvf74OIW2Kv8pBnImPsHdd9ww==",
+  "success": true,
+  "projectFilePath": "/home/timbo/src/Godot/HackyHacky_JoyJoy/HackyHacky_JoyJoy.csproj",
+  "expectedPackageFiles": [
+    "/home/timbo/.nuget/packages/godot.sourcegenerators/4.3.0-dev.6/godot.sourcegenerators.4.3.0-dev.6.nupkg.sha512",
+    "/home/timbo/.nuget/packages/godotsharp/4.3.0-dev.6/godotsharp.4.3.0-dev.6.nupkg.sha512",
+    "/home/timbo/.nuget/packages/godotsharpeditor/4.3.0-dev.6/godotsharpeditor.4.3.0-dev.6.nupkg.sha512",
+    "/home/timbo/.nuget/packages/microsoft.netcore.app.ref/6.0.32/microsoft.netcore.app.ref.6.0.32.nupkg.sha512",
+    "/home/timbo/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.32/microsoft.aspnetcore.app.ref.6.0.32.nupkg.sha512"
+  ],
+  "logs": []
+}

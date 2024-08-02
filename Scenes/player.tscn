@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cuyk8vy73dj7n"]
+
+[ext_resource type="Script" path="res://Scenes/Player.cs" id="1_rohru"]
+[ext_resource type="Texture2D" uid="uid://ctxq2k4oy3syu" path="res://Assets/Sprites/snake.png" id="1_s3u5q"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5y5gb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_s3u5q")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="player" type="Area2D"]
+position = Vector2(32, 32)
+script = ExtResource("1_rohru")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5y5gb")
+animation = &"walk"

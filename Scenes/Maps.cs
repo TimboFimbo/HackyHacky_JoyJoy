@@ -7,16 +7,18 @@ namespace AsciiMaps
     {
         static string[] mapLevel1 = 
         {
-            ".......W...",
-            ".......W...",
-            "....T..W...",
-            ".......D.E.",
-            ".......W...",
-            ".......W...",
-            ".......W..."
+            "WWWWWWWWWWWWW",
+            "W.......W...W",
+            "W.......W...W",
+            "W....T..W...W",
+            "W.......D.E.W",
+            "W.......W...W",
+            "W.......W...W",
+            "W.......W...W",
+            "WWWWWWWWWWWWW"
         };
 
-        public static char CheckMap(int y, int x)
+        public static char CheckMap(int x, int y)
         {
             return mapLevel1[y][x];
         }

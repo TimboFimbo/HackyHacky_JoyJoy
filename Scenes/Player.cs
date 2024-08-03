@@ -9,6 +9,8 @@ public partial class Player : Area2D
 	Vector2 pos = new Vector2(80, 80);
 	[Signal]
 	public delegate void DirectionPressedEventHandler(string pressed);
+	[Signal]
+	public delegate void InteractPressedEventHandler();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -42,6 +44,11 @@ public partial class Player : Area2D
 		{
 			// MovePlayer("down");
 			EmitSignal(SignalName.DirectionPressed, "down");
+		}
+
+		if (Input.IsActionJustPressed("interact"))
+		{
+			EmitSignal(SignalName.InteractPressed);
 		}
 	}
 

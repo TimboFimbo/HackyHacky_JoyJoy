@@ -14,3 +14,4 @@ position = Vector2(32, 32)
 position = Vector2(79, 80)
 
 [connection signal="DirectionPressed" from="player" to="." method="DirectionSignalReceived"]
+[connection signal="InteractPressed" from="player" to="." method="InteractSignalReceived"]

@@ -11,6 +11,8 @@ public partial class Player : Area2D
 	public delegate void DirectionPressedEventHandler(string pressed);
 	[Signal]
 	public delegate void InteractPressedEventHandler();
+	[Signal]
+	public delegate void OpenDoorPressedEventHandler(int doorNumber);
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -49,6 +51,23 @@ public partial class Player : Area2D
 		if (Input.IsActionJustPressed("interact"))
 		{
 			EmitSignal(SignalName.InteractPressed);
+		}
+
+		// The following are debug keys and won't be used in-game
+
+		if (Input.IsActionJustPressed("open_door"))
+		{
+			EmitSignal(SignalName.OpenDoorPressed, 0);
+		}
+
+		if (Input.IsActionJustPressed("open_door_1"))
+		{
+			EmitSignal(SignalName.OpenDoorPressed, 1);
+		}
+
+		if (Input.IsActionJustPressed("open_door_2"))
+		{
+			EmitSignal(SignalName.OpenDoorPressed, 2);
 		}
 	}
 

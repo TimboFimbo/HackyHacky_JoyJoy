@@ -8,7 +8,7 @@ public partial class Main : Node
 	bool printed = false;
 	int[] playerPos = {1, 1};
 	int[] mapSize = {12, 8};
-	char[] walkableBlocks = new char[2] {'.', '#'};
+	char[] walkableBlocks = new char[3] {'.', '#', '#'};
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -142,5 +142,60 @@ public partial class Main : Node
 			GD.Print("Walkable Block: ", item.ToString());
 		}
 		// GD.Print("Walkable BLocks: ", walkableBlocks);
+	}
+
+	public void OpenDoorSignalReceived(int doorNumber)
+	{
+		switch(doorNumber)
+		{
+			// open any door next to player
+			case 0:
+			for (int i = 0; i < 2; i++)
+			{
+				for (int j = 0; j < 2; j++)
+				{
+					int xPos = playerPos[0] - i;
+					int yPos = playerPos[1] - j;
+
+					if (AsciiMaps.Maps.CheckMap(xPos, yPos) == '1' ||
+					AsciiMaps.Maps.CheckMap(xPos, yPos) == '2')
+					{
+						GD.Print("Door found at " + xPos.ToString() + ", " + yPos.ToString());
+						OpenDoor(xPos, yPos);
+					}
+
+					xPos = playerPos[0] + i;
+					yPos = playerPos[1] + j;
+
+					if (AsciiMaps.Maps.CheckMap(xPos, yPos) == '1' ||
+					AsciiMaps.Maps.CheckMap(xPos, yPos) == '2')
+					{
+						GD.Print("Door found at " + xPos.ToString() + ", " + yPos.ToString());
+						OpenDoor(xPos, yPos);
+					}
+				}
+			}
+			break;
+
+			case 1:
+			GD.Print("Door 1 to open");
+			break;
+		}
+
+		for (int i = 0; i < walkableBlocks.Length; i++)
+		{
+			GD.Print("Walkable block " + i.ToString() + " = " + walkableBlocks[i].ToString());
+		}
+	}
+
+	private void OpenDoor(int xPos, int yPos)
+	{
+		var tileMap = GetNode<TileMap>("map_level1");
+		char doorToOpen = AsciiMaps.Maps.CheckMap(xPos, yPos);
+
+		tileMap.SetCell(0, new Vector2I(xPos, yPos), 0, new Vector2I(2, 0), 0);
+		walkableBlocks[doorToOpen - '0'] = doorToOpen;
+
+		GD.Print("Opening door at " + xPos.ToString() + ", " + yPos.ToString());
 	}
 }

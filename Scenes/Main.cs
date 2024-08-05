@@ -9,6 +9,7 @@ public partial class Main : Node
 	int[] playerPos = {1, 1};
 	int[] mapSize = {12, 8};
 	char[] walkableBlocks = new char[3] {'.', '#', '#'};
+	bool inputBoxOpen = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -36,6 +37,11 @@ public partial class Main : Node
 
 	public void DirectionSignalReceived(string direction)
 	{
+		if (inputBoxOpen)
+		{
+			return;
+		}
+
 		GD.Print("Signal received  - ", direction);
 		bool moveOk = false;
 		GD.Print(moveOk);
@@ -123,33 +129,39 @@ public partial class Main : Node
 
 	public void InteractSignalReceived()
 	{
-		GD.Print("Interact Signal Received");
-		var tileMap = GetNode<TileMap>("map_level1");
-
-		// GD.Print(tileMap.GetCellTileData(0, new Vector2I(3, 8)));
-		// int abc = tileMap.GetCellSourceId(0, new Vector2I(3, 8));
-		// GD.Print(abc.ToString());
-
-		// GD.Print(tileMap.GetCellTileData(0, new Vector2I(8, 4)));
-		// int abcd = tileMap.GetCellSourceId(0, new Vector2I(8, 4));
-		// GD.Print(abcd.ToString());
-
-		tileMap.SetCell(0, new Vector2I(8, 4), 0, new Vector2I(2, 0), 0);
-		walkableBlocks[1] = 'D';
-
-		foreach(char item in walkableBlocks)
+		if (!inputBoxOpen)
 		{
-			GD.Print("Walkable Block: ", item.ToString());
+			GD.Print("Interact Signal Received");
+			var inputBox = GetNode<LineEdit>("input_box");
+			inputBox.Show();
+			inputBox.GrabFocus();
+			inputBoxOpen = true;
 		}
-		// GD.Print("Walkable BLocks: ", walkableBlocks);
+
+		// This needs to open the terminal
+
+		// var tileMap = GetNode<TileMap>("map_level1");
+		// tileMap.SetCell(0, new Vector2I(8, 4), 0, new Vector2I(2, 0), 0);
+		// walkableBlocks[1] = 'D';
+
+		// foreach(char item in walkableBlocks)
+		// {
+		// 	GD.Print("Walkable Block: ", item.ToString());
+		// }
 	}
 
 	public void OpenDoorSignalReceived(int doorNumber)
 	{
+		if (inputBoxOpen)
+		{
+			return;
+		}
+
 		switch(doorNumber)
 		{
 			// open any door next to player
 			case 0:
+			GD.Print("Any adjacent door to open");
 			for (int i = 0; i < 2; i++)
 			{
 				for (int j = 0; j < 2; j++)
@@ -179,6 +191,32 @@ public partial class Main : Node
 
 			case 1:
 			GD.Print("Door 1 to open");
+			for (int i = 0; i < mapSize[0]; i++)
+			{
+				for (int j = 0; j < mapSize[1]; j++)
+				{
+					if (AsciiMaps.Maps.CheckMap(i, j) == '1')
+					{
+						GD.Print("Door found at " + i.ToString() + ", " + j.ToString());
+						OpenDoor(i, j);
+					}
+				}
+			}
+			break;
+
+			case 2:
+			GD.Print("Door 2 to open");
+			for (int i = 0; i < mapSize[0]; i++)
+			{
+				for (int j = 0; j < mapSize[1]; j++)
+				{
+					if (AsciiMaps.Maps.CheckMap(i, j) == '2')
+					{
+						GD.Print("Door found at " + i.ToString() + ", " + j.ToString());
+						OpenDoor(i, j);
+					}
+				}
+			}
 			break;
 		}
 
@@ -186,6 +224,15 @@ public partial class Main : Node
 		{
 			GD.Print("Walkable block " + i.ToString() + " = " + walkableBlocks[i].ToString());
 		}
+	}
+
+	public void InputBoxSignalReceived(string text)
+	{
+		var inputBox = GetNode<LineEdit>("input_box");
+		GD.Print("Text from input box: ", inputBox.Text);
+		inputBox.ReleaseFocus();
+		inputBox.Hide();
+		inputBoxOpen = false;
 	}
 
 	private void OpenDoor(int xPos, int yPos)

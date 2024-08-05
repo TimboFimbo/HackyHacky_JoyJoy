@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://l5632oekfvey"]
+
+[ext_resource type="FontFile" uid="uid://dxrjai3i55deo" path="res://Assets/Fonts/dogica/TTF/dogicapixel.ttf" id="1_pb7jx"]
+[ext_resource type="Script" path="res://Scenes/InputBox.cs" id="2_ty2ge"]
+
+[node name="input_box" type="LineEdit"]
+offset_left = 24.0
+offset_top = 414.0
+offset_right = 778.0
+offset_bottom = 482.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_pb7jx")
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Enter Code: "
+script = ExtResource("2_ty2ge")

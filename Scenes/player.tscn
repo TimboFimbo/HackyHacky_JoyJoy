@@ -1,13 +1,53 @@
-[gd_scene load_steps=4 format=3 uid="uid://cuyk8vy73dj7n"]
+[gd_scene load_steps=14 format=3 uid="uid://cuyk8vy73dj7n"]
 
 [ext_resource type="Script" path="res://Scenes/Player.cs" id="1_rohru"]
-[ext_resource type="Texture2D" uid="uid://ctxq2k4oy3syu" path="res://Assets/Sprites/snake.png" id="1_s3u5q"]
+[ext_resource type="Texture2D" uid="uid://ctxq2k4oy3syu" path="res://Assets/Sprites/Snake_Sprite/snake.png" id="1_s3u5q"]
+[ext_resource type="Texture2D" uid="uid://dst4teq7c06lp" path="res://Assets/Sprites/Snake_Sprite/tile021.png" id="3_grh14"]
+[ext_resource type="Texture2D" uid="uid://dy4jl7rfqfhv4" path="res://Assets/Sprites/Snake_Sprite/tile022.png" id="4_54wof"]
+[ext_resource type="Texture2D" uid="uid://b0uyphl8y0a04" path="res://Assets/Sprites/Snake_Sprite/tile023.png" id="5_l1uq0"]
+[ext_resource type="Texture2D" uid="uid://cedqv7rryt7ki" path="res://Assets/Sprites/Snake_Sprite/tile024.png" id="6_ngfd8"]
+[ext_resource type="Texture2D" uid="uid://d0yp3ka744lrd" path="res://Assets/Sprites/Snake_Sprite/tile025.png" id="7_a184h"]
+[ext_resource type="Texture2D" uid="uid://bq7nartr24yae" path="res://Assets/Sprites/Snake_Sprite/tile026.png" id="8_tocxu"]
+[ext_resource type="Texture2D" uid="uid://djrbo7j0jv2g5" path="res://Assets/Sprites/Snake_Sprite/tile027.png" id="9_l2io0"]
+[ext_resource type="Texture2D" uid="uid://dk7nmfb2rpotx" path="res://Assets/Sprites/Snake_Sprite/tile028.png" id="10_0budy"]
+[ext_resource type="Texture2D" uid="uid://defgoj6ts3cwp" path="res://Assets/Sprites/Snake_Sprite/tile029.png" id="11_hvi0n"]
+[ext_resource type="Texture2D" uid="uid://bm20oll44nuoa" path="res://Assets/Sprites/Snake_Sprite/tile030.png" id="12_agt2o"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5y5gb"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_s3u5q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_grh14")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_54wof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_l1uq0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ngfd8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_a184h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_tocxu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_l2io0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_0budy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_hvi0n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_agt2o")
 }],
 "loop": true,
 "name": &"walk",
@@ -18,6 +58,6 @@ animations = [{
 position = Vector2(32, 32)
 script = ExtResource("1_rohru")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="SnakeSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5y5gb")
 animation = &"walk"

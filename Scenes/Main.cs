@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using AsciiMaps;
+using OLangCode;
 using System.Linq;
 
 public partial class Main : Node
@@ -16,23 +17,17 @@ public partial class Main : Node
 	{
 		GD.Print("Game Started");
 
-		// GD.Print("Coordinates (0, 0) contains a " + AsciiMaps.Maps.CheckMap(0, 0));
-		// GD.Print("Coordinates (2, 4) contains a ", AsciiMaps.Maps.CheckMap(2, 4));
-		// GD.Print("Coordinates (3, 7) contains a ", AsciiMaps.Maps.CheckMap(3, 7));
+		DisplayCode(1);
+
+		var sprite = GetNode<Player>("player").GetNode<AnimatedSprite2D>("SnakeSprite");
+		GD.Print("Found snake sprite: ", sprite.ToString());
+		sprite.Play();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		// while (!printed)
-		// {
-		// 	GD.Print("Coordinates (0, 0) contains a " + AsciiMaps.Maps.CheckMap(0, 0));
-		// 	GD.Print("Coordinates (4, 2) contains a %s", AsciiMaps.Maps.CheckMap(4, 2));
-		// 	GD.Print("Coordinates (9, 3) contains a %s", AsciiMaps.Maps.CheckMap(9, 3));
-		// 	printed = true;
-		// }
-
-		// GD.Print("Something");
+		return;
 	}
 
 	public void DirectionSignalReceived(string direction)
@@ -46,10 +41,13 @@ public partial class Main : Node
 		bool moveOk = false;
 		GD.Print(moveOk);
 
+		var sprite = GetNode<Player>("player").GetNode<AnimatedSprite2D>("SnakeSprite");
+
 		if (direction == "right")
 		{
 			if (playerPos[0] < mapSize[0] - 1)
 			{
+				sprite.FlipH = true;
 				char newPos = AsciiMaps.Maps.CheckMap(playerPos[0] + 1, playerPos[1]);
 
 				GD.Print("newPos = ", newPos.ToString());
@@ -68,6 +66,7 @@ public partial class Main : Node
 		{
 			if (playerPos[0] > 1)
 			{
+				sprite.FlipH = false;
 				char newPos = AsciiMaps.Maps.CheckMap(playerPos[0] - 1, playerPos[1]);
 
 				GD.Print("newPos = ", newPos.ToString());
@@ -281,5 +280,17 @@ public partial class Main : Node
 		inputBox.Show();
 		inputBox.GrabFocus();
 		inputBoxOpen = true;
+	}
+
+	private void DisplayCode(int levelNumber)
+	{
+		var codeBox = GetNode<CodeBox>("CodeBox");
+
+		switch (levelNumber)
+		{
+			case 1:
+				codeBox.SetText(OLangCode.Code.oLangLevel1);
+				break;
+		}
 	}
 }

@@ -1,3 +1,6 @@
+ColorRect
+TextureRect
+GridContainer
 LineEdit
 TextEdit
 AnimatedSprite2D

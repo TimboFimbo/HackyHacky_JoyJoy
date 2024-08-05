@@ -5,3 +5,5 @@ res://Scenes/map_level_1.tscn
 res://Scenes/main.tscn
 res://Scenes/player.tscn
 res://Scenes/input_box.tscn
+res://Scenes/code_box.tscn
+res://Scenes/CodeBox.cs

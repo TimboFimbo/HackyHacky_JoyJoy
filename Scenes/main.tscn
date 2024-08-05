@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmpnhoymcs802"]
+[gd_scene load_steps=6 format=3 uid="uid://cmpnhoymcs802"]
 
 [ext_resource type="PackedScene" uid="uid://jn0dwoe52ofv" path="res://Scenes/map_level_1.tscn" id="1_idtn2"]
 [ext_resource type="Script" path="res://Scenes/Main.cs" id="1_ypcln"]
 [ext_resource type="PackedScene" uid="uid://cuyk8vy73dj7n" path="res://Scenes/player.tscn" id="2_t0eya"]
 [ext_resource type="PackedScene" uid="uid://l5632oekfvey" path="res://Scenes/input_box.tscn" id="4_a5m0f"]
+[ext_resource type="PackedScene" uid="uid://bfuof2wwr07" path="res://Scenes/code_box.tscn" id="5_ax0dd"]
 
 [node name="main" type="Node"]
 script = ExtResource("1_ypcln")
@@ -18,9 +19,11 @@ position = Vector2(79, 80)
 visible = false
 offset_left = 31.0
 offset_top = 347.0
-offset_right = 785.0
+offset_right = 526.0
 offset_bottom = 415.0
 focus_mode = 2
+
+[node name="CodeBox" parent="." instance=ExtResource("5_ax0dd")]
 
 [connection signal="DirectionPressed" from="player" to="." method="DirectionSignalReceived"]
 [connection signal="InteractPressed" from="player" to="." method="InteractSignalReceived"]

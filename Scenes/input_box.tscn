@@ -6,7 +6,7 @@
 [node name="input_box" type="LineEdit"]
 offset_left = 24.0
 offset_top = 414.0
-offset_right = 778.0
+offset_right = 581.0
 offset_bottom = 482.0
 focus_mode = 0
 theme_override_fonts/font = ExtResource("1_pb7jx")

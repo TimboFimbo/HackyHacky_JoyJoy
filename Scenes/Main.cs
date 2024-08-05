@@ -8,7 +8,7 @@ public partial class Main : Node
 	bool printed = false;
 	int[] playerPos = {1, 1};
 	int[] mapSize = {12, 8};
-	char[] walkableBlocks = new char[3] {'.', '#', '#'};
+	char[] walkableBlocks = new char[4] {'.', '#', '#', 'E'};
 	bool inputBoxOpen = false;
 
 	// Called when the node enters the scene tree for the first time.
@@ -46,7 +46,6 @@ public partial class Main : Node
 		bool moveOk = false;
 		GD.Print(moveOk);
 
-
 		if (direction == "right")
 		{
 			if (playerPos[0] < mapSize[0] - 1)
@@ -60,6 +59,7 @@ public partial class Main : Node
 					moveOk = true;
 					GD.Print("Moving player ", direction);
 					playerPos[0] += 1;
+					if (newPos == 'E') { ExitSteppedOn(); }
 				}
 			}
 		}
@@ -77,6 +77,7 @@ public partial class Main : Node
 					moveOk = true;
 					GD.Print("Moving player ", direction);
 					playerPos[0] -= 1;
+					if (newPos == 'E') { ExitSteppedOn(); }
 				}
 			}
 		}
@@ -94,6 +95,7 @@ public partial class Main : Node
 					moveOk = true;
 					GD.Print("Moving player ", direction);
 					playerPos[1] += 1;
+					if (newPos == 'E') { ExitSteppedOn(); }
 				}
 			}
 		}
@@ -111,6 +113,7 @@ public partial class Main : Node
 					moveOk = true;
 					GD.Print("Moving player ", direction);
 					playerPos[1] -= 1;
+					if (newPos == 'E') { ExitSteppedOn(); }
 				}
 			}
 		}
@@ -129,13 +132,33 @@ public partial class Main : Node
 
 	public void InteractSignalReceived()
 	{
-		if (!inputBoxOpen)
+		if (inputBoxOpen)
 		{
-			GD.Print("Interact Signal Received");
-			var inputBox = GetNode<LineEdit>("input_box");
-			inputBox.Show();
-			inputBox.GrabFocus();
-			inputBoxOpen = true;
+			return;
+		}
+
+		for (int i = 0; i < 2; i++)
+		{
+			for (int j = 0; j < 2; j++)
+			{
+				int xPos = playerPos[0] - i;
+				int yPos = playerPos[1] - j;
+
+				if (AsciiMaps.Maps.CheckMap(xPos, yPos) == 'T')
+				{
+					GD.Print("Terminal found at " + xPos.ToString() + ", " + yPos.ToString());
+					ActivateTerminal();
+				}
+
+				xPos = playerPos[0] + i;
+				yPos = playerPos[1] + j;
+
+				if (AsciiMaps.Maps.CheckMap(xPos, yPos) == 'T')
+				{
+					GD.Print("Door found at " + xPos.ToString() + ", " + yPos.ToString());
+					ActivateTerminal();
+				}
+			}
 		}
 
 		// This needs to open the terminal
@@ -244,5 +267,19 @@ public partial class Main : Node
 		walkableBlocks[doorToOpen - '0'] = doorToOpen;
 
 		GD.Print("Opening door at " + xPos.ToString() + ", " + yPos.ToString());
+	}
+
+	private void ExitSteppedOn()
+	{
+		GD.Print("You Win!");
+	}
+
+	private void ActivateTerminal()
+	{
+		GD.Print("Interact Signal Received");
+		var inputBox = GetNode<LineEdit>("input_box");
+		inputBox.Show();
+		inputBox.GrabFocus();
+		inputBoxOpen = true;
 	}
 }

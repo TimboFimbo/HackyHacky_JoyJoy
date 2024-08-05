@@ -48,24 +48,24 @@ public partial class Player : Area2D
 			EmitSignal(SignalName.DirectionPressed, "down");
 		}
 
-		if (Input.IsActionJustPressed("interact"))
+		if (Input.IsActionJustPressed("interact")) // key 'i'
 		{
 			EmitSignal(SignalName.InteractPressed);
 		}
 
 		// The following are debug keys and won't be used in-game
 
-		if (Input.IsActionJustPressed("open_door"))
+		if (Input.IsActionJustPressed("open_door")) // key 'o'
 		{
 			EmitSignal(SignalName.OpenDoorPressed, 0);
 		}
 
-		if (Input.IsActionJustPressed("open_door_1"))
+		if (Input.IsActionJustPressed("open_door_1")) // key '1'
 		{
 			EmitSignal(SignalName.OpenDoorPressed, 1);
 		}
 
-		if (Input.IsActionJustPressed("open_door_2"))
+		if (Input.IsActionJustPressed("open_door_2")) // key '2'
 		{
 			EmitSignal(SignalName.OpenDoorPressed, 2);
 		}

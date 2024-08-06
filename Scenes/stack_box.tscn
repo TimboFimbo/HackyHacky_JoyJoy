@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgo2q4fex3vml"]
+
+[ext_resource type="Script" path="res://StackBox.cs" id="1_fpm0k"]
+
+[node name="StackBox" type="GridContainer"]
+offset_left = 715.0
+offset_top = 569.0
+offset_right = 1215.0
+offset_bottom = 686.0
+columns = 16
+script = ExtResource("1_fpm0k")

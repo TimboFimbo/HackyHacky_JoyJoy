@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwv1itc3drlw"]
+
+[ext_resource type="Script" path="res://Scenes/VarsBox.cs" id="1_2mfwu"]
+
+[node name="VarsBox" type="GridContainer"]
+offset_left = 715.0
+offset_top = 24.0
+offset_right = 1215.0
+offset_bottom = 200.0
+columns = 16
+script = ExtResource("1_2mfwu")

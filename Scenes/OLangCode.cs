@@ -12,6 +12,22 @@ namespace OLangCode
             "END             " +
             "RUNopen_door    " +
             "PRT$1030        " +
-            "END             ";
+            "END             " +
+            "                " +
+            "                " +
+            "                " +
+            "                ";
+
+        public static string varsLevel1 = 
+            "1234            " +
+            "Enter Code: ;   " +
+            "Door Not Opened;" +
+            "Door Opened;    " +
+            "                ";
+
+        public static string emptyStack = 
+            "                " +
+            "                " +
+            "                ";
     }
 }

@@ -1,10 +1,10 @@
 using Godot;
 using System;
 
-public partial class CodeBox : GridContainer
+public partial class VarsBox : GridContainer
 {
-	int numberOfCharBoxes = 176;
-	float[] boxColour = {0.5f, 0.25f, 0.5f};
+	int numberOfCharBoxes = 80;
+	float[] boxColour = {0.3f, 0.25f, 0.5f};
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

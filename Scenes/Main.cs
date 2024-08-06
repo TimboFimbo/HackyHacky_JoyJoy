@@ -18,6 +18,8 @@ public partial class Main : Node
 		GD.Print("Game Started");
 
 		DisplayCode(1);
+		DisplayVars(1);
+		DisplayStack(1);
 
 		var sprite = GetNode<Player>("player").GetNode<AnimatedSprite2D>("SnakeSprite");
 		GD.Print("Found snake sprite: ", sprite.ToString());
@@ -292,5 +294,24 @@ public partial class Main : Node
 				codeBox.SetText(OLangCode.Code.oLangLevel1);
 				break;
 		}
+	}
+
+	private void DisplayVars(int levelNumber)
+	{
+		var varsBox = GetNode<VarsBox>("VarsBox");
+
+		switch (levelNumber)
+		{
+			case 1:
+				varsBox.SetText(OLangCode.Code.varsLevel1);
+				break;
+		}
+	}
+
+	private void DisplayStack(int levelNumber)
+	{
+		var varsBox = GetNode<StackBox>("StackBox");
+
+		varsBox.SetText(OLangCode.Code.emptyStack);
 	}
 }

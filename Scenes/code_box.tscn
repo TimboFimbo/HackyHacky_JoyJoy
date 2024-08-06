@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://Scenes/CodeBox.cs" id="1_gvx5b"]
 
 [node name="CodeBox" type="GridContainer"]
-offset_left = 699.0
-offset_top = 209.0
-offset_right = 1199.0
-offset_bottom = 529.0
+offset_left = 715.0
+offset_top = 187.0
+offset_right = 1215.0
+offset_bottom = 507.0
 columns = 16
 script = ExtResource("1_gvx5b")

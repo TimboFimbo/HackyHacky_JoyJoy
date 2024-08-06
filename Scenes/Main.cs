@@ -20,7 +20,7 @@ public partial class Main : Node
 		var outputBox = GetNode<RichTextLabel>("output_box");
 		var interpreter = GetNode<OLangInterpreter>("OLangInterpreter");
 		// outputBox.Text = interpreter.TextToCamel("Test Camel Output");
-		interpreter.ParseOLang(OLangCode.Code.oLangLevel1);
+		// interpreter.ParseOLang(OLangCode.Code.oLangLevel1);
 
 		DisplayCode(1);
 		DisplayVars(1);
@@ -169,17 +169,6 @@ public partial class Main : Node
 				}
 			}
 		}
-
-		// This needs to open the terminal
-
-		// var tileMap = GetNode<TileMap>("map_level1");
-		// tileMap.SetCell(0, new Vector2I(8, 4), 0, new Vector2I(2, 0), 0);
-		// walkableBlocks[1] = 'D';
-
-		// foreach(char item in walkableBlocks)
-		// {
-		// 	GD.Print("Walkable Block: ", item.ToString());
-		// }
 	}
 
 	public void OpenDoorSignalReceived(int doorNumber)
@@ -275,11 +264,13 @@ public partial class Main : Node
 	{
 		// just printing entire string as debug - will get correct string from Vars
 		GD.Print(thingToPrint);
+		var outputBox = GetNode<RichTextLabel>("output_box");
 
 		if (thingToPrint[0] == '$') // for now, all print commands will start with this
 		{
 			string varToPrint = FindLineToPrint(thingToPrint);
 			GD.Print("Var to Print: ", varToPrint);
+			outputBox.Text = varToPrint;
 		}
 	}
 
@@ -312,6 +303,10 @@ public partial class Main : Node
 	{
 		GD.Print("Interact Signal Received");
 		var inputBox = GetNode<LineEdit>("input_box");
+		var interpreter = GetNode<OLangInterpreter>("OLangInterpreter");
+
+		// input box should only open when Input command is received
+		interpreter.ParseOLang(OLangCode.Code.oLangLevel1);
 		inputBox.Show();
 		inputBox.GrabFocus();
 		inputBoxOpen = true;
@@ -368,10 +363,5 @@ public partial class Main : Node
 		}
 
 		return stringToPrint;
-
-		// var hexLineNumberString = lineNumber.ToInt() - OLangCode.Code.varsStart;
-		// GD.Print("Hex Line Number: ", hexLineNumberString.ToString());
-
-		return "";
 	}
 }

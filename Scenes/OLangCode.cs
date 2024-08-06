@@ -8,12 +8,12 @@ namespace OLangCode
         public static int varsStart = 1000;
 
         public static string oLangLevel1 = 
+            "PRT$1000        " +
+            "INP$1030,16     " +
             "PRT$1010        " +
-            "INP$1000,16     " +
-            "PRT$1020        " +
             "END             " +
             "RUNopen_door    " +
-            "PRT$1030        " +
+            "PRT$1020        " +
             "END             " +
             "                " +
             "                " +
@@ -21,10 +21,10 @@ namespace OLangCode
             "                ";
 
         public static string varsLevel1 = 
-            "1234            " +
-            "Enter Code: ;   " +
+            "Enter Code;     " +
             "Door Not Opened;" +
             "Door Opened;    " +
+            "1234            " +
             "                ";
 
         public static string emptyStack = 

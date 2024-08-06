@@ -1,3 +1,11 @@
+res://Scenes/BoxController.cs
+res://Scenes/Player.cs
+res://Scenes/VarsBox.cs
+res://Scenes/CodeBox.cs
+res://StackBox.cs
+res://OLangInterpreter.cs
+res://Scenes/Main.cs
+res://Scenes/InputBox.cs
 res://Scenes/map_level_1.tscn
 res://Scenes/main.tscn
 res://Scenes/player.tscn
@@ -7,11 +15,3 @@ res://Scenes/vars_box.tscn
 res://Scenes/stack_box.tscn
 res://Scenes/box_controller.tscn
 res://Scenes/o_lang_interpreter.tscn
-res://Scenes/BoxController.cs
-res://Scenes/Player.cs
-res://Scenes/VarsBox.cs
-res://Scenes/CodeBox.cs
-res://StackBox.cs
-res://OLangInterpreter.cs
-res://Scenes/Main.cs
-res://Scenes/InputBox.cs

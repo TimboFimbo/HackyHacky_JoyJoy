@@ -1,8 +1,8 @@
 using Godot;
 using System;
+using System.Linq;
 using AsciiMaps;
 using OLangCode;
-using System.Linq;
 
 public partial class Main : Node
 {
@@ -16,6 +16,11 @@ public partial class Main : Node
 	public override void _Ready()
 	{
 		GD.Print("Game Started");
+
+		var outputBox = GetNode<RichTextLabel>("output_box");
+		var interpreter = GetNode<OLangInterpreter>("OLangInterpreter");
+		// outputBox.Text = interpreter.TextToCamel("Test Camel Output");
+		interpreter.ParseOLang(OLangCode.Code.oLangLevel1);
 
 		DisplayCode(1);
 		DisplayVars(1);
@@ -266,6 +271,24 @@ public partial class Main : Node
 		inputBoxOpen = false;
 	}
 
+	public void PrintCommandSignalReceived(string thingToPrint)
+	{
+		// just printing entire string as debug - will get correct string from Vars
+		GD.Print(thingToPrint);
+
+		if (thingToPrint[0] == '$') // for now, all print commands will start with this
+		{
+			string varToPrint = FindLineToPrint(thingToPrint);
+			GD.Print("Var to Print: ", varToPrint);
+		}
+	}
+
+	// this currently does the same as above, but wanted to keep errors separate
+	public void ErrorCommandSignalReceived(string errorToPrint)
+	{
+		GD.Print(errorToPrint);
+	}
+
 	private void OpenDoor(int xPos, int yPos)
 	{
 		var tileMap = GetNode<TileMap>("map_level1");
@@ -323,5 +346,32 @@ public partial class Main : Node
 		var varsBox = GetNode<StackBox>("StackBox");
 
 		varsBox.SetText(OLangCode.Code.emptyStack);
+	}
+
+	private string FindLineToPrint(string printCommandString)
+	{
+		int lineNumber = printCommandString.Remove(0, 1).ToInt() - OLangCode.Code.varsStart;
+		GD.Print("Line Number: ", lineNumber.ToString());
+
+		int startChar = Convert.ToInt32(lineNumber * 1.6); // convert to hex - yes, i know this is stupid!
+		GD.Print("Start Char: ", startChar.ToString());
+
+		string stringToPrint = "";
+
+		char thisChar = OLangCode.Code.varsLevel1[startChar];
+
+		while (thisChar != ';')
+		{
+			stringToPrint += thisChar;
+			startChar++;
+			thisChar = OLangCode.Code.varsLevel1[startChar];
+		}
+
+		return stringToPrint;
+
+		// var hexLineNumberString = lineNumber.ToInt() - OLangCode.Code.varsStart;
+		// GD.Print("Hex Line Number: ", hexLineNumberString.ToString());
+
+		return "";
 	}
 }

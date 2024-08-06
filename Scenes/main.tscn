@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cmpnhoymcs802"]
+[gd_scene load_steps=10 format=3 uid="uid://cmpnhoymcs802"]
 
 [ext_resource type="PackedScene" uid="uid://jn0dwoe52ofv" path="res://Scenes/map_level_1.tscn" id="1_idtn2"]
 [ext_resource type="Script" path="res://Scenes/Main.cs" id="1_ypcln"]
 [ext_resource type="PackedScene" uid="uid://cuyk8vy73dj7n" path="res://Scenes/player.tscn" id="2_t0eya"]
+[ext_resource type="PackedScene" uid="uid://b4sopualo3alk" path="res://Scenes/o_lang_interpreter.tscn" id="2_txfxr"]
 [ext_resource type="PackedScene" uid="uid://l5632oekfvey" path="res://Scenes/input_box.tscn" id="4_a5m0f"]
 [ext_resource type="PackedScene" uid="uid://bfuof2wwr07" path="res://Scenes/code_box.tscn" id="5_ax0dd"]
 [ext_resource type="FontFile" uid="uid://dxrjai3i55deo" path="res://Assets/Fonts/dogica/TTF/dogicapixel.ttf" id="5_iny0r"]
@@ -11,6 +12,8 @@
 
 [node name="main" type="Node"]
 script = ExtResource("1_ypcln")
+
+[node name="OLangInterpreter" parent="." instance=ExtResource("2_txfxr")]
 
 [node name="map_level1" parent="." instance=ExtResource("1_idtn2")]
 position = Vector2(32, 32)
@@ -49,6 +52,7 @@ text = "Output Box"
 show_behind_parent = true
 light_mask = 4
 visibility_layer = 4
+layout_mode = 0
 offset_left = -7.0
 offset_top = -21.0
 offset_right = 415.0
@@ -68,6 +72,8 @@ offset_bottom = 236.0
 offset_top = 610.0
 offset_bottom = 689.0
 
+[connection signal="ErrorCommand" from="OLangInterpreter" to="." method="ErrorCommandSignalReceived"]
+[connection signal="PrintCommand" from="OLangInterpreter" to="." method="PrintCommandSignalReceived"]
 [connection signal="DirectionPressed" from="player" to="." method="DirectionSignalReceived"]
 [connection signal="InteractPressed" from="player" to="." method="InteractSignalReceived"]
 [connection signal="OpenDoorPressed" from="player" to="." method="OpenDoorSignalReceived"]

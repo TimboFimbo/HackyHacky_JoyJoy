@@ -5,6 +5,8 @@ namespace OLangCode
 {
     public static class Code
     {
+        public static int varsStart = 1000;
+
         public static string oLangLevel1 = 
             "PRT$1010        " +
             "INP$1000,16     " +

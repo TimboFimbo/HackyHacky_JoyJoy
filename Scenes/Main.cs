@@ -34,6 +34,8 @@ public partial class Main : Node
 
 	public void DirectionSignalReceived(string direction)
 	{
+		var outputBox = GetNode<RichTextLabel>("output_box");
+
 		if (inputBoxOpen)
 		{
 			return;
@@ -128,6 +130,7 @@ public partial class Main : Node
 		else
 		{
 			GD.Print("Cannot move there.");
+			outputBox.Text = "Cannot Move There";
 		}
 	}
 
@@ -181,6 +184,8 @@ public partial class Main : Node
 			return;
 		}
 
+		var outputBox = GetNode<RichTextLabel>("output_box");
+
 		switch(doorNumber)
 		{
 			// open any door next to player
@@ -198,6 +203,7 @@ public partial class Main : Node
 					{
 						GD.Print("Door found at " + xPos.ToString() + ", " + yPos.ToString());
 						OpenDoor(xPos, yPos);
+						outputBox.Text = "Door Opened";
 					}
 
 					xPos = playerPos[0] + i;
@@ -208,6 +214,7 @@ public partial class Main : Node
 					{
 						GD.Print("Door found at " + xPos.ToString() + ", " + yPos.ToString());
 						OpenDoor(xPos, yPos);
+						outputBox.Text = "Door Opened";
 					}
 				}
 			}
@@ -273,6 +280,9 @@ public partial class Main : Node
 	private void ExitSteppedOn()
 	{
 		GD.Print("You Win!");
+
+		var outputBox = GetNode<RichTextLabel>("output_box");
+		outputBox.Text = "You Win!";
 	}
 
 	private void ActivateTerminal()

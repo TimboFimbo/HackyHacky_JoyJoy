@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0hl86h5wp2gp"]
+
+[ext_resource type="PackedScene" uid="uid://dwv1itc3drlw" path="res://Scenes/vars_box.tscn" id="1_oajap"]
+[ext_resource type="Script" path="res://Scenes/BoxController.cs" id="1_vtpah"]
+[ext_resource type="PackedScene" uid="uid://bfuof2wwr07" path="res://Scenes/code_box.tscn" id="2_j852k"]
+[ext_resource type="PackedScene" uid="uid://dgo2q4fex3vml" path="res://Scenes/stack_box.tscn" id="3_fq18r"]
+
+[node name="BoxController" type="Node"]
+script = ExtResource("1_vtpah")
+
+[node name="VarsBox" parent="." instance=ExtResource("1_oajap")]
+offset_top = 60.0
+offset_bottom = 236.0
+
+[node name="CodeBox" parent="." instance=ExtResource("2_j852k")]
+offset_top = 234.0
+offset_bottom = 554.0
+
+[node name="StackBox" parent="." instance=ExtResource("3_fq18r")]
+offset_top = 610.0
+offset_bottom = 698.0

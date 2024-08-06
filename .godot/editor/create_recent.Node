@@ -1,4 +1,5 @@
 ColorRect
+RichTextLabel
 TextureRect
 GridContainer
 LineEdit

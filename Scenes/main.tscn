@@ -75,6 +75,7 @@ offset_bottom = 689.0
 
 [connection signal="CurCommandChange" from="OLangInterpreter" to="." method="CurCommandChangeSignalReceived"]
 [connection signal="ErrorCommand" from="OLangInterpreter" to="." method="ErrorCommandSignalReceived"]
+[connection signal="InputCommand" from="OLangInterpreter" to="." method="InputCommandSignalReceived"]
 [connection signal="PrintCommand" from="OLangInterpreter" to="." method="PrintCommandSignalReceived"]
 [connection signal="DirectionPressed" from="player" to="." method="DirectionSignalReceived"]
 [connection signal="InteractPressed" from="player" to="." method="InteractSignalReceived"]

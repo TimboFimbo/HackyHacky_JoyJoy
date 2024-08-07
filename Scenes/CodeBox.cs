@@ -26,7 +26,7 @@ public partial class CodeBox : GridContainer
 
 		for (int i = 0; i < highlightedBoxes.Length; i++)
 		{
-			highlightedBoxes[i] = i;
+			highlightedBoxes[i] = -1;
 		}
 
 		if (curLineNumber >= 0)

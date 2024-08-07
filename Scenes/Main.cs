@@ -254,10 +254,12 @@ public partial class Main : Node
 	public void InputBoxSignalReceived(string text)
 	{
 		var inputBox = GetNode<LineEdit>("input_box");
+		var interpreter = GetNode<OLangInterpreter>("OLangInterpreter");
 		// GD.Print("Text from input box: ", inputBox.Text);
 		inputBox.ReleaseFocus();
 		inputBox.Hide();
 		inputBoxOpen = false;
+		interpreter.currentlyPaused = false;
 	}
 
 	public void PrintCommandSignalReceived(string thingToPrint)
@@ -272,6 +274,14 @@ public partial class Main : Node
 			// GD.Print("Var to Print: ", varToPrint);
 			outputBox.Text = varToPrint;
 		}
+	}
+
+	public void InputCommandSignalReceived()
+	{
+		var inputBox = GetNode<LineEdit>("input_box");
+		inputBox.Show();
+		inputBox.GrabFocus();
+		inputBoxOpen = true;
 	}
 
 	// this currently does the same as above, but wanted to keep errors separate
@@ -308,14 +318,10 @@ public partial class Main : Node
 	private void ActivateTerminal()
 	{
 		// GD.Print("Interact Signal Received");
-		var inputBox = GetNode<LineEdit>("input_box");
 		var interpreter = GetNode<OLangInterpreter>("OLangInterpreter");
 
 		// input box should only open when Input command is received
 		interpreter.ParseOLang(OLangCode.Code.oLangLevel1);
-		inputBox.Show();
-		inputBox.GrabFocus();
-		inputBoxOpen = true;
 	}
 
 	private void DisplayCode(int levelNumber, int curLineNumber)

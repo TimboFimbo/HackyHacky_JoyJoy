@@ -11,6 +11,11 @@ public partial class Main : Node
 	int[] mapSize = {12, 8};
 	char[] walkableBlocks = new char[4] {'.', '#', '#', 'E'};
 	bool inputBoxOpen = false;
+	// string curVarsCode = "";
+	// string curStackCode = "";
+
+	System.Text.StringBuilder varsCodeTest = new System.Text.StringBuilder(OLangCode.Code.varsLevel1);
+	System.Text.StringBuilder stackCodeTest = new System.Text.StringBuilder(OLangCode.Code.emptyStack);
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -22,9 +27,14 @@ public partial class Main : Node
 		// outputBox.Text = interpreter.TextToCamel("Test Camel Output");
 		// interpreter.ParseOLang(OLangCode.Code.oLangLevel1);
 
+		// SetCurVarsAndStack(1);
+
+		// test to ensure vars can be edited
+		// EditVars("I Love You!;", 0);
+
 		DisplayCode(1, -1);
-		DisplayVars(1);
-		DisplayStack(1);
+		DisplayVars();
+		DisplayStack();
 
 		var sprite = GetNode<Player>("player").GetNode<AnimatedSprite2D>("SnakeSprite");
 		// GD.Print("Found snake sprite: ", sprite.ToString());
@@ -336,23 +346,29 @@ public partial class Main : Node
 		}
 	}
 
-	private void DisplayVars(int levelNumber)
+	private void DisplayVars()
 	{
 		var varsBox = GetNode<VarsBox>("VarsBox");
 
-		switch (levelNumber)
-		{
-			case 1:
-				varsBox.SetText(OLangCode.Code.varsLevel1);
-				break;
-		}
+		// switch (levelNumber)
+		// {
+		// 	case 1:
+		// 		varsBox.SetText(OLangCode.Code.varsLevel1);
+		// 		break;
+		// }
+
+		// varsBox.SetText(curVarsCode);
+		varsBox.SetText(varsCodeTest.ToString());
 	}
 
-	private void DisplayStack(int levelNumber)
+	private void DisplayStack()
 	{
-		var varsBox = GetNode<StackBox>("StackBox");
+		var stackBox = GetNode<StackBox>("StackBox");
 
-		varsBox.SetText(OLangCode.Code.emptyStack);
+		// varsBox.SetText(OLangCode.Code.emptyStack);
+
+		// stackBox.SetText(curStackCode);
+		stackBox.SetText(stackCodeTest.ToString());
 	}
 
 	private string FindLineToPrint(string printCommandString)
@@ -365,15 +381,51 @@ public partial class Main : Node
 
 		string stringToPrint = "";
 
-		char thisChar = OLangCode.Code.varsLevel1[startChar];
+		// char thisChar = OLangCode.Code.varsLevel1[startChar];
+
+		char thisChar = varsCodeTest[startChar];
 
 		while (thisChar != ';')
 		{
 			stringToPrint += thisChar;
 			startChar++;
-			thisChar = OLangCode.Code.varsLevel1[startChar];
+			// thisChar = OLangCode.Code.varsLevel1[startChar];
+			thisChar = varsCodeTest[startChar];
 		}
 
 		return stringToPrint;
+	}
+
+	// This function currently does nothing, so will probably be removed
+	private void SetCurVarsAndStack(int levelNumber)
+	{
+		switch (levelNumber)
+		{
+			case 1:
+				// curVarsCode = OLangCode.Code.varsLevel1;
+				// curStackCode = OLangCode.Code.emptyStack;
+				
+				// just to test that the stack string can be changed
+				var stackWordToAdd = "TestEdit";
+				// curStackCode = stackWordToAdd + curStackCode.Remove(0, stackWordToAdd.Length);
+
+				int offset = 0;
+
+				// another way of testing that strings can be changed
+				// for (int i = 0; i < stackWordToAdd.Length; i++)
+				// {
+				// 	varsCodeTest[i + offset] = stackWordToAdd[i];
+				// }
+
+				break;
+		}
+	}
+
+	private void EditVars(string editedCode, int offset)
+	{
+		for (int i = 0; i < editedCode.Length; i++)
+		{
+			varsCodeTest[i + offset] = editedCode[i];
+		}	
 	}
 }

@@ -22,12 +22,12 @@ public partial class Main : Node
 		// outputBox.Text = interpreter.TextToCamel("Test Camel Output");
 		// interpreter.ParseOLang(OLangCode.Code.oLangLevel1);
 
-		DisplayCode(1);
+		DisplayCode(1, -1);
 		DisplayVars(1);
 		DisplayStack(1);
 
 		var sprite = GetNode<Player>("player").GetNode<AnimatedSprite2D>("SnakeSprite");
-		GD.Print("Found snake sprite: ", sprite.ToString());
+		// GD.Print("Found snake sprite: ", sprite.ToString());
 		sprite.Play();
 	}
 
@@ -46,7 +46,7 @@ public partial class Main : Node
 			return;
 		}
 
-		GD.Print("Signal received  - ", direction);
+		// GD.Print("Signal received  - ", direction);
 		bool moveOk = false;
 		GD.Print(moveOk);
 
@@ -59,12 +59,12 @@ public partial class Main : Node
 				sprite.FlipH = true;
 				char newPos = AsciiMaps.Maps.CheckMap(playerPos[0] + 1, playerPos[1]);
 
-				GD.Print("newPos = ", newPos.ToString());
+				// GD.Print("newPos = ", newPos.ToString());
 
 				if (walkableBlocks.Contains(newPos))
 				{
 					moveOk = true;
-					GD.Print("Moving player ", direction);
+					// GD.Print("Moving player ", direction);
 					playerPos[0] += 1;
 					if (newPos == 'E') { ExitSteppedOn(); }
 				}
@@ -78,12 +78,12 @@ public partial class Main : Node
 				sprite.FlipH = false;
 				char newPos = AsciiMaps.Maps.CheckMap(playerPos[0] - 1, playerPos[1]);
 
-				GD.Print("newPos = ", newPos.ToString());
+				// GD.Print("newPos = ", newPos.ToString());
 
 				if (walkableBlocks.Contains(newPos)) 
 				{
 					moveOk = true;
-					GD.Print("Moving player ", direction);
+					// GD.Print("Moving player ", direction);
 					playerPos[0] -= 1;
 					if (newPos == 'E') { ExitSteppedOn(); }
 				}
@@ -96,12 +96,12 @@ public partial class Main : Node
 			{
 				char newPos = AsciiMaps.Maps.CheckMap(playerPos[0], playerPos[1] + 1);
 
-				GD.Print("newPos = ", newPos.ToString());
+				// GD.Print("newPos = ", newPos.ToString());
 
 				if (walkableBlocks.Contains(newPos)) 
 				{
 					moveOk = true;
-					GD.Print("Moving player ", direction);
+					// GD.Print("Moving player ", direction);
 					playerPos[1] += 1;
 					if (newPos == 'E') { ExitSteppedOn(); }
 				}
@@ -114,19 +114,19 @@ public partial class Main : Node
 			{
 				char newPos = AsciiMaps.Maps.CheckMap(playerPos[0], playerPos[1] - 1);
 
-				GD.Print("newPos = ", newPos.ToString());
+				// GD.Print("newPos = ", newPos.ToString());
 
 				if (walkableBlocks.Contains(newPos)) 
 				{
 					moveOk = true;
-					GD.Print("Moving player ", direction);
+					// GD.Print("Moving player ", direction);
 					playerPos[1] -= 1;
 					if (newPos == 'E') { ExitSteppedOn(); }
 				}
 			}
 		}
 
-		GD.Print("Move ok ", moveOk.ToString());
+		// GD.Print("Move ok ", moveOk.ToString());
 
 		if (moveOk == true)
 		{
@@ -134,7 +134,7 @@ public partial class Main : Node
 		}
 		else
 		{
-			GD.Print("Cannot move there.");
+			// GD.Print("Cannot move there.");
 			outputBox.Text = "Cannot Move There";
 		}
 	}
@@ -155,7 +155,7 @@ public partial class Main : Node
 
 				if (AsciiMaps.Maps.CheckMap(xPos, yPos) == 'T')
 				{
-					GD.Print("Terminal found at " + xPos.ToString() + ", " + yPos.ToString());
+					// GD.Print("Terminal found at " + xPos.ToString() + ", " + yPos.ToString());
 					ActivateTerminal();
 				}
 
@@ -164,7 +164,7 @@ public partial class Main : Node
 
 				if (AsciiMaps.Maps.CheckMap(xPos, yPos) == 'T')
 				{
-					GD.Print("Door found at " + xPos.ToString() + ", " + yPos.ToString());
+					// GD.Print("Door found at " + xPos.ToString() + ", " + yPos.ToString());
 					ActivateTerminal();
 				}
 			}
@@ -184,7 +184,7 @@ public partial class Main : Node
 		{
 			// open any door next to player
 			case 0:
-			GD.Print("Any adjacent door to open");
+			// GD.Print("Any adjacent door to open");
 			for (int i = 0; i < 2; i++)
 			{
 				for (int j = 0; j < 2; j++)
@@ -195,7 +195,7 @@ public partial class Main : Node
 					if (AsciiMaps.Maps.CheckMap(xPos, yPos) == '1' ||
 					AsciiMaps.Maps.CheckMap(xPos, yPos) == '2')
 					{
-						GD.Print("Door found at " + xPos.ToString() + ", " + yPos.ToString());
+						// GD.Print("Door found at " + xPos.ToString() + ", " + yPos.ToString());
 						OpenDoor(xPos, yPos);
 						outputBox.Text = "Door Opened";
 					}
@@ -206,7 +206,7 @@ public partial class Main : Node
 					if (AsciiMaps.Maps.CheckMap(xPos, yPos) == '1' ||
 					AsciiMaps.Maps.CheckMap(xPos, yPos) == '2')
 					{
-						GD.Print("Door found at " + xPos.ToString() + ", " + yPos.ToString());
+						// GD.Print("Door found at " + xPos.ToString() + ", " + yPos.ToString());
 						OpenDoor(xPos, yPos);
 						outputBox.Text = "Door Opened";
 					}
@@ -215,14 +215,14 @@ public partial class Main : Node
 			break;
 
 			case 1:
-			GD.Print("Door 1 to open");
+			// GD.Print("Door 1 to open");
 			for (int i = 0; i < mapSize[0]; i++)
 			{
 				for (int j = 0; j < mapSize[1]; j++)
 				{
 					if (AsciiMaps.Maps.CheckMap(i, j) == '1')
 					{
-						GD.Print("Door found at " + i.ToString() + ", " + j.ToString());
+						// GD.Print("Door found at " + i.ToString() + ", " + j.ToString());
 						OpenDoor(i, j);
 					}
 				}
@@ -230,14 +230,14 @@ public partial class Main : Node
 			break;
 
 			case 2:
-			GD.Print("Door 2 to open");
+			// GD.Print("Door 2 to open");
 			for (int i = 0; i < mapSize[0]; i++)
 			{
 				for (int j = 0; j < mapSize[1]; j++)
 				{
 					if (AsciiMaps.Maps.CheckMap(i, j) == '2')
 					{
-						GD.Print("Door found at " + i.ToString() + ", " + j.ToString());
+						// GD.Print("Door found at " + i.ToString() + ", " + j.ToString());
 						OpenDoor(i, j);
 					}
 				}
@@ -247,14 +247,14 @@ public partial class Main : Node
 
 		for (int i = 0; i < walkableBlocks.Length; i++)
 		{
-			GD.Print("Walkable block " + i.ToString() + " = " + walkableBlocks[i].ToString());
+			// GD.Print("Walkable block " + i.ToString() + " = " + walkableBlocks[i].ToString());
 		}
 	}
 
 	public void InputBoxSignalReceived(string text)
 	{
 		var inputBox = GetNode<LineEdit>("input_box");
-		GD.Print("Text from input box: ", inputBox.Text);
+		// GD.Print("Text from input box: ", inputBox.Text);
 		inputBox.ReleaseFocus();
 		inputBox.Hide();
 		inputBoxOpen = false;
@@ -263,13 +263,13 @@ public partial class Main : Node
 	public void PrintCommandSignalReceived(string thingToPrint)
 	{
 		// just printing entire string as debug - will get correct string from Vars
-		GD.Print(thingToPrint);
+		// GD.Print(thingToPrint);
 		var outputBox = GetNode<RichTextLabel>("output_box");
 
 		if (thingToPrint[0] == '$') // for now, all print commands will start with this
 		{
 			string varToPrint = FindLineToPrint(thingToPrint);
-			GD.Print("Var to Print: ", varToPrint);
+			// GD.Print("Var to Print: ", varToPrint);
 			outputBox.Text = varToPrint;
 		}
 	}
@@ -280,6 +280,12 @@ public partial class Main : Node
 		GD.Print(errorToPrint);
 	}
 
+	public void CurCommandChangeSignalReceived(int curCommandNum)
+	{
+		DisplayCode(1, curCommandNum);
+		GD.Print("Cur Command in Main: ", curCommandNum.ToString());
+	}
+
 	private void OpenDoor(int xPos, int yPos)
 	{
 		var tileMap = GetNode<TileMap>("map_level1");
@@ -288,12 +294,12 @@ public partial class Main : Node
 		tileMap.SetCell(0, new Vector2I(xPos, yPos), 0, new Vector2I(2, 0), 0);
 		walkableBlocks[doorToOpen - '0'] = doorToOpen;
 
-		GD.Print("Opening door at " + xPos.ToString() + ", " + yPos.ToString());
+		// GD.Print("Opening door at " + xPos.ToString() + ", " + yPos.ToString());
 	}
 
 	private void ExitSteppedOn()
 	{
-		GD.Print("You Win!");
+		// GD.Print("You Win!");
 
 		var outputBox = GetNode<RichTextLabel>("output_box");
 		outputBox.Text = "You Win!";
@@ -301,7 +307,7 @@ public partial class Main : Node
 
 	private void ActivateTerminal()
 	{
-		GD.Print("Interact Signal Received");
+		// GD.Print("Interact Signal Received");
 		var inputBox = GetNode<LineEdit>("input_box");
 		var interpreter = GetNode<OLangInterpreter>("OLangInterpreter");
 
@@ -312,14 +318,14 @@ public partial class Main : Node
 		inputBoxOpen = true;
 	}
 
-	private void DisplayCode(int levelNumber)
+	private void DisplayCode(int levelNumber, int curLineNumber)
 	{
 		var codeBox = GetNode<CodeBox>("CodeBox");
 
 		switch (levelNumber)
 		{
 			case 1:
-				codeBox.SetText(OLangCode.Code.oLangLevel1);
+				codeBox.SetText(OLangCode.Code.oLangLevel1, curLineNumber);
 				break;
 		}
 	}
@@ -346,10 +352,10 @@ public partial class Main : Node
 	private string FindLineToPrint(string printCommandString)
 	{
 		int lineNumber = printCommandString.Remove(0, 1).ToInt() - OLangCode.Code.varsStart;
-		GD.Print("Line Number: ", lineNumber.ToString());
+		// GD.Print("Line Number: ", lineNumber.ToString());
 
 		int startChar = Convert.ToInt32(lineNumber * 1.6); // convert to hex - yes, i know this is stupid!
-		GD.Print("Start Char: ", startChar.ToString());
+		// GD.Print("Start Char: ", startChar.ToString());
 
 		string stringToPrint = "";
 

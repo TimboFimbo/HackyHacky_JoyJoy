@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading;
 
 public partial class OLangInterpreter : Node
 {
@@ -7,6 +8,8 @@ public partial class OLangInterpreter : Node
 	public delegate void PrintCommandEventHandler(string toPrint);
 	[Signal]
 	public delegate void ErrorCommandEventHandler(string errorToPrint);
+	[Signal]
+	public delegate void CurCommandChangeEventHandler(int curCommandNum);
 	private int curCommandNum = 0;
 
 	// Called when the node enters the scene tree for the first time.
@@ -39,10 +42,11 @@ public partial class OLangInterpreter : Node
 				continue;
 			}
 
-			GD.Print(commandLines[i]);
+			// GD.Print(commandLines[i]);
 
 			string command = commandLines[i][0].ToString() + commandLines[i][1] + commandLines[i][2];
 			GD.Print(command);
+			EmitSignal(SignalName.CurCommandChange, curCommandNum);
 
 			switch (command)
 			{
@@ -62,7 +66,13 @@ public partial class OLangInterpreter : Node
 					}
 					curCommandNum++;
 					break;
+
+				case "INP": // for player input
+					curCommandNum++;
+					break;
 			}
+
+			Thread.Sleep(500);
 		}
 	}
 }

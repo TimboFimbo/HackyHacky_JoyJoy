@@ -1,10 +1,12 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class CodeBox : GridContainer
 {
 	int numberOfCharBoxes = 176;
 	float[] boxColour = {0.5f, 0.25f, 0.5f};
+	float[] highlightColour = {0.2f, 0.7f, 0.2f};
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -16,14 +18,31 @@ public partial class CodeBox : GridContainer
 	{
 	}
 
-	public void SetText(string textToSet)
+	public void SetText(string textToSet, int curLineNumber)
 	{
 		var boxSize = 30;
+		int[] highlightedBoxes = new int[16];
+		float[] curColour = highlightColour;
+
+		for (int i = 0; i < highlightedBoxes.Length; i++)
+		{
+			highlightedBoxes[i] = i;
+		}
+
+		if (curLineNumber >= 0)
+		{
+			Array.Clear(highlightedBoxes, 0, highlightedBoxes.Length);
+			for (int i = 0; i < 16; i++)
+			{
+				highlightedBoxes[i] = curLineNumber * 16 + i;
+				// GD.Print("Added to highlighted boxes: ", highlightedBoxes[i].ToString());
+			}
+		}
 
 		foreach(Node child in this.GetChildren())
 		{
 			RemoveChild(child);
-			GD.Print("Child Removed");
+			// GD.Print("Child Removed");
 		}
 
 		for( var i = 0; i < textToSet.Length; ++i)
@@ -42,11 +61,21 @@ public partial class CodeBox : GridContainer
 			label.CustomMinimumSize = new Vector2(boxSize, boxSize);
 			label.Set("theme_override_font_sizes/normal_font_size", 16);
 
+			if (highlightedBoxes.Contains(i))
+			{
+				curColour = highlightColour;
+			}
+			else
+			{
+				curColour = boxColour;
+			}
+
 			container.AddChild(new ColorRect()
 			{
   				Size = new Vector2(boxSize, boxSize),
-  				Color = new Color(boxColour[0], boxColour[1], boxColour[2])
+  				Color = new Color(curColour[0], curColour[1], curColour[2])
   			});
+			// GD.Print("Box added at " + i.ToString() + " with colour " + curColour[0].ToString());
 
 			container.AddChild(label);
   

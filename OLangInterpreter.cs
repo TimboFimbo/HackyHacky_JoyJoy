@@ -11,8 +11,8 @@ public partial class OLangInterpreter : Node
 	[Signal]
 	public delegate void CurCommandChangeEventHandler(int curCommandNum);
 	[Signal]
-	public delegate void InputCommandEventHandler();
-	private int curCommandNum = 0;
+	public delegate void InputCommandEventHandler(string addressToInputTo, int lengthOfInput, int curLineNum);
+	public int curCommandNum = 0;
 	public bool currentlyPaused = false;
 	private float timeBetweenLines = 1.0f;
 
@@ -77,7 +77,24 @@ public partial class OLangInterpreter : Node
 					break;
 
 				case "INP": // for player input
-					EmitSignal(SignalName.InputCommand);
+					string[] inpArguments = new string[2];
+					if (commandLines[i].Length < 4)
+					{
+						EmitSignal(SignalName.ErrorCommand, "No address to input to!");
+					}
+					else
+					{
+						string arguments = "";
+						for (int j = 4; j < commandLines[i].Length; j++)
+						{
+							if (commandLines[i][j] != ' ')
+							{
+								arguments += commandLines[i][j];
+							}
+							inpArguments = arguments.Split(',');
+						}
+					}
+					EmitSignal(SignalName.InputCommand, inpArguments[0], inpArguments[1].ToInt(), curCommandNum + 1);
 					currentlyPaused = true;
 					curCommandNum++;
 					break;

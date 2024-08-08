@@ -11,6 +11,9 @@ public partial class Main : Node
 	int[] mapSize = {12, 8};
 	char[] walkableBlocks = new char[4] {'.', '#', '#', 'E'};
 	bool inputBoxOpen = false;
+	string curInpAddress;
+	int curInpLength;
+	int curLineNum;
 	// string curVarsCode = "";
 	// string curStackCode = "";
 
@@ -58,7 +61,7 @@ public partial class Main : Node
 
 		// GD.Print("Signal received  - ", direction);
 		bool moveOk = false;
-		GD.Print(moveOk);
+		// GD.Print(moveOk);
 
 		var sprite = GetNode<Player>("player").GetNode<AnimatedSprite2D>("SnakeSprite");
 
@@ -266,6 +269,10 @@ public partial class Main : Node
 		var inputBox = GetNode<LineEdit>("input_box");
 		var interpreter = GetNode<OLangInterpreter>("OLangInterpreter");
 		// GD.Print("Text from input box: ", inputBox.Text);
+
+		EditStack(text);
+		DisplayStack();
+
 		inputBox.ReleaseFocus();
 		inputBox.Hide();
 		inputBoxOpen = false;
@@ -286,8 +293,16 @@ public partial class Main : Node
 		}
 	}
 
-	public void InputCommandSignalReceived()
+	public void InputCommandSignalReceived(string addressToInputTo, int lengthOfInput, int lineNum)
 	{
+		GD.Print("Address to input to: ", addressToInputTo.ToString());
+		GD.Print("Length of input: ", lengthOfInput.ToString());
+		GD.Print("Current Line: ", lineNum.ToString());
+
+		curInpAddress = addressToInputTo;
+		curInpLength = lengthOfInput;
+		curLineNum = lineNum;
+
 		var inputBox = GetNode<LineEdit>("input_box");
 		inputBox.Show();
 		inputBox.GrabFocus();
@@ -427,5 +442,36 @@ public partial class Main : Node
 		{
 			varsCodeTest[i + offset] = editedCode[i];
 		}	
+	}
+
+	private void EditStack(string boxInput)
+	{
+		int rowSize = 16;
+		string returnAddress = (2000 + curLineNum * 10).ToString();
+		int numberOfInputChars;
+
+		GD.Print("Box Input Received: ", boxInput);
+
+		// first set the arguments
+		for (int i = 0; i < curInpAddress.Length; i++)
+		{
+			stackCodeTest[i + rowSize * 2] = curInpAddress[i];
+		}
+
+		// now set the return address
+		for (int i = 0; i < returnAddress.Length; i++)
+		{
+			stackCodeTest[i + rowSize] = returnAddress[i];
+		}
+
+		// now set the input
+		if (boxInput.Length > rowSize * 3 - 1) { numberOfInputChars = rowSize * 3; }
+		else { numberOfInputChars = boxInput.Length; }
+
+		for (int i = 0; i < numberOfInputChars; i++)
+		{
+			stackCodeTest[i] = boxInput[i];
+		}
+
 	}
 }

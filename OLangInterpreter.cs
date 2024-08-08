@@ -14,6 +14,12 @@ public partial class OLangInterpreter : Node
 	public delegate void InputCommandEventHandler(string addressToInputTo, int lengthOfInput, int curLineNum);
 	[Signal]
 	public delegate void StackInputCommandEventHandler(string input, int lineToUpdate, int offset);
+	[Signal]
+	public delegate void EndInputCommandEventHandler();
+	// [Signal]
+	// public delegate void RunCommandEventHandler(string functionToRun, string args);
+	[Signal]
+	public delegate void OpenDoorCommandEventHandler(int doorNumber);
 	public int curCommandNum = 0;
 	public bool currentlyPaused = false;
 	private float timeBetweenLines = 1.0f;
@@ -99,6 +105,45 @@ public partial class OLangInterpreter : Node
 					}
 					EmitSignal(SignalName.InputCommand, inpArguments[0], inpArguments[1].ToInt(), curCommandNum + 1);
 					currentlyPaused = true;
+					curCommandNum++;
+					break;
+
+				case "END": // when program reaches end
+					EmitSignal(SignalName.EndInputCommand);
+					break;
+
+				case "RUN": //runs a prewritten function
+					if (commandLines[i].Length < 4)
+					{
+						EmitSignal(SignalName.ErrorCommand, "Nothing to run!");
+					}
+					else
+					{
+						string arguments = "";
+						for (int j = 3; j < commandLines[i].Length; j++)
+						{
+							arguments += commandLines[i][j];
+						}
+
+						// first remove whitespace
+						string commandNoWhite = arguments.Replace(" ", "");
+
+						// now split into function and argument
+						string[] lines = arguments.Split(',');
+
+						// check the function and send signal
+						if (lines[0] == "open_door")
+						{
+							EmitSignal(SignalName.OpenDoorCommand, lines[1].ToInt());
+						}
+						else
+						{
+							EmitSignal(SignalName.ErrorCommand, "Not a function!");
+						}
+
+						GD.Print("Run command: ", lines[0]);
+						GD.Print("Run Args: ", lines[1]);
+					}
 					curCommandNum++;
 					break;
 			}

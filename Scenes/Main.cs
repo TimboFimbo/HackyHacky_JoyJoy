@@ -330,6 +330,22 @@ public partial class Main : Node
 		GD.Print("Cur Command in Main: ", curCommandNum.ToString());
 	}
 
+	public void EndCommandSignalReceived()
+	{
+		var outputBox = GetNode<RichTextLabel>("output_box");
+		var interpreter = GetNode<OLangInterpreter>("OLangInterpreter");
+
+		outputBox.Text = "Program Ended";
+
+		DisplayCode(1, -1); // removes highlighting from grid line
+		interpreter.curCommandNum = 0;
+	}
+
+	// public void RunCommandSignalReceived(string functionToRun, string args)
+	// {
+
+	// }
+
 	private void OpenDoor(int xPos, int yPos)
 	{
 		var tileMap = GetNode<TileMap>("map_level1");

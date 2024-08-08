@@ -12,7 +12,7 @@ namespace OLangCode
             "INP$1030,16     " +
             "PRT$1010        " +
             "END             " +
-            "RUNopen_door    " +
+            "RUNopen_door,1  " +
             "PRT$1020        " +
             "END             " +
             "                " +

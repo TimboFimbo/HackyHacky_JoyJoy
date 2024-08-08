@@ -23,7 +23,7 @@ public partial class StackBox : GridContainer
 		foreach(Node child in this.GetChildren())
 		{
 			RemoveChild(child);
-			GD.Print("Child Removed");
+			// GD.Print("Child Removed");
 		}
 
 		for( var i = 0; i < textToSet.Length; ++i)

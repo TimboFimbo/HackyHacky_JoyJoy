@@ -210,7 +210,7 @@ public partial class Main : Node
 					{
 						// GD.Print("Door found at " + xPos.ToString() + ", " + yPos.ToString());
 						OpenDoor(xPos, yPos);
-						outputBox.Text = "Door Opened";
+						// outputBox.Text = "Door Opened";
 					}
 
 					xPos = playerPos[0] + i;
@@ -221,7 +221,7 @@ public partial class Main : Node
 					{
 						// GD.Print("Door found at " + xPos.ToString() + ", " + yPos.ToString());
 						OpenDoor(xPos, yPos);
-						outputBox.Text = "Door Opened";
+						// outputBox.Text = "Door Opened";
 					}
 				}
 			}
@@ -276,7 +276,8 @@ public partial class Main : Node
 		inputBox.ReleaseFocus();
 		inputBox.Hide();
 		inputBoxOpen = false;
-		interpreter.currentlyPaused = false;
+		interpreter.ParseStackInput(stackCodeTest.ToString());
+		// interpreter.currentlyPaused = false;
 	}
 
 	public void PrintCommandSignalReceived(string thingToPrint)
@@ -307,6 +308,14 @@ public partial class Main : Node
 		inputBox.Show();
 		inputBox.GrabFocus();
 		inputBoxOpen = true;
+	}
+
+	public void StackInputCommandReceived(string input, int lineToUpdate, int offset)
+	{
+		int realOffset = lineToUpdate * 16 + offset;
+		EditVars(input, realOffset);
+		DisplayVars();
+		GetNode<OLangInterpreter>("OLangInterpreter").currentlyPaused = false;
 	}
 
 	// this currently does the same as above, but wanted to keep errors separate

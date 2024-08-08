@@ -12,9 +12,12 @@ public partial class OLangInterpreter : Node
 	public delegate void CurCommandChangeEventHandler(int curCommandNum);
 	[Signal]
 	public delegate void InputCommandEventHandler(string addressToInputTo, int lengthOfInput, int curLineNum);
+	[Signal]
+	public delegate void StackInputCommandEventHandler(string input, int lineToUpdate, int offset);
 	public int curCommandNum = 0;
 	public bool currentlyPaused = false;
 	private float timeBetweenLines = 1.0f;
+	private int stackLineLength = 16;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -103,5 +106,72 @@ public partial class OLangInterpreter : Node
 			// Thread.Sleep(500);
 			await ToSignal(GetTree().CreateTimer(timeBetweenLines), SceneTreeTimer.SignalName.Timeout);
 		}
+	}
+
+	public async void ParseStackInput(string stackCode)
+	{
+		string blankLine = "                ";
+		System.Text.StringBuilder inputLineParse = new System.Text.StringBuilder(blankLine);
+		System.Text.StringBuilder retLineParse = new System.Text.StringBuilder(blankLine);
+		System.Text.StringBuilder argsLineParse = new System.Text.StringBuilder(blankLine);
+		bool errorFound = false;
+
+		GD.Print("Stack Code to be Parsed: ", stackCode);
+
+		// first parse the stack lines
+		for (int i = 0; i < stackLineLength * 3; i++)
+		{
+			if (i < stackLineLength)
+			{
+				if (stackCode[i] >= ' ')
+				{
+					inputLineParse[i] = stackCode[i];
+				}
+			}
+
+			if (i >= stackLineLength && i < stackLineLength * 2)
+			{
+				if (stackCode[i] != ' ')
+				{
+					retLineParse[i - stackLineLength] = stackCode[i];
+				}
+			}
+
+			if (i >= stackLineLength * 2 && i < stackLineLength * 3)
+			{
+				if (stackCode[i] != ' ')
+				{
+					argsLineParse[i - stackLineLength * 2] = stackCode[i];
+				}
+				
+			}
+		}
+
+		// add check to ensure value can be parsed to int, and don't hard code values
+		if (retLineParse.ToString().ToInt() < 2000 || retLineParse.ToString().ToInt() > 2090)
+		{
+			errorFound = true;
+			EmitSignal(SignalName.ErrorCommand, "Stack Return Line Error");
+		}
+
+		if (argsLineParse.ToString().ToInt() < 1000 || argsLineParse.ToString().ToInt() > 1040)
+		{
+			errorFound = true;
+			EmitSignal(SignalName.ErrorCommand, "Stack Args Line Error");
+		}
+
+		if (!errorFound)
+		{
+			curCommandNum = retLineParse[2].ToString().ToInt();
+			var lineToUpdate = argsLineParse[2].ToString().ToInt();
+			var offset = argsLineParse[3].ToString().ToInt();
+			EmitSignal(SignalName.StackInputCommand, inputLineParse.ToString(), lineToUpdate, offset);
+		}
+		else { GD.Print("Stack Parsing Error"); }
+
+		GD.Print("Stack Input Parsed: ", inputLineParse.ToString());
+		GD.Print("Stack Return Parsed: ", retLineParse.ToString());
+		GD.Print("Stack Args Parsed: ", argsLineParse.ToString());
+		await ToSignal(GetTree().CreateTimer(timeBetweenLines), SceneTreeTimer.SignalName.Timeout);
 	}
 }

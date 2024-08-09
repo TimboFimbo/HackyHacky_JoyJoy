@@ -15,3 +15,5 @@ res://Scenes/vars_box.tscn
 res://Scenes/stack_box.tscn
 res://Scenes/box_controller.tscn
 res://Scenes/o_lang_interpreter.tscn
+res://Scenes/map_level_2.tscn
+res://Scenes/map_level_3.tscn

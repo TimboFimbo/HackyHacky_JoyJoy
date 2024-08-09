@@ -14,6 +14,7 @@ public partial class Main : Node
 	string curInpAddress;
 	int curInpLength;
 	int curLineNum;
+	int curLevel = 1;
 	// string curVarsCode = "";
 	// string curStackCode = "";
 
@@ -27,6 +28,21 @@ public partial class Main : Node
 
 		var outputBox = GetNode<RichTextLabel>("output_box");
 		var interpreter = GetNode<OLangInterpreter>("OLangInterpreter");
+		var tileMap1 = GetNode<TileMap>("map_level1");
+		var tileMap3 = GetNode<TileMap>("map_level3");
+
+		if (curLevel == 1)
+		{
+			tileMap1.Show();
+			tileMap3.Hide();
+		}
+
+		if (curLevel == 3)
+		{
+			varsCodeTest = new System.Text.StringBuilder(OLangCode.Code.varsLevel3);
+			tileMap1.Hide();
+			tileMap3.Show();
+		}
 		// outputBox.Text = interpreter.TextToCamel("Test Camel Output");
 		// interpreter.ParseOLang(OLangCode.Code.oLangLevel1);
 
@@ -35,7 +51,7 @@ public partial class Main : Node
 		// test to ensure vars can be edited
 		// EditVars("I Love You!;", 0);
 
-		DisplayCode(1, -1);
+		DisplayCode(curLevel, -1);
 		DisplayVars();
 		DisplayStack();
 
@@ -70,7 +86,7 @@ public partial class Main : Node
 			if (playerPos[0] < mapSize[0] - 1)
 			{
 				sprite.FlipH = true;
-				char newPos = AsciiMaps.Maps.CheckMap(playerPos[0] + 1, playerPos[1]);
+				char newPos = AsciiMaps.Maps.CheckMap(playerPos[0] + 1, playerPos[1], curLevel);
 
 				// GD.Print("newPos = ", newPos.ToString());
 
@@ -89,7 +105,7 @@ public partial class Main : Node
 			if (playerPos[0] > 1)
 			{
 				sprite.FlipH = false;
-				char newPos = AsciiMaps.Maps.CheckMap(playerPos[0] - 1, playerPos[1]);
+				char newPos = AsciiMaps.Maps.CheckMap(playerPos[0] - 1, playerPos[1], curLevel);
 
 				// GD.Print("newPos = ", newPos.ToString());
 
@@ -107,7 +123,7 @@ public partial class Main : Node
 		{
 			if (playerPos[1] < mapSize[1] - 1)
 			{
-				char newPos = AsciiMaps.Maps.CheckMap(playerPos[0], playerPos[1] + 1);
+				char newPos = AsciiMaps.Maps.CheckMap(playerPos[0], playerPos[1] + 1, curLevel);
 
 				// GD.Print("newPos = ", newPos.ToString());
 
@@ -125,7 +141,7 @@ public partial class Main : Node
 		{
 			if (playerPos[1] > 1)
 			{
-				char newPos = AsciiMaps.Maps.CheckMap(playerPos[0], playerPos[1] - 1);
+				char newPos = AsciiMaps.Maps.CheckMap(playerPos[0], playerPos[1] - 1, curLevel);
 
 				// GD.Print("newPos = ", newPos.ToString());
 
@@ -166,7 +182,7 @@ public partial class Main : Node
 				int xPos = playerPos[0] - i;
 				int yPos = playerPos[1] - j;
 
-				if (AsciiMaps.Maps.CheckMap(xPos, yPos) == 'T')
+				if (AsciiMaps.Maps.CheckMap(xPos, yPos, curLevel) == 'T')
 				{
 					// GD.Print("Terminal found at " + xPos.ToString() + ", " + yPos.ToString());
 					ActivateTerminal();
@@ -175,7 +191,7 @@ public partial class Main : Node
 				xPos = playerPos[0] + i;
 				yPos = playerPos[1] + j;
 
-				if (AsciiMaps.Maps.CheckMap(xPos, yPos) == 'T')
+				if (AsciiMaps.Maps.CheckMap(xPos, yPos, curLevel) == 'T')
 				{
 					// GD.Print("Door found at " + xPos.ToString() + ", " + yPos.ToString());
 					ActivateTerminal();
@@ -229,8 +245,8 @@ public partial class Main : Node
 					int xPos = playerPos[0] - i;
 					int yPos = playerPos[1] - j;
 
-					if (AsciiMaps.Maps.CheckMap(xPos, yPos) == '1' ||
-					AsciiMaps.Maps.CheckMap(xPos, yPos) == '2')
+					if (AsciiMaps.Maps.CheckMap(xPos, yPos, curLevel) == '1' ||
+					AsciiMaps.Maps.CheckMap(xPos, yPos, curLevel) == '2')
 					{
 						// GD.Print("Door found at " + xPos.ToString() + ", " + yPos.ToString());
 						OpenDoor(xPos, yPos);
@@ -240,8 +256,8 @@ public partial class Main : Node
 					xPos = playerPos[0] + i;
 					yPos = playerPos[1] + j;
 
-					if (AsciiMaps.Maps.CheckMap(xPos, yPos) == '1' ||
-					AsciiMaps.Maps.CheckMap(xPos, yPos) == '2')
+					if (AsciiMaps.Maps.CheckMap(xPos, yPos, curLevel) == '1' ||
+					AsciiMaps.Maps.CheckMap(xPos, yPos, curLevel) == '2')
 					{
 						// GD.Print("Door found at " + xPos.ToString() + ", " + yPos.ToString());
 						OpenDoor(xPos, yPos);
@@ -257,7 +273,7 @@ public partial class Main : Node
 			{
 				for (int j = 0; j < mapSize[1]; j++)
 				{
-					if (AsciiMaps.Maps.CheckMap(i, j) == '1')
+					if (AsciiMaps.Maps.CheckMap(i, j, curLevel) == '1')
 					{
 						// GD.Print("Door found at " + i.ToString() + ", " + j.ToString());
 						OpenDoor(i, j);
@@ -272,7 +288,7 @@ public partial class Main : Node
 			{
 				for (int j = 0; j < mapSize[1]; j++)
 				{
-					if (AsciiMaps.Maps.CheckMap(i, j) == '2')
+					if (AsciiMaps.Maps.CheckMap(i, j, curLevel) == '2')
 					{
 						// GD.Print("Door found at " + i.ToString() + ", " + j.ToString());
 						OpenDoor(i, j);
@@ -350,7 +366,7 @@ public partial class Main : Node
 
 	public void CurCommandChangeSignalReceived(int curCommandNum)
 	{
-		DisplayCode(1, curCommandNum);
+		DisplayCode(curLevel, curCommandNum);
 		GD.Print("Cur Command in Main: ", curCommandNum.ToString());
 	}
 
@@ -361,7 +377,7 @@ public partial class Main : Node
 
 		outputBox.Text = "Program Ended";
 
-		DisplayCode(1, -1); // removes highlighting from grid line
+		DisplayCode(curLevel, -1); // removes highlighting from grid line
 		interpreter.curCommandNum = 0;
 	}
 
@@ -372,8 +388,18 @@ public partial class Main : Node
 
 	private void OpenDoor(int xPos, int yPos)
 	{
-		var tileMap = GetNode<TileMap>("map_level1");
-		char doorToOpen = AsciiMaps.Maps.CheckMap(xPos, yPos);
+		TileMap tileMap = GetNode<TileMap>("map_level1");
+
+		if (curLevel == 2)
+		{
+			tileMap = GetNode<TileMap>("map_level2");
+		}
+		if (curLevel == 3)
+		{
+			tileMap = GetNode<TileMap>("map_level3");
+		}
+
+		char doorToOpen = AsciiMaps.Maps.CheckMap(xPos, yPos, curLevel);
 
 		tileMap.SetCell(0, new Vector2I(xPos, yPos), 0, new Vector2I(2, 0), 0);
 		walkableBlocks[doorToOpen - '0'] = doorToOpen;
@@ -395,7 +421,20 @@ public partial class Main : Node
 		var interpreter = GetNode<OLangInterpreter>("OLangInterpreter");
 
 		// input box should only open when Input command is received
-		interpreter.ParseOLang(OLangCode.Code.oLangLevel1);
+		if (curLevel == 1)
+		{
+			interpreter.ParseOLang(OLangCode.Code.oLangLevel1);
+		}
+		if (curLevel == 2)
+		{
+			// interpreter.ParseOLang(OLangCode.Code.oLangLevel2);
+		}
+		if (curLevel == 3)
+		{
+			interpreter.ParseOLang(OLangCode.Code.oLangLevel3);
+		}
+
+
 	}
 
 	private void DisplayCode(int levelNumber, int curLineNumber)
@@ -406,6 +445,11 @@ public partial class Main : Node
 		{
 			case 1:
 				codeBox.SetText(OLangCode.Code.oLangLevel1, curLineNumber);
+				break;
+			case 2:
+				break;
+			case 3:
+				codeBox.SetText(OLangCode.Code.oLangLevel3, curLineNumber);
 				break;
 		}
 	}

@@ -27,6 +27,26 @@ namespace OLangCode
             "1234            " +
             "                ";
 
+        public static string oLangLevel3 = 
+            "PRT$1000        " +
+            "RUNopen_door,0  " +
+            "PRT$1010        " +
+            "END             " +
+            "                " +
+            "                " +
+            "                " +
+            "                " +
+            "                " +
+            "                " +
+            "                ";
+
+        public static string varsLevel3 = 
+            "Opening Door...;" +
+            "Door Opened;    " +
+            "                " +
+            "                " +
+            "                ";
+
         public static string emptyStack = 
             "                " +
             "                " +

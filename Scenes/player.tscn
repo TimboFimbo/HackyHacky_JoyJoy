@@ -55,7 +55,8 @@ animations = [{
 }]
 
 [node name="player" type="Area2D"]
-position = Vector2(32, 32)
+position = Vector2(48, 48)
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_rohru")
 
 [node name="SnakeSprite" type="AnimatedSprite2D" parent="."]

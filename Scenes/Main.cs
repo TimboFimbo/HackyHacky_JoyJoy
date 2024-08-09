@@ -184,6 +184,30 @@ public partial class Main : Node
 		}
 	}
 
+	public void PauseSignalReceived()
+	{
+		var interpreter = GetNode<OLangInterpreter>("OLangInterpreter");
+		var outputBox = GetNode<RichTextLabel>("output_box");
+
+		// interpreter.currentlyPaused = !interpreter.currentlyPaused;
+
+		if (inputBoxOpen)
+		{
+			return;
+		}
+
+		if (interpreter.currentlyPaused)
+		{
+			interpreter.currentlyPaused = false;
+			outputBox.Text = "           -- PLAY --";
+		}
+		else
+		{
+			interpreter.currentlyPaused = true;
+			outputBox.Text = "          -- PAUSE --";
+		}
+	}
+
 	public void OpenDoorSignalReceived(int doorNumber)
 	{
 		if (inputBoxOpen)

@@ -17,16 +17,17 @@ script = ExtResource("1_ypcln")
 
 [node name="map_level1" parent="." instance=ExtResource("1_idtn2")]
 position = Vector2(32, 32)
+scale = Vector2(1.5, 1.5)
 
 [node name="player" parent="." instance=ExtResource("2_t0eya")]
-position = Vector2(79, 80)
+position = Vector2(105, 100)
 
 [node name="input_box" parent="." instance=ExtResource("4_a5m0f")]
 visible = false
-offset_left = 31.0
-offset_top = 347.0
-offset_right = 526.0
-offset_bottom = 415.0
+offset_left = 33.0
+offset_top = 503.0
+offset_right = 467.0
+offset_bottom = 571.0
 focus_mode = 2
 placeholder_text = "1234"
 
@@ -56,7 +57,7 @@ visibility_layer = 4
 layout_mode = 0
 offset_left = -7.0
 offset_top = -21.0
-offset_right = 415.0
+offset_right = 427.0
 offset_bottom = 51.0
 scale = Vector2(1.45387, 1.01888)
 color = Color(0.190762, 0.190762, 0.190762, 1)
@@ -83,4 +84,5 @@ offset_bottom = 689.0
 [connection signal="DirectionPressed" from="player" to="." method="DirectionSignalReceived"]
 [connection signal="InteractPressed" from="player" to="." method="InteractSignalReceived"]
 [connection signal="OpenDoorPressed" from="player" to="." method="OpenDoorSignalReceived"]
+[connection signal="PausePressed" from="player" to="." method="PauseSignalReceived"]
 [connection signal="text_submitted" from="input_box" to="." method="InputBoxSignalReceived"]

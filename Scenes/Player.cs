@@ -3,7 +3,7 @@ using System;
 
 public partial class Player : Area2D
 {
-	int tileSize = 32;
+	int tileSize = 48;
 	int ScreenSize;
 	int movementSpeed = 1;
 	Vector2 pos = new Vector2(80, 80);
@@ -13,6 +13,8 @@ public partial class Player : Area2D
 	public delegate void InteractPressedEventHandler();
 	[Signal]
 	public delegate void OpenDoorPressedEventHandler(int doorNumber);
+	[Signal]
+	public delegate void PausePressedEventHandler();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -68,6 +70,11 @@ public partial class Player : Area2D
 		if (Input.IsActionJustPressed("open_door_2")) // key '2'
 		{
 			EmitSignal(SignalName.OpenDoorPressed, 2);
+		}
+
+		if (Input.IsActionJustPressed("pause")) // key 'SPACE'
+		{
+			EmitSignal(SignalName.PausePressed);
 		}
 	}
 

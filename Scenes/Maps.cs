@@ -18,6 +18,19 @@ namespace AsciiMaps
             "WWWWWWWWWWWWW"
         };
 
+        static string[] mapLevel2 = 
+        {
+            "WWWWWWWWWWWWW",
+            "W.........WWW",
+            "W..........WW",
+            "W...........W",
+            "W.....T.WW1WW",
+            "WW......W...W",
+            "WWW....WW.E.W",
+            "WWWW..WWW...W",
+            "WWWWWWWWWWWWW"
+        };
+
         static string[] mapLevel3 = 
         {
             "WWWWWWWWWWWWW",
@@ -39,12 +52,11 @@ namespace AsciiMaps
             }
             if (levelNum == 2)
             {
-                // return mapLevel2[y][x];
-                return ' ';
+                return mapLevel2[y][x];
             }
             else
             {
-                return mapLevel3[y][x]; // change to maplevel3
+                return mapLevel3[y][x];
             }
         }
     }

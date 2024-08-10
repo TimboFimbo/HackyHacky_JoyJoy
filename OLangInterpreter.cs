@@ -20,10 +20,13 @@ public partial class OLangInterpreter : Node
 	// public delegate void RunCommandEventHandler(string functionToRun, string args);
 	[Signal]
 	public delegate void OpenDoorCommandEventHandler(int doorNumber);
+	[Signal]
+	public delegate void RunStringNeededEventHandler(string memAddress);
 	public int curCommandNum = 0;
 	public bool currentlyPaused = false;
 	private float timeBetweenLines = 1.0f;
 	private int stackLineLength = 16;
+	public string runString = "";
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -128,13 +131,41 @@ public partial class OLangInterpreter : Node
 						// first remove whitespace
 						string commandNoWhite = arguments.Replace(" ", "");
 
-						// now split into function and argument
-						string[] lines = arguments.Split(',');
+						string[] lines = new string[2];
+
+						if (arguments[0] == '$')
+						{
+							runString = "";
+							EmitSignal(SignalName.RunStringNeeded, arguments);
+
+							while(runString == "")
+							{
+								await ToSignal(GetTree().CreateTimer(0.1), SceneTreeTimer.SignalName.Timeout); 
+							}
+							GD.Print("Run String: ", runString);
+							// now split into function and argument
+							if (runString.Contains(','))
+							{
+								lines = runString.Split(',');
+							}
+							else
+							{
+								EmitSignal(SignalName.ErrorCommand, "No Valid Function");
+							}
+						}
+						else
+						{
+							lines = arguments.Split(',');
+						}
 
 						// check the function and send signal
 						if (lines[0] == "open_door")
 						{
 							EmitSignal(SignalName.OpenDoorCommand, lines[1].ToInt());
+						}
+						else if (lines[0] == "null_func")
+						{
+							GD.Print("Null func run");
 						}
 						else
 						{

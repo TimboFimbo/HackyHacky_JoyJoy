@@ -15,6 +15,7 @@ public partial class Main : Node
 	int curInpLength;
 	int curLineNum;
 	int curLevel = 1;
+	int lineLength = 16;
 	// string curVarsCode = "";
 	// string curStackCode = "";
 
@@ -29,11 +30,21 @@ public partial class Main : Node
 		var outputBox = GetNode<RichTextLabel>("output_box");
 		var interpreter = GetNode<OLangInterpreter>("OLangInterpreter");
 		var tileMap1 = GetNode<TileMap>("map_level1");
+		var tileMap2 = GetNode<TileMap>("map_level2");
 		var tileMap3 = GetNode<TileMap>("map_level3");
 
 		if (curLevel == 1)
 		{
 			tileMap1.Show();
+			tileMap2.Hide();
+			tileMap3.Hide();
+		}
+
+		if (curLevel == 2)
+		{
+			varsCodeTest = new System.Text.StringBuilder(OLangCode.Code.varsLevel2);
+			tileMap1.Hide();
+			tileMap2.Show();
 			tileMap3.Hide();
 		}
 
@@ -41,6 +52,7 @@ public partial class Main : Node
 		{
 			varsCodeTest = new System.Text.StringBuilder(OLangCode.Code.varsLevel3);
 			tileMap1.Hide();
+			tileMap2.Hide();
 			tileMap3.Show();
 		}
 		// outputBox.Text = interpreter.TextToCamel("Test Camel Output");
@@ -326,7 +338,15 @@ public partial class Main : Node
 		// GD.Print(thingToPrint);
 		var outputBox = GetNode<RichTextLabel>("output_box");
 
-		if (thingToPrint[0] == '$') // for now, all print commands will start with this
+		if (thingToPrint.Contains(','))
+		{
+			string[] stringsToPrint = thingToPrint.Split(',');
+			string stringToPrint = FindLineToPrint(stringsToPrint[0]) +
+				" " + FindLineToPrint(stringsToPrint[1]);
+
+			outputBox.Text = stringToPrint;
+		}
+		else 
 		{
 			string varToPrint = FindLineToPrint(thingToPrint);
 			// GD.Print("Var to Print: ", varToPrint);
@@ -361,13 +381,21 @@ public partial class Main : Node
 	// this currently does the same as above, but wanted to keep errors separate
 	public void ErrorCommandSignalReceived(string errorToPrint)
 	{
+		var outputBox = GetNode<RichTextLabel>("output_box");
 		GD.Print(errorToPrint);
+		outputBox.Text = errorToPrint;
 	}
 
 	public void CurCommandChangeSignalReceived(int curCommandNum)
 	{
 		DisplayCode(curLevel, curCommandNum);
 		GD.Print("Cur Command in Main: ", curCommandNum.ToString());
+	}
+
+	public void RunStringNeededSignalReceived(string memAddress)
+	{
+		var interpreter = GetNode<OLangInterpreter>("OLangInterpreter");
+		interpreter.runString = FindLineToPrint(memAddress);
 	}
 
 	public void EndCommandSignalReceived()
@@ -427,7 +455,7 @@ public partial class Main : Node
 		}
 		if (curLevel == 2)
 		{
-			// interpreter.ParseOLang(OLangCode.Code.oLangLevel2);
+			interpreter.ParseOLang(OLangCode.Code.oLangLevel2);
 		}
 		if (curLevel == 3)
 		{
@@ -447,6 +475,7 @@ public partial class Main : Node
 				codeBox.SetText(OLangCode.Code.oLangLevel1, curLineNumber);
 				break;
 			case 2:
+				codeBox.SetText(OLangCode.Code.oLangLevel2, curLineNumber);
 				break;
 			case 3:
 				codeBox.SetText(OLangCode.Code.oLangLevel3, curLineNumber);
@@ -493,15 +522,20 @@ public partial class Main : Node
 
 		char thisChar = varsCodeTest[startChar];
 
-		while (thisChar != ';')
+		for (int i = startChar; i < startChar + lineLength; i++)
 		{
-			stringToPrint += thisChar;
-			startChar++;
-			// thisChar = OLangCode.Code.varsLevel1[startChar];
-			thisChar = varsCodeTest[startChar];
+			stringToPrint += varsCodeTest[i];
 		}
 
-		return stringToPrint;
+		// while (thisChar != ';')
+		// {
+		// 	stringToPrint += thisChar;
+		// 	startChar++;
+		// 	// thisChar = OLangCode.Code.varsLevel1[startChar];
+		// 	thisChar = varsCodeTest[startChar];
+		// }
+
+		return stringToPrint.Trim();
 	}
 
 	// This function currently does nothing, so will probably be removed

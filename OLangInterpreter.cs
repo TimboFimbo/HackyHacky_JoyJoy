@@ -21,6 +21,10 @@ public partial class OLangInterpreter : Node
 	[Signal]
 	public delegate void OpenDoorCommandEventHandler(int doorNumber);
 	[Signal]
+	public delegate void CheckCodeCommandEventHandler(int inputCode);
+	[Signal]
+	public delegate void GenCodeCommandEventHandler(int codeLength);
+	[Signal]
 	public delegate void RunStringNeededEventHandler(string memAddress);
 	public int curCommandNum = 0;
 	public bool currentlyPaused = false;
@@ -166,6 +170,14 @@ public partial class OLangInterpreter : Node
 						else if (lines[0] == "null_func")
 						{
 							GD.Print("Null func run");
+						}
+						else if (lines[0] == "gen_code")
+						{
+							EmitSignal(SignalName.GenCodeCommand, lines[1].ToInt());
+						}
+						else if (lines[0] == "check_code")
+						{
+							EmitSignal(SignalName.CheckCodeCommand, lines[1].ToInt());
 						}
 						else
 						{

@@ -32,12 +32,14 @@ public partial class Main : Node
 		var tileMap1 = GetNode<TileMap>("map_level1");
 		var tileMap2 = GetNode<TileMap>("map_level2");
 		var tileMap3 = GetNode<TileMap>("map_level3");
+		var tileMap4 = GetNode<TileMap>("map_level4");
 
 		if (curLevel == 1)
 		{
 			tileMap1.Show();
 			tileMap2.Hide();
 			tileMap3.Hide();
+			tileMap4.Hide();
 		}
 
 		if (curLevel == 2)
@@ -46,6 +48,7 @@ public partial class Main : Node
 			tileMap1.Hide();
 			tileMap2.Show();
 			tileMap3.Hide();
+			tileMap4.Hide();
 		}
 
 		if (curLevel == 3)
@@ -54,7 +57,18 @@ public partial class Main : Node
 			tileMap1.Hide();
 			tileMap2.Hide();
 			tileMap3.Show();
+			tileMap4.Hide();
 		}
+
+		if (curLevel == 4)
+		{
+			varsCodeTest = new System.Text.StringBuilder(OLangCode.Code.varsLevel4);
+			tileMap1.Hide();
+			tileMap2.Hide();
+			tileMap3.Hide();
+			tileMap4.Show();
+		}
+
 		// outputBox.Text = interpreter.TextToCamel("Test Camel Output");
 		// interpreter.ParseOLang(OLangCode.Code.oLangLevel1);
 
@@ -392,6 +406,38 @@ public partial class Main : Node
 		GD.Print("Cur Command in Main: ", curCommandNum.ToString());
 	}
 
+	public void GenCommandSignalReceived(int codeLength)
+	{
+		string s = string.Empty;
+		Random rnd = new Random();
+
+		for (int i = 0; i < codeLength; i++)
+		{
+			s = String.Concat(s, rnd.Next(10).ToString());
+		}
+
+		EditVars(s, 0);
+		DisplayVars();
+	}
+
+	public void CheckCommandSignalReceived(int inputCode)
+	{
+		if (inputCode == 0)
+		{
+			string randomCode = FindLineToPrint("$1000");
+			string enteredCode = FindLineToPrint("$1010");
+
+			if (randomCode == enteredCode)
+			{
+				OpenDoorSignalReceived(1);
+			}
+			else 
+			{
+				ErrorCommandSignalReceived("Code Incorrect");
+			}
+		}
+	}
+
 	public void RunStringNeededSignalReceived(string memAddress)
 	{
 		var interpreter = GetNode<OLangInterpreter>("OLangInterpreter");
@@ -425,6 +471,10 @@ public partial class Main : Node
 		if (curLevel == 3)
 		{
 			tileMap = GetNode<TileMap>("map_level3");
+		}
+		if (curLevel == 4)
+		{
+			tileMap = GetNode<TileMap>("map_level4");
 		}
 
 		char doorToOpen = AsciiMaps.Maps.CheckMap(xPos, yPos, curLevel);
@@ -461,7 +511,10 @@ public partial class Main : Node
 		{
 			interpreter.ParseOLang(OLangCode.Code.oLangLevel3);
 		}
-
+		if (curLevel == 4)
+		{
+			interpreter.ParseOLang(OLangCode.Code.oLangLevel4);
+		}
 
 	}
 
@@ -479,6 +532,9 @@ public partial class Main : Node
 				break;
 			case 3:
 				codeBox.SetText(OLangCode.Code.oLangLevel3, curLineNumber);
+				break;
+			case 4:
+				codeBox.SetText(OLangCode.Code.oLangLevel4, curLineNumber);
 				break;
 		}
 	}
@@ -583,7 +639,7 @@ public partial class Main : Node
 		for (int i = 0; i < curInpAddress.Length; i++)
 		{
 			stackCodeTest[i + rowSize * 2] = curInpAddress[i];
-		}
+		}		
 
 		// now set the return address
 		for (int i = 0; i < returnAddress.Length; i++)

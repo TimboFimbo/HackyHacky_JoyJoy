@@ -44,7 +44,7 @@ namespace OLangCode
             "Enter Name      " +
             "NAME            " +
             "null_func,0     " +
-            "Hello           " +
+            "Hello,          " +
             "                ";
 
         public static string oLangLevel3 = 
@@ -65,6 +65,26 @@ namespace OLangCode
             "Door Opened     " +
             "                " +
             "                " +
+            "                ";
+
+        public static string oLangLevel4 = 
+            "RUNgen_code,4   " +
+            "PRT$1020        " +
+            "INP$1010,16     " +
+            "PRT$1030        " +
+            "RUNcheck_code,0 " +
+            "END             " +
+            "                " +
+            "                " +
+            "                " +
+            "                " +
+            "                ";
+
+        public static string varsLevel4 = 
+            "GEN             " +
+            "CODE            " +
+            "Enter Code      " +
+            "Checking Code..." +
             "                ";
 
         public static string emptyStack = 

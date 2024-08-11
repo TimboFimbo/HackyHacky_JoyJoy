@@ -14,6 +14,8 @@ public partial class Player : Area2D
 	[Signal]
 	public delegate void OpenDoorPressedEventHandler(int doorNumber);
 	[Signal]
+	public delegate void CloseDoorPressedEventHandler(int doorNumber);
+	[Signal]
 	public delegate void PausePressedEventHandler();
 
 	// Called when the node enters the scene tree for the first time.
@@ -70,6 +72,21 @@ public partial class Player : Area2D
 		if (Input.IsActionJustPressed("open_door_2")) // key '2'
 		{
 			EmitSignal(SignalName.OpenDoorPressed, 2);
+		}
+
+		if (Input.IsActionJustPressed("close_door")) // key 'c'
+		{
+			EmitSignal(SignalName.CloseDoorPressed, 0);
+		}
+
+		if (Input.IsActionJustPressed("close_door_1")) // key '3'
+		{
+			EmitSignal(SignalName.CloseDoorPressed, 1);
+		}
+
+		if (Input.IsActionJustPressed("close_door_2")) // key '4'
+		{
+			EmitSignal(SignalName.CloseDoorPressed, 2);
 		}
 
 		if (Input.IsActionJustPressed("pause")) // key 'SPACE'

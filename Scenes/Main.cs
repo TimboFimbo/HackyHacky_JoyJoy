@@ -33,6 +33,7 @@ public partial class Main : Node
 		var tileMap2 = GetNode<TileMap>("map_level2");
 		var tileMap3 = GetNode<TileMap>("map_level3");
 		var tileMap4 = GetNode<TileMap>("map_level4");
+		var tileMap5 = GetNode<TileMap>("map_level5");
 
 		if (curLevel == 1)
 		{
@@ -40,6 +41,7 @@ public partial class Main : Node
 			tileMap2.Hide();
 			tileMap3.Hide();
 			tileMap4.Hide();
+			tileMap5.Hide();
 		}
 
 		if (curLevel == 2)
@@ -49,6 +51,7 @@ public partial class Main : Node
 			tileMap2.Show();
 			tileMap3.Hide();
 			tileMap4.Hide();
+			tileMap5.Hide();
 		}
 
 		if (curLevel == 3)
@@ -58,6 +61,7 @@ public partial class Main : Node
 			tileMap2.Hide();
 			tileMap3.Show();
 			tileMap4.Hide();
+			tileMap5.Hide();
 		}
 
 		if (curLevel == 4)
@@ -67,6 +71,17 @@ public partial class Main : Node
 			tileMap2.Hide();
 			tileMap3.Hide();
 			tileMap4.Show();
+			tileMap5.Hide();
+		}
+
+		if (curLevel == 5)
+		{
+			varsCodeTest = new System.Text.StringBuilder(OLangCode.Code.varsLevel5);
+			tileMap1.Hide();
+			tileMap2.Hide();
+			tileMap3.Hide();
+			tileMap4.Hide();
+			tileMap5.Show();
 		}
 
 		// outputBox.Text = interpreter.TextToCamel("Test Camel Output");
@@ -330,6 +345,86 @@ public partial class Main : Node
 		}
 	}
 
+	public void CloseDoorSignalReceived(int doorNumber)
+	{
+		if (inputBoxOpen)
+		{
+			return;
+		}
+
+		var outputBox = GetNode<RichTextLabel>("output_box");
+
+		switch(doorNumber)
+		{
+			// close any door next to player
+			case 0:
+			// GD.Print("Any adjacent door to close");
+			for (int i = 0; i < 2; i++)
+			{
+				for (int j = 0; j < 2; j++)
+				{
+					int xPos = playerPos[0] - i;
+					int yPos = playerPos[1] - j;
+
+					if (AsciiMaps.Maps.CheckMap(xPos, yPos, curLevel) == '1' ||
+					AsciiMaps.Maps.CheckMap(xPos, yPos, curLevel) == '2')
+					{
+						// GD.Print("Door found at " + xPos.ToString() + ", " + yPos.ToString());
+						CloseDoor(xPos, yPos);
+						// outputBox.Text = "Door Closed";
+					}
+
+					xPos = playerPos[0] + i;
+					yPos = playerPos[1] + j;
+
+					if (AsciiMaps.Maps.CheckMap(xPos, yPos, curLevel) == '1' ||
+					AsciiMaps.Maps.CheckMap(xPos, yPos, curLevel) == '2')
+					{
+						// GD.Print("Door found at " + xPos.ToString() + ", " + yPos.ToString());
+						CloseDoor(xPos, yPos);
+						// outputBox.Text = "Door Closed";
+					}
+				}
+			}
+			break;
+
+			case 1:
+			// GD.Print("Door 1 to close");
+			for (int i = 0; i < mapSize[0]; i++)
+			{
+				for (int j = 0; j < mapSize[1]; j++)
+				{
+					if (AsciiMaps.Maps.CheckMap(i, j, curLevel) == '1')
+					{
+						// GD.Print("Door found at " + i.ToString() + ", " + j.ToString());
+						CloseDoor(i, j);
+					}
+				}
+			}
+			break;
+
+			case 2:
+			// GD.Print("Door 2 to close");
+			for (int i = 0; i < mapSize[0]; i++)
+			{
+				for (int j = 0; j < mapSize[1]; j++)
+				{
+					if (AsciiMaps.Maps.CheckMap(i, j, curLevel) == '2')
+					{
+						// GD.Print("Door found at " + i.ToString() + ", " + j.ToString());
+						CloseDoor(i, j);
+					}
+				}
+			}
+			break;
+		}
+
+		for (int i = 0; i < walkableBlocks.Length; i++)
+		{
+			// GD.Print("Walkable block " + i.ToString() + " = " + walkableBlocks[i].ToString());
+		}
+	}
+
 	public void InputBoxSignalReceived(string text)
 	{
 		var inputBox = GetNode<LineEdit>("input_box");
@@ -476,11 +571,44 @@ public partial class Main : Node
 		{
 			tileMap = GetNode<TileMap>("map_level4");
 		}
+		if (curLevel == 5)
+		{
+			tileMap = GetNode<TileMap>("map_level5");
+		}
 
 		char doorToOpen = AsciiMaps.Maps.CheckMap(xPos, yPos, curLevel);
 
 		tileMap.SetCell(0, new Vector2I(xPos, yPos), 0, new Vector2I(2, 0), 0);
 		walkableBlocks[doorToOpen - '0'] = doorToOpen;
+
+		// GD.Print("Opening door at " + xPos.ToString() + ", " + yPos.ToString());
+	}
+
+	private void CloseDoor(int xPos, int yPos)
+	{
+		TileMap tileMap = GetNode<TileMap>("map_level1");
+
+		if (curLevel == 2)
+		{
+			tileMap = GetNode<TileMap>("map_level2");
+		}
+		if (curLevel == 3)
+		{
+			tileMap = GetNode<TileMap>("map_level3");
+		}
+		if (curLevel == 4)
+		{
+			tileMap = GetNode<TileMap>("map_level4");
+		}
+		if (curLevel == 5)
+		{
+			tileMap = GetNode<TileMap>("map_level5");
+		}
+
+		char doorToClose = AsciiMaps.Maps.CheckMap(xPos, yPos, curLevel);
+
+		tileMap.SetCell(0, new Vector2I(xPos, yPos), 0, new Vector2I(7, 0), 0);
+		walkableBlocks[doorToClose - '0'] = '#';
 
 		// GD.Print("Opening door at " + xPos.ToString() + ", " + yPos.ToString());
 	}
@@ -515,6 +643,10 @@ public partial class Main : Node
 		{
 			interpreter.ParseOLang(OLangCode.Code.oLangLevel4);
 		}
+		if (curLevel == 5)
+		{
+			interpreter.ParseOLang(OLangCode.Code.oLangLevel5);
+		}
 
 	}
 
@@ -535,6 +667,9 @@ public partial class Main : Node
 				break;
 			case 4:
 				codeBox.SetText(OLangCode.Code.oLangLevel4, curLineNumber);
+				break;
+			case 5:
+				codeBox.SetText(OLangCode.Code.oLangLevel5, curLineNumber);
 				break;
 		}
 	}

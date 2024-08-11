@@ -57,6 +57,19 @@ namespace AsciiMaps
             "WWWWWWWWWWWWW"
         };
 
+        static string[] mapLevel5 = 
+        {
+            "WWWWWWWWWWWWW",
+            "W.WWWWWWWWW.W",
+            "W..WWWWWWW..W",
+            "W..WW...W...W",
+            "W...1...2.E.W",
+            "W...W...W...W",
+            "W...WWWWW...W",
+            "W.T.WWWWW..WW",
+            "WWWWWWWWWWWWW"
+        };
+
         public static char CheckMap(int x, int y, int levelNum)
         {
             if (levelNum == 1)
@@ -71,9 +84,13 @@ namespace AsciiMaps
             {
                 return mapLevel3[y][x];
             }
-            else
+            if (levelNum == 4)
             {
                 return mapLevel4[y][x];
+            }
+            else
+            {
+                return mapLevel5[y][x];
             }
         }
     }

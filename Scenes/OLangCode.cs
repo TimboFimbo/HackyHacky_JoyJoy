@@ -87,6 +87,26 @@ namespace OLangCode
             "Checking Code..." +
             "                ";
 
+        public static string oLangLevel5 = 
+            "PRT$1010        " +
+            "INP$1000,16     " +
+            "RUNopen_door,1  " +
+            "PRT$1020        " +
+            "RUNclose_door,1 " +
+            "PRT$1030        " +
+            "RUN$1040        " +
+            "PRT$1020        " +
+            "RUNclose_door,1 " +
+            "PRT$1030        " +
+            "END             ";
+
+        public static string varsLevel5 = 
+            "CODE            " +
+            "Enter Code      " +
+            "Door Opened     " +
+            "Door Closed     " +
+            "open_door,1     ";
+
         public static string emptyStack = 
             "                " +
             "                " +

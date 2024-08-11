@@ -21,6 +21,8 @@ public partial class OLangInterpreter : Node
 	[Signal]
 	public delegate void OpenDoorCommandEventHandler(int doorNumber);
 	[Signal]
+	public delegate void CloseDoorCommandEventHandler(int doorNumber);
+	[Signal]
 	public delegate void CheckCodeCommandEventHandler(int inputCode);
 	[Signal]
 	public delegate void GenCodeCommandEventHandler(int codeLength);
@@ -166,6 +168,10 @@ public partial class OLangInterpreter : Node
 						if (lines[0] == "open_door")
 						{
 							EmitSignal(SignalName.OpenDoorCommand, lines[1].ToInt());
+						}
+						else if (lines[0] == "close_door")
+						{
+							EmitSignal(SignalName.CloseDoorCommand, lines[1].ToInt());
 						}
 						else if (lines[0] == "null_func")
 						{

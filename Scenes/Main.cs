@@ -469,7 +469,7 @@ public partial class Main : Node
 		GD.Print("Length of input: ", lengthOfInput.ToString());
 		GD.Print("Current Line: ", lineNum.ToString());
 
-		curInpAddress = addressToInputTo;
+		curInpAddress = "$" + addressToInputTo;
 		curInpLength = lengthOfInput;
 		curLineNum = lineNum;
 
@@ -765,7 +765,7 @@ public partial class Main : Node
 	private void EditStack(string boxInput)
 	{
 		int rowSize = 16;
-		string returnAddress = (2000 + curLineNum * 10).ToString();
+		string returnAddress = "$" + (2000 + curLineNum * 10).ToString();
 		int numberOfInputChars;
 
 		GD.Print("Box Input Received: ", boxInput);

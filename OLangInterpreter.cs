@@ -204,6 +204,8 @@ public partial class OLangInterpreter : Node
 
 	public async void ParseStackInput(string stackCode)
 	{
+		// TODO: have errors end program, and check if values can be parsed to int
+
 		string blankLine = "                ";
 		System.Text.StringBuilder inputLineParse = new System.Text.StringBuilder(blankLine);
 		System.Text.StringBuilder retLineParse = new System.Text.StringBuilder(blankLine);
@@ -241,24 +243,45 @@ public partial class OLangInterpreter : Node
 			}
 		}
 
-		// add check to ensure value can be parsed to int, and don't hard code values
-		if (retLineParse.ToString().ToInt() < 2000 || retLineParse.ToString().ToInt() > 2090)
+		string finalRetLine = "";
+
+		if (retLineParse[0] == '$')
+		{
+			finalRetLine = retLineParse.Remove(0,1).ToString();
+			if (finalRetLine.ToInt() < 2000 || finalRetLine.ToInt() > 2090)
+			{
+				errorFound = true;
+				EmitSignal(SignalName.ErrorCommand, "Return Line Error");
+			}
+		}
+		else
 		{
 			errorFound = true;
-			EmitSignal(SignalName.ErrorCommand, "Stack Return Line Error");
+			EmitSignal(SignalName.ErrorCommand, "Return Line Error");
 		}
 
-		if (argsLineParse.ToString().ToInt() < 1000 || argsLineParse.ToString().ToInt() > 1040)
+		string finalArgsLine = "";
+
+		if (argsLineParse[0] == '$')
+		{
+			finalArgsLine = argsLineParse.Remove(0,1).ToString();
+			if (finalArgsLine.ToInt() < 1000 || finalArgsLine.ToInt() > 1040)
+			{
+				errorFound = true;
+				EmitSignal(SignalName.ErrorCommand, "Args Line Error");
+			}
+		}
+		else
 		{
 			errorFound = true;
-			EmitSignal(SignalName.ErrorCommand, "Stack Args Line Error");
+			EmitSignal(SignalName.ErrorCommand, "Args Line Error");
 		}
 
 		if (!errorFound)
 		{
-			curCommandNum = retLineParse[2].ToString().ToInt();
-			var lineToUpdate = argsLineParse[2].ToString().ToInt();
-			var offset = argsLineParse[3].ToString().ToInt();
+			curCommandNum = finalRetLine[2].ToString().ToInt();
+			var lineToUpdate = finalArgsLine[2].ToString().ToInt();
+			var offset = finalArgsLine[3].ToString().ToInt();
 			EmitSignal(SignalName.StackInputCommand, inputLineParse.ToString(), lineToUpdate, offset);
 		}
 		else { GD.Print("Stack Parsing Error"); }

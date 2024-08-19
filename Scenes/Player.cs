@@ -107,6 +107,7 @@ public partial class Player : Area2D
 	public void ResetPlayer()
 	{
 		pos = Position;
+		GetNode<GpuParticles2D>("SpawnParticles").Emitting = true;
 	}
 
 	async public void MovePlayer(string dir)

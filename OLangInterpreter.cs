@@ -38,6 +38,7 @@ public partial class OLangInterpreter : Node
 	private float timeBetweenLines = 1.0f;
 	private int stackLineLength = 16;
 	public string runString = "";
+	public bool currentlyResetting = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -53,6 +54,17 @@ public partial class OLangInterpreter : Node
 	public string TextToCamel(string textToSet)
 	{
 		return textToSet.ToCamelCase();
+	}
+
+	// Reset everything
+	public void ResetEverything()
+	{
+		curCommandNum = 0;
+		curStackCommandNum = 0;
+		currentlyPaused = false;
+		codePausedByStack = false;
+		stackCurrentlyPaused = false;
+		currentlyResetting = true;
 	}
 
 	// Here it is - the fun part. Takes the oLang code, splits it, and runs each command
@@ -210,13 +222,13 @@ public partial class OLangInterpreter : Node
 	public async void ParseStackInput(string stackCode)
 	{
 		// TODO: have errors end program, and check if values can be parsed to int
-
 		string blankLine = "                ";
 		System.Text.StringBuilder inputLineParse = new System.Text.StringBuilder(blankLine);
 		System.Text.StringBuilder retLineParse = new System.Text.StringBuilder(blankLine);
 		System.Text.StringBuilder argsLineParse = new System.Text.StringBuilder(blankLine);
 		bool errorFound = false;
 		codePausedByStack = true;
+		currentlyResetting = false;
 
 		GD.Print("Stack Code to be Parsed: ", stackCode);
 
@@ -287,6 +299,7 @@ public partial class OLangInterpreter : Node
 		{
 			GD.Print("No stack parsing errors found");
 
+
 			EmitSignal(SignalName.CurStackChange, 2);
 			var lineToUpdate = finalArgsLine[2].ToString().ToInt();
 			var offset = finalArgsLine[3].ToString().ToInt();
@@ -297,18 +310,24 @@ public partial class OLangInterpreter : Node
 				await ToSignal(GetTree().CreateTimer(0.1), SceneTreeTimer.SignalName.Timeout); 
 			}
 
-			EmitSignal(SignalName.CurStackChange, 0);
-			EmitSignal(SignalName.StackInputCommand, inputLineParse.ToString(), lineToUpdate, offset);
-			await ToSignal(GetTree().CreateTimer(timeBetweenLines), SceneTreeTimer.SignalName.Timeout);
+			if (!currentlyResetting)
+			{
+				EmitSignal(SignalName.CurStackChange, 0);
+				EmitSignal(SignalName.StackInputCommand, inputLineParse.ToString(), lineToUpdate, offset);
+				await ToSignal(GetTree().CreateTimer(timeBetweenLines), SceneTreeTimer.SignalName.Timeout);
+			}
 
 			while (stackCurrentlyPaused) 
 			{ 
 				await ToSignal(GetTree().CreateTimer(0.1), SceneTreeTimer.SignalName.Timeout); 
 			}
 
-			EmitSignal(SignalName.CurStackChange, 1);
-			curCommandNum = finalRetLine[2].ToString().ToInt();
-			await ToSignal(GetTree().CreateTimer(timeBetweenLines), SceneTreeTimer.SignalName.Timeout);
+			if (!currentlyResetting)
+			{
+				EmitSignal(SignalName.CurStackChange, 1);
+				curCommandNum = finalRetLine[2].ToString().ToInt();
+				await ToSignal(GetTree().CreateTimer(timeBetweenLines), SceneTreeTimer.SignalName.Timeout);
+			}
 
 			while (stackCurrentlyPaused) 
 			{ 
@@ -326,5 +345,6 @@ public partial class OLangInterpreter : Node
 		// await ToSignal(GetTree().CreateTimer(timeBetweenLines), SceneTreeTimer.SignalName.Timeout);
 		codePausedByStack = false;
 		currentlyPaused = false;
+		currentlyResetting = false;
 	}
 }

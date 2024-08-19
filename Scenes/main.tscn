@@ -117,4 +117,5 @@ offset_bottom = 689.0
 [connection signal="InteractPressed" from="player" to="." method="InteractSignalReceived"]
 [connection signal="OpenDoorPressed" from="player" to="." method="OpenDoorSignalReceived"]
 [connection signal="PausePressed" from="player" to="." method="PauseSignalReceived"]
+[connection signal="ResetPressed" from="player" to="." method="ResetSignalReceived"]
 [connection signal="text_submitted" from="input_box" to="." method="InputBoxSignalReceived"]

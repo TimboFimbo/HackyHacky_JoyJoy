@@ -9,6 +9,8 @@ public partial class Main : Node
 	bool printed = false;
 	int[] playerPos = {1, 1};
 	int[] mapSize = {12, 8};
+	Vector2 playerStartPos = new Vector2(105, 100);
+	// Vector2 playerSpriteStartPos = new Vector2(80, 80);
 	char[] walkableBlocks = new char[4] {'.', '#', '#', 'E'};
 	bool inputBoxOpen = false;
 	string curInpAddress;
@@ -25,18 +27,44 @@ public partial class Main : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		ResetLevel(curLevel);
+	}
+
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+		return;
+	}
+
+	private void ResetLevel(int levelNumber)
+	{
+		curLevel = levelNumber;
 		GD.Print("Game Started");
 
-		var outputBox = GetNode<RichTextLabel>("output_box");
-		var interpreter = GetNode<OLangInterpreter>("OLangInterpreter");
 		var tileMap1 = GetNode<TileMap>("map_level1");
 		var tileMap2 = GetNode<TileMap>("map_level2");
 		var tileMap3 = GetNode<TileMap>("map_level3");
 		var tileMap4 = GetNode<TileMap>("map_level4");
 		var tileMap5 = GetNode<TileMap>("map_level5");
+		var playerSprite = GetNode<Player>("player");
+		var inputBox = GetNode<LineEdit>("input_box");
+		var interpreter = GetNode<OLangInterpreter>("OLangInterpreter");
+
+		printed = false;
+		playerPos[0] = 1;
+		playerPos[1] = 1;
+		// walkableBlocks = new char[4] {'.', '#', '#', 'E'};
+		inputBoxOpen = false;
+		playerSprite.Position = playerStartPos;
+		playerSprite.ResetPlayer();
+		stackCodeTest = new System.Text.StringBuilder(OLangCode.Code.emptyStack);
+		inputBox.Text = "";
+
+		interpreter.ResetEverything();
 
 		if (curLevel == 1)
 		{
+			varsCodeTest = new System.Text.StringBuilder(OLangCode.Code.varsLevel1);
 			tileMap1.Show();
 			tileMap2.Hide();
 			tileMap3.Hide();
@@ -84,28 +112,17 @@ public partial class Main : Node
 			tileMap5.Show();
 		}
 
-		// outputBox.Text = interpreter.TextToCamel("Test Camel Output");
-		// interpreter.ParseOLang(OLangCode.Code.oLangLevel1);
-
-		// SetCurVarsAndStack(1);
-
-		// test to ensure vars can be edited
-		// EditVars("I Love You!;", 0);
-
 		DisplayCode(curLevel, -1);
 		DisplayVars();
 		DisplayStack(-1);
+		CloseDoorSignalReceived(1);
+		CloseDoorSignalReceived(2);
 
 		var sprite = GetNode<Player>("player").GetNode<AnimatedSprite2D>("SnakeSprite");
-		// GD.Print("Found snake sprite: ", sprite.ToString());
 		sprite.Play();
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-		return;
-	}
+	// *** Signal Received Methods ***
 
 	public void DirectionSignalReceived(string direction)
 	{
@@ -272,6 +289,16 @@ public partial class Main : Node
 		{
 			interpreter.stackCurrentlyPaused = true;
 		}
+	}
+
+	public void ResetSignalReceived()
+	{
+		if (inputBoxOpen)
+		{
+			return;
+		}
+
+		ResetLevel(curLevel);
 	}
 
 	public void OpenDoorSignalReceived(int doorNumber)
@@ -566,10 +593,7 @@ public partial class Main : Node
 		interpreter.curCommandNum = 0;
 	}
 
-	// public void RunCommandSignalReceived(string functionToRun, string args)
-	// {
-
-	// }
+	// *** Local Methods ***
 
 	private void OpenDoor(int xPos, int yPos)
 	{

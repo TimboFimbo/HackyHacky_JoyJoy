@@ -17,12 +17,16 @@ public partial class Player : Area2D
 	public delegate void CloseDoorPressedEventHandler(int doorNumber);
 	[Signal]
 	public delegate void PausePressedEventHandler();
+	[Signal]
+	public delegate void ResetPressedEventHandler();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		pos = Position;
+		// pos = Position;
 		// GD.Print(pos);
+
+		ResetPlayer();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -57,6 +61,16 @@ public partial class Player : Area2D
 			EmitSignal(SignalName.InteractPressed);
 		}
 
+		if (Input.IsActionJustPressed("pause")) // key 'SPACE'
+		{
+			EmitSignal(SignalName.PausePressed);
+		}
+
+		if (Input.IsActionJustPressed("reset")) // key 'r'
+		{
+			EmitSignal(SignalName.ResetPressed);
+		}
+
 		// The following are debug keys and won't be used in-game
 
 		if (Input.IsActionJustPressed("open_door")) // key 'o'
@@ -88,11 +102,11 @@ public partial class Player : Area2D
 		{
 			EmitSignal(SignalName.CloseDoorPressed, 2);
 		}
+	}
 
-		if (Input.IsActionJustPressed("pause")) // key 'SPACE'
-		{
-			EmitSignal(SignalName.PausePressed);
-		}
+	public void ResetPlayer()
+	{
+		pos = Position;
 	}
 
 	async public void MovePlayer(string dir)

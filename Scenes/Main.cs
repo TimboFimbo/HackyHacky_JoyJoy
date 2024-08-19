@@ -94,7 +94,7 @@ public partial class Main : Node
 
 		DisplayCode(curLevel, -1);
 		DisplayVars();
-		DisplayStack();
+		DisplayStack(-1);
 
 		var sprite = GetNode<Player>("player").GetNode<AnimatedSprite2D>("SnakeSprite");
 		// GD.Print("Found snake sprite: ", sprite.ToString());
@@ -262,6 +262,15 @@ public partial class Main : Node
 		{
 			interpreter.currentlyPaused = true;
 			outputBox.Text = "          -- PAUSE --";
+		}
+
+		if (interpreter.stackCurrentlyPaused)
+		{
+			interpreter.stackCurrentlyPaused = false;
+		}
+		else
+		{
+			interpreter.stackCurrentlyPaused = true;
 		}
 	}
 
@@ -432,11 +441,12 @@ public partial class Main : Node
 		// GD.Print("Text from input box: ", inputBox.Text);
 
 		EditStack(text);
-		DisplayStack();
+		DisplayStack(-1);
 
 		inputBox.ReleaseFocus();
 		inputBox.Hide();
 		inputBoxOpen = false;
+		interpreter.currentlyPaused = true;
 		interpreter.ParseStackInput(stackCodeTest.ToString());
 		// interpreter.currentlyPaused = false;
 	}
@@ -484,7 +494,7 @@ public partial class Main : Node
 		int realOffset = lineToUpdate * 16 + offset;
 		EditVars(input, realOffset);
 		DisplayVars();
-		GetNode<OLangInterpreter>("OLangInterpreter").currentlyPaused = false;
+		GetNode<OLangInterpreter>("OLangInterpreter").codePausedByStack = true;
 	}
 
 	// this currently does the same as above, but wanted to keep errors separate
@@ -499,6 +509,12 @@ public partial class Main : Node
 	{
 		DisplayCode(curLevel, curCommandNum);
 		GD.Print("Cur Command in Main: ", curCommandNum.ToString());
+	}
+
+	public void CurStackChangeSignalReceived(int curStackLineNum)
+	{
+		DisplayStack(curStackLineNum);
+		GD.Print("Cur Stack Line in Main: ", curStackLineNum.ToString());
 	}
 
 	public void GenCommandSignalReceived(int codeLength)
@@ -689,14 +705,14 @@ public partial class Main : Node
 		varsBox.SetText(varsCodeTest.ToString());
 	}
 
-	private void DisplayStack()
+	private void DisplayStack(int curStackLineNum)
 	{
 		var stackBox = GetNode<StackBox>("StackBox");
 
 		// varsBox.SetText(OLangCode.Code.emptyStack);
 
 		// stackBox.SetText(curStackCode);
-		stackBox.SetText(stackCodeTest.ToString());
+		stackBox.SetText(stackCodeTest.ToString(), curStackLineNum);
 	}
 
 	private string FindLineToPrint(string printCommandString)

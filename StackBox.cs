@@ -1,10 +1,12 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class StackBox : GridContainer
 {
 	int numberOfCharBoxes = 80;
 	float[] boxColour = {0.5f, 0.25f, 0.3f};
+	float[] highlightColour = {0.2f, 0.7f, 0.2f};
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -16,9 +18,26 @@ public partial class StackBox : GridContainer
 	{
 	}
 
-	public void SetText(string textToSet)
+	public void SetText(string textToSet, int curStackLineNumber)
 	{
 		var boxSize = 30;
+		int[] highlightedBoxes = new int[16];
+		float[] curColour = highlightColour;
+
+		for (int i = 0; i < highlightedBoxes.Length; i++)
+		{
+			highlightedBoxes[i] = -1;
+		}
+
+		if (curStackLineNumber >= 0)
+		{
+			Array.Clear(highlightedBoxes, 0, highlightedBoxes.Length);
+			for (int i = 0; i < 16; i++)
+			{
+				highlightedBoxes[i] = curStackLineNumber * 16 + i;
+				// GD.Print("Added to highlighted boxes: ", highlightedBoxes[i].ToString());
+			}
+		}
 
 		foreach(Node child in this.GetChildren())
 		{
@@ -42,10 +61,19 @@ public partial class StackBox : GridContainer
 			label.CustomMinimumSize = new Vector2(boxSize, boxSize);
 			label.Set("theme_override_font_sizes/normal_font_size", 16);
 
+			if (highlightedBoxes.Contains(i))
+			{
+				curColour = highlightColour;
+			}
+			else
+			{
+				curColour = boxColour;
+			}
+			
 			container.AddChild(new ColorRect()
 			{
   				Size = new Vector2(boxSize, boxSize),
-  				Color = new Color(boxColour[0], boxColour[1], boxColour[2])
+  				Color = new Color(curColour[0], curColour[1], curColour[2])
   			});
 
 			container.AddChild(label);

@@ -11,6 +11,8 @@ public partial class OLangInterpreter : Node
 	[Signal]
 	public delegate void CurCommandChangeEventHandler(int curCommandNum);
 	[Signal]
+	public delegate void CurStackChangeEventHandler(int curStackCommandNum);
+	[Signal]
 	public delegate void InputCommandEventHandler(string addressToInputTo, int lengthOfInput, int curLineNum);
 	[Signal]
 	public delegate void StackInputCommandEventHandler(string input, int lineToUpdate, int offset);
@@ -29,7 +31,10 @@ public partial class OLangInterpreter : Node
 	[Signal]
 	public delegate void RunStringNeededEventHandler(string memAddress);
 	public int curCommandNum = 0;
+	public int curStackCommandNum = 0;
 	public bool currentlyPaused = false;
+	public bool codePausedByStack = false;
+	public bool stackCurrentlyPaused = false;
 	private float timeBetweenLines = 1.0f;
 	private int stackLineLength = 16;
 	public string runString = "";
@@ -59,7 +64,7 @@ public partial class OLangInterpreter : Node
 
 		for (int i = 0; i < commandLines.Length; i++)
 		{
-			while (currentlyPaused) 
+			while (currentlyPaused || codePausedByStack) 
 			{ 
 				await ToSignal(GetTree().CreateTimer(0.1), SceneTreeTimer.SignalName.Timeout); 
 			}
@@ -211,6 +216,7 @@ public partial class OLangInterpreter : Node
 		System.Text.StringBuilder retLineParse = new System.Text.StringBuilder(blankLine);
 		System.Text.StringBuilder argsLineParse = new System.Text.StringBuilder(blankLine);
 		bool errorFound = false;
+		codePausedByStack = true;
 
 		GD.Print("Stack Code to be Parsed: ", stackCode);
 
@@ -279,16 +285,46 @@ public partial class OLangInterpreter : Node
 
 		if (!errorFound)
 		{
-			curCommandNum = finalRetLine[2].ToString().ToInt();
+			GD.Print("No stack parsing errors found");
+
+			EmitSignal(SignalName.CurStackChange, 2);
 			var lineToUpdate = finalArgsLine[2].ToString().ToInt();
 			var offset = finalArgsLine[3].ToString().ToInt();
+			await ToSignal(GetTree().CreateTimer(timeBetweenLines), SceneTreeTimer.SignalName.Timeout);
+
+			while (stackCurrentlyPaused) 
+			{ 
+				await ToSignal(GetTree().CreateTimer(0.1), SceneTreeTimer.SignalName.Timeout); 
+			}
+
+			EmitSignal(SignalName.CurStackChange, 0);
 			EmitSignal(SignalName.StackInputCommand, inputLineParse.ToString(), lineToUpdate, offset);
+			await ToSignal(GetTree().CreateTimer(timeBetweenLines), SceneTreeTimer.SignalName.Timeout);
+
+			while (stackCurrentlyPaused) 
+			{ 
+				await ToSignal(GetTree().CreateTimer(0.1), SceneTreeTimer.SignalName.Timeout); 
+			}
+
+			EmitSignal(SignalName.CurStackChange, 1);
+			curCommandNum = finalRetLine[2].ToString().ToInt();
+			await ToSignal(GetTree().CreateTimer(timeBetweenLines), SceneTreeTimer.SignalName.Timeout);
+
+			while (stackCurrentlyPaused) 
+			{ 
+				await ToSignal(GetTree().CreateTimer(0.1), SceneTreeTimer.SignalName.Timeout); 
+			}
+
+			EmitSignal(SignalName.CurStackChange, -1);
+			// await ToSignal(GetTree().CreateTimer(timeBetweenLines), SceneTreeTimer.SignalName.Timeout);
 		}
 		else { GD.Print("Stack Parsing Error"); }
 
 		GD.Print("Stack Input Parsed: ", inputLineParse.ToString());
 		GD.Print("Stack Return Parsed: ", retLineParse.ToString());
 		GD.Print("Stack Args Parsed: ", argsLineParse.ToString());
-		await ToSignal(GetTree().CreateTimer(timeBetweenLines), SceneTreeTimer.SignalName.Timeout);
+		// await ToSignal(GetTree().CreateTimer(timeBetweenLines), SceneTreeTimer.SignalName.Timeout);
+		codePausedByStack = false;
+		currentlyPaused = false;
 	}
 }

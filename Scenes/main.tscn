@@ -103,6 +103,7 @@ offset_bottom = 689.0
 [connection signal="CheckCodeCommand" from="OLangInterpreter" to="." method="CheckCommandSignalReceived"]
 [connection signal="CloseDoorCommand" from="OLangInterpreter" to="." method="CloseDoorSignalReceived"]
 [connection signal="CurCommandChange" from="OLangInterpreter" to="." method="CurCommandChangeSignalReceived"]
+[connection signal="CurStackChange" from="OLangInterpreter" to="." method="CurStackChangeSignalReceived"]
 [connection signal="EndInputCommand" from="OLangInterpreter" to="." method="EndCommandSignalReceived"]
 [connection signal="ErrorCommand" from="OLangInterpreter" to="." method="ErrorCommandSignalReceived"]
 [connection signal="GenCodeCommand" from="OLangInterpreter" to="." method="GenCommandSignalReceived"]

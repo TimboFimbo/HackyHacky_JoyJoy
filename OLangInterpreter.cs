@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Threading;
+using Constants;
 
 public partial class OLangInterpreter : Node
 {
@@ -97,7 +98,8 @@ public partial class OLangInterpreter : Node
 				case "PRT": // for printing
 					if (commandLines[i].Length < 4)
 					{
-						EmitSignal(SignalName.ErrorCommand, "Nothing to print!");
+						// EmitSignal(SignalName.ErrorCommand, "Nothing to print!");
+						UponErrorFound(Constants.Errors.ERR_NO_PRINT);
 					}
 					else
 					{
@@ -115,7 +117,8 @@ public partial class OLangInterpreter : Node
 					string[] inpArguments = new string[2];
 					if (commandLines[i].Length < 4)
 					{
-						EmitSignal(SignalName.ErrorCommand, "No address to input to!");
+						// EmitSignal(SignalName.ErrorCommand, "No address to input to!");
+						UponErrorFound(Constants.Errors.ERR_NO_ADDRESS);
 					}
 					else
 					{
@@ -138,10 +141,12 @@ public partial class OLangInterpreter : Node
 					EmitSignal(SignalName.EndInputCommand);
 					break;
 
+				// TODO: This needs to check if function can be parsed first
 				case "RUN": //runs a prewritten function
 					if (commandLines[i].Length < 4)
 					{
-						EmitSignal(SignalName.ErrorCommand, "Nothing to run!");
+						// EmitSignal(SignalName.ErrorCommand, "Nothing to run!");
+						UponErrorFound(Constants.Errors.ERR_NO_RUN);
 					}
 					else
 					{
@@ -173,7 +178,8 @@ public partial class OLangInterpreter : Node
 							}
 							else
 							{
-								EmitSignal(SignalName.ErrorCommand, "No Valid Function");
+								// EmitSignal(SignalName.ErrorCommand, "No Valid Function");
+								UponErrorFound(Constants.Errors.ERR_NO_FUNC);
 							}
 						}
 						else
@@ -204,7 +210,8 @@ public partial class OLangInterpreter : Node
 						}
 						else
 						{
-							EmitSignal(SignalName.ErrorCommand, "Not a function!");
+							// EmitSignal(SignalName.ErrorCommand, "Not a function!");
+							UponErrorFound(Constants.Errors.ERR_NO_FUNC);
 						}
 
 						GD.Print("Run command: ", lines[0]);
@@ -269,13 +276,15 @@ public partial class OLangInterpreter : Node
 			if (finalRetLine.ToInt() < 2000 || finalRetLine.ToInt() > 2090)
 			{
 				errorFound = true;
-				EmitSignal(SignalName.ErrorCommand, "Return Line Error");
+				// EmitSignal(SignalName.ErrorCommand, "Return Line Error");
+				UponErrorFound(Constants.Errors.ERR_RET_LINE);
 			}
 		}
 		else
 		{
 			errorFound = true;
-			EmitSignal(SignalName.ErrorCommand, "Return Line Error");
+			// EmitSignal(SignalName.ErrorCommand, "Return Line Error");
+			UponErrorFound(Constants.Errors.ERR_RET_LINE);
 		}
 
 		string finalArgsLine = "";
@@ -286,19 +295,20 @@ public partial class OLangInterpreter : Node
 			if (finalArgsLine.ToInt() < 1000 || finalArgsLine.ToInt() > 1040)
 			{
 				errorFound = true;
-				EmitSignal(SignalName.ErrorCommand, "Args Line Error");
+				// EmitSignal(SignalName.ErrorCommand, "Args Line Error");
+				UponErrorFound(Constants.Errors.ERR_ARGS_LINE);
 			}
 		}
 		else
 		{
 			errorFound = true;
-			EmitSignal(SignalName.ErrorCommand, "Args Line Error");
+			// EmitSignal(SignalName.ErrorCommand, "Args Line Error");
+			UponErrorFound(Constants.Errors.ERR_ARGS_LINE);
 		}
 
 		if (!errorFound)
 		{
 			GD.Print("No stack parsing errors found");
-
 
 			EmitSignal(SignalName.CurStackChange, 2);
 			var lineToUpdate = finalArgsLine[2].ToString().ToInt();
@@ -336,6 +346,10 @@ public partial class OLangInterpreter : Node
 
 			EmitSignal(SignalName.CurStackChange, -1);
 			// await ToSignal(GetTree().CreateTimer(timeBetweenLines), SceneTreeTimer.SignalName.Timeout);
+
+			codePausedByStack = false;
+			currentlyPaused = false;
+			currentlyResetting = false;
 		}
 		else { GD.Print("Stack Parsing Error"); }
 
@@ -343,6 +357,16 @@ public partial class OLangInterpreter : Node
 		GD.Print("Stack Return Parsed: ", retLineParse.ToString());
 		GD.Print("Stack Args Parsed: ", argsLineParse.ToString());
 		// await ToSignal(GetTree().CreateTimer(timeBetweenLines), SceneTreeTimer.SignalName.Timeout);
+		// codePausedByStack = false;
+		// currentlyPaused = false;
+		// currentlyResetting = false;
+	}
+	
+	private async void UponErrorFound(string errorMessage)
+	{
+		EmitSignal(SignalName.ErrorCommand, errorMessage);
+		await ToSignal(GetTree().CreateTimer(2.0), SceneTreeTimer.SignalName.Timeout);
+		EmitSignal(SignalName.EndInputCommand);
 		codePausedByStack = false;
 		currentlyPaused = false;
 		currentlyResetting = false;

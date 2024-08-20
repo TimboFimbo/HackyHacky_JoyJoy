@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cmpnhoymcs802"]
+[gd_scene load_steps=15 format=3 uid="uid://cmpnhoymcs802"]
 
 [ext_resource type="PackedScene" uid="uid://jn0dwoe52ofv" path="res://Scenes/map_level_1.tscn" id="1_idtn2"]
 [ext_resource type="Script" path="res://Scenes/Main.cs" id="1_ypcln"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dwv1itc3drlw" path="res://Scenes/vars_box.tscn" id="6_nduhu"]
 [ext_resource type="PackedScene" uid="uid://dwxj6fmqy4jel" path="res://Scenes/map_level_5.tscn" id="7_bin8m"]
 [ext_resource type="PackedScene" uid="uid://dgo2q4fex3vml" path="res://Scenes/stack_box.tscn" id="7_hqurv"]
+[ext_resource type="PackedScene" uid="uid://tr8bdt1jgce6" path="res://Scenes/hud.tscn" id="14_6w7ig"]
 
 [node name="main" type="Node"]
 script = ExtResource("1_ypcln")
@@ -100,6 +101,8 @@ offset_bottom = 236.0
 offset_top = 610.0
 offset_bottom = 689.0
 
+[node name="HUD" parent="." instance=ExtResource("14_6w7ig")]
+
 [connection signal="CheckCodeCommand" from="OLangInterpreter" to="." method="CheckCommandSignalReceived"]
 [connection signal="CloseDoorCommand" from="OLangInterpreter" to="." method="CloseDoorSignalReceived"]
 [connection signal="CurCommandChange" from="OLangInterpreter" to="." method="CurCommandChangeSignalReceived"]
@@ -119,3 +122,4 @@ offset_bottom = 689.0
 [connection signal="PausePressed" from="player" to="." method="PauseSignalReceived"]
 [connection signal="ResetPressed" from="player" to="." method="ResetSignalReceived"]
 [connection signal="text_submitted" from="input_box" to="." method="InputBoxSignalReceived"]
+[connection signal="StartGame" from="HUD" to="." method="StartGameSignalReceived"]

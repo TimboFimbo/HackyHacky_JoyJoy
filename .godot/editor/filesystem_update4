@@ -2,11 +2,4 @@ res://Scenes/main.tscn
 res://Scenes/player.tscn
 res://Scenes/map_level_1.tscn
 res://Scenes/map_level_5.tscn
-res://Scenes/BoxController.cs
-res://Scenes/Player.cs
-res://Scenes/VarsBox.cs
-res://Scenes/CodeBox.cs
-res://StackBox.cs
-res://OLangInterpreter.cs
-res://Scenes/Main.cs
-res://Scenes/InputBox.cs
+res://Scenes/hud.tscn

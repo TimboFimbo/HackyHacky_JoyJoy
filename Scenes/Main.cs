@@ -124,6 +124,14 @@ public partial class Main : Node
 
 	// *** Signal Received Methods ***
 
+	public void StartGameSignalReceived(int levelNumber)
+	{
+		var hud = GetNode<Hud>("HUD");
+		hud.ShowMessage("Level " + levelNumber.ToString());
+
+		ResetLevel(levelNumber);
+	}
+
 	public void DirectionSignalReceived(string direction)
 	{
 		var outputBox = GetNode<RichTextLabel>("output_box");
@@ -659,6 +667,8 @@ public partial class Main : Node
 
 		var outputBox = GetNode<RichTextLabel>("output_box");
 		outputBox.Text = "You Win!";
+
+		GetNode<Hud>("HUD").ShowYouWin(curLevel);
 	}
 
 	private void ActivateTerminal()

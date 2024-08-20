@@ -1,12 +1,14 @@
+Label
+Timer
+Button
+TextureRect
+CanvasLayer
 GPUParticles2D
 Node
 ColorRect
 RichTextLabel
-TextureRect
 GridContainer
 LineEdit
 TextEdit
 AnimatedSprite2D
 Area2D
-Node2D
-TileMap

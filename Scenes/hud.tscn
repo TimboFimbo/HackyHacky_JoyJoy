@@ -1,0 +1,168 @@
+[gd_scene load_steps=10 format=3 uid="uid://tr8bdt1jgce6"]
+
+[ext_resource type="Script" path="res://Scenes/Hud.cs" id="1_fbqcy"]
+[ext_resource type="Texture2D" uid="uid://c1vi6gkuv77do" path="res://Assets/Sprites/CurcuitBackground.webp" id="1_jf37g"]
+[ext_resource type="FontFile" uid="uid://dxrjai3i55deo" path="res://Assets/Fonts/dogica/TTF/dogicapixel.ttf" id="2_nfsif"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_12eby"]
+line_spacing = 20.0
+font = ExtResource("2_nfsif")
+font_size = 128
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gk277"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1dew1"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xto3w"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pgsw2"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xy5ky"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_fbqcy")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 3840.0
+offset_bottom = 2160.0
+scale = Vector2(0.335, 0.335)
+texture = ExtResource("1_jf37g")
+
+[node name="Message" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -449.0
+offset_top = 32.0
+offset_right = 450.0
+offset_bottom = 459.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 128
+text = "Hacky Hacky Joy Joy"
+label_settings = SubResource("LabelSettings_12eby")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="WinMessage" type="Label" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -625.0
+offset_top = -158.0
+offset_right = 626.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 24
+text = "All Levels Complete!
+
+You are the most talented, most interesting, and most extraordinary person in the universe. And you are capable of amazing things. Because you are the Special. And so am I. And so is everyone."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Button_1" type="Button" parent="."]
+modulate = Color(5.29438e-06, 0.77303, 0.285663, 1)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 60.0
+offset_top = -220.0
+offset_right = 260.0
+offset_bottom = -170.0
+grow_vertical = 0
+theme_override_colors/icon_pressed_color = Color(0, 0, 1, 1)
+theme_override_colors/font_color = Color(0.207843, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_gk277")
+text = "Level 1"
+
+[node name="Button_2" type="Button" parent="."]
+modulate = Color(0, 0.772549, 0.286275, 1)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 300.0
+offset_top = -220.0
+offset_right = 500.0
+offset_bottom = -170.0
+grow_vertical = 0
+theme_override_colors/icon_pressed_color = Color(0, 0, 1, 1)
+theme_override_colors/font_color = Color(0.207843, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1dew1")
+text = "Level 2"
+
+[node name="Button_3" type="Button" parent="."]
+modulate = Color(0, 0.772549, 0.286275, 1)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 540.0
+offset_top = -220.0
+offset_right = 740.0
+offset_bottom = -170.0
+grow_vertical = 0
+theme_override_colors/icon_pressed_color = Color(0, 0, 1, 1)
+theme_override_colors/font_color = Color(0.207843, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_xto3w")
+text = "Level 3"
+
+[node name="Button_4" type="Button" parent="."]
+modulate = Color(0, 0.772549, 0.286275, 1)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 780.0
+offset_top = -220.0
+offset_right = 980.0
+offset_bottom = -170.0
+grow_vertical = 0
+theme_override_colors/icon_pressed_color = Color(0, 0, 1, 1)
+theme_override_colors/font_color = Color(0.207843, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_pgsw2")
+text = "Level 4"
+
+[node name="Button_5" type="Button" parent="."]
+modulate = Color(0, 0.772549, 0.286275, 1)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1020.0
+offset_top = -220.0
+offset_right = 1220.0
+offset_bottom = -170.0
+grow_vertical = 0
+theme_override_colors/icon_pressed_color = Color(0, 0, 1, 1)
+theme_override_colors/font_color = Color(0.207843, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_xy5ky")
+text = "Level 5"
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="pressed" from="Button_1" to="." method="OnButton1Pressed"]
+[connection signal="pressed" from="Button_2" to="." method="OnButton2Pressed"]
+[connection signal="pressed" from="Button_3" to="." method="OnButton3Pressed"]
+[connection signal="pressed" from="Button_4" to="." method="OnButton4Pressed"]
+[connection signal="pressed" from="Button_5" to="." method="OnButton5Pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="OnMessageTimerTimeout"]

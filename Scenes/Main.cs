@@ -9,7 +9,7 @@ public partial class Main : Node
 	bool printed = false;
 	int[] playerPos = {1, 1};
 	int[] mapSize = {12, 8};
-	Vector2 playerStartPos = new Vector2(105, 100);
+	Vector2 playerStartPos = new Vector2(89, 84);
 	// Vector2 playerSpriteStartPos = new Vector2(80, 80);
 	char[] walkableBlocks = new char[4] {'.', '#', '#', 'E'};
 	bool inputBoxOpen = false;

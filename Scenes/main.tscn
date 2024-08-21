@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://cmpnhoymcs802"]
+[gd_scene load_steps=16 format=3 uid="uid://cmpnhoymcs802"]
 
 [ext_resource type="PackedScene" uid="uid://jn0dwoe52ofv" path="res://Scenes/map_level_1.tscn" id="1_idtn2"]
 [ext_resource type="Script" path="res://Scenes/Main.cs" id="1_ypcln"]
 [ext_resource type="PackedScene" uid="uid://cuyk8vy73dj7n" path="res://Scenes/player.tscn" id="2_t0eya"]
 [ext_resource type="PackedScene" uid="uid://b4sopualo3alk" path="res://Scenes/o_lang_interpreter.tscn" id="2_txfxr"]
+[ext_resource type="Texture2D" uid="uid://cyf4cav2eujy5" path="res://Assets/Sprites/CircuitBackground_Pixel.png" id="3_id2l6"]
 [ext_resource type="PackedScene" uid="uid://tl8ytty63oye" path="res://Scenes/map_level_3.tscn" id="4_6c704"]
 [ext_resource type="PackedScene" uid="uid://bi8rw526sga5d" path="res://Scenes/map_level_2.tscn" id="4_8oab1"]
 [ext_resource type="PackedScene" uid="uid://l5632oekfvey" path="res://Scenes/input_box.tscn" id="4_a5m0f"]
@@ -20,40 +21,47 @@ script = ExtResource("1_ypcln")
 
 [node name="OLangInterpreter" parent="." instance=ExtResource("2_txfxr")]
 
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(0.259294, 0.259294, 0.259294, 1)
+offset_right = 3840.0
+offset_bottom = 2160.0
+scale = Vector2(0.335, 0.335)
+texture = ExtResource("3_id2l6")
+
 [node name="map_level1" parent="." instance=ExtResource("1_idtn2")]
 visible = false
-position = Vector2(32, 32)
+position = Vector2(16, 16)
 scale = Vector2(1.5, 1.5)
 
 [node name="map_level2" parent="." instance=ExtResource("4_8oab1")]
 visible = false
-position = Vector2(32, 32)
+position = Vector2(16, 16)
 scale = Vector2(1.5, 1.5)
 
 [node name="map_level3" parent="." instance=ExtResource("4_6c704")]
 visible = false
-position = Vector2(32, 32)
+position = Vector2(16, 16)
 scale = Vector2(1.5, 1.5)
 
 [node name="map_level4" parent="." instance=ExtResource("6_g2sfl")]
 visible = false
-position = Vector2(32, 32)
+position = Vector2(16, 16)
 scale = Vector2(1.5, 1.5)
 layer_0/tile_data = PackedInt32Array(0, 327680, 0, 65536, 327680, 0, 131072, 327680, 0, 196608, 327680, 0, 262144, 327680, 0, 327680, 327680, 0, 393216, 327680, 0, 458752, 327680, 0, 524288, 327680, 0, 1, 327680, 0, 2, 327680, 0, 3, 327680, 0, 4, 327680, 0, 5, 327680, 0, 6, 327680, 0, 7, 327680, 0, 8, 327680, 0, 9, 327680, 0, 10, 327680, 0, 11, 327680, 0, 12, 327680, 0, 65548, 327680, 0, 131084, 327680, 0, 196620, 327680, 0, 262156, 327680, 0, 327692, 327680, 0, 393228, 327680, 0, 458764, 327680, 0, 524300, 327680, 0, 524289, 327680, 0, 524290, 327680, 0, 524291, 327680, 0, 524292, 327680, 0, 524293, 327680, 0, 524294, 327680, 0, 524295, 327680, 0, 524296, 327680, 0, 524297, 327680, 0, 524298, 327680, 0, 524299, 327680, 0, 65544, 131072, 0, 131080, 131072, 0, 196616, 131072, 0, 458760, 327680, 0, 393224, 327680, 0, 327688, 458752, 0, 262152, 327680, 0, 262154, 327680, 0, 196613, 131072, 0, 65537, 131072, 0, 65538, 131072, 0, 65539, 131072, 0, 65540, 262144, 0, 65541, 262144, 0, 65542, 262144, 0, 65543, 131072, 0, 131079, 131072, 0, 131078, 131072, 0, 131077, 262144, 0, 131076, 131072, 0, 131075, 131072, 0, 131074, 131072, 0, 131073, 131072, 0, 196609, 131072, 0, 196610, 131072, 0, 196611, 131072, 0, 196612, 131072, 0, 196614, 131072, 0, 196615, 131072, 0, 262151, 131072, 0, 262150, 131072, 0, 262149, 131072, 0, 262148, 720896, 0, 262147, 131072, 0, 262146, 131072, 0, 262145, 131072, 0, 327681, 131072, 0, 327682, 131072, 0, 327683, 131072, 0, 327684, 131072, 0, 327685, 131072, 0, 327686, 131072, 0, 327687, 131072, 0, 393223, 131072, 0, 393222, 131072, 0, 393221, 131072, 0, 393220, 131072, 0, 393219, 131072, 0, 393218, 131072, 0, 393217, 262144, 0, 458753, 262144, 0, 458754, 262144, 0, 458755, 262144, 0, 458756, 131072, 0, 458757, 131072, 0, 458758, 131072, 0, 458759, 131072, 0, 65545, 262144, 0, 65546, 262144, 0, 65547, 262144, 0, 131083, 262144, 0, 131082, 262144, 0, 131081, 131072, 0, 196617, 131072, 0, 196618, 131072, 0, 196619, 262144, 0, 262155, 327680, 0, 262153, 327680, 0, 327689, 131072, 0, 327690, 131072, 0, 327691, 131072, 0, 393227, 131072, 0, 393226, 655360, 0, 393225, 131072, 0, 458761, 131072, 0, 458762, 131072, 0, 458763, 262144, 0)
 
 [node name="map_level5" parent="." instance=ExtResource("7_bin8m")]
 visible = false
-position = Vector2(32, 32)
+position = Vector2(16, 16)
 scale = Vector2(1.5, 1.5)
 
 [node name="player" parent="." instance=ExtResource("2_t0eya")]
-position = Vector2(105, 100)
+position = Vector2(89, 84)
 
 [node name="input_box" parent="." instance=ExtResource("4_a5m0f")]
 visible = false
-offset_left = 33.0
+offset_left = 16.0
 offset_top = 503.0
-offset_right = 467.0
+offset_right = 450.0
 offset_bottom = 571.0
 focus_mode = 2
 placeholder_text = "Input Here"
@@ -65,9 +73,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -605.0
+offset_left = -624.0
 offset_top = 265.0
-offset_right = -52.0
+offset_right = -74.0
 offset_bottom = 332.0
 grow_horizontal = 2
 grow_vertical = 2

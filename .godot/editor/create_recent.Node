@@ -1,13 +1,13 @@
 Label
+ColorRect
+GridContainer
 Timer
 Button
 TextureRect
 CanvasLayer
 GPUParticles2D
 Node
-ColorRect
 RichTextLabel
-GridContainer
 LineEdit
 TextEdit
 AnimatedSprite2D

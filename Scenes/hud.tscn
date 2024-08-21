@@ -27,6 +27,595 @@ bg_color = Color(1, 1, 1, 1)
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_fbqcy")
 
+[node name="VarsLabel" type="GridContainer" parent="."]
+offset_left = 660.0
+offset_top = 60.0
+offset_right = 710.0
+offset_bottom = 226.0
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="VarsLabel"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+color = Color(0, 0.688021, 0.688021, 1)
+
+[node name="Label" type="Label" parent="VarsLabel/ColorRect"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 50.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 10
+text = "$1000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="VarsLabel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(0, 0.688021, 0.688021, 1)
+
+[node name="Label" type="Label" parent="VarsLabel/ColorRect2"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 50.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 10
+text = "$1010"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect3" type="ColorRect" parent="VarsLabel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(0, 0.688021, 0.688021, 1)
+
+[node name="Label" type="Label" parent="VarsLabel/ColorRect3"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 50.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 10
+text = "$1020"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect4" type="ColorRect" parent="VarsLabel"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+color = Color(0, 0.688021, 0.688021, 1)
+
+[node name="Label" type="Label" parent="VarsLabel/ColorRect4"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 50.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 10
+text = "$1030"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect5" type="ColorRect" parent="VarsLabel"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+color = Color(0, 0.688021, 0.688021, 1)
+
+[node name="Label" type="Label" parent="VarsLabel/ColorRect5"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 50.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 10
+text = "$1040"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CodeLabel" type="GridContainer" parent="."]
+offset_left = 660.0
+offset_top = 234.0
+offset_right = 710.0
+offset_bottom = 604.0
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="CodeLabel"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+color = Color(1, 0.218943, 0.715373, 1)
+
+[node name="Label" type="Label" parent="CodeLabel/ColorRect"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 50.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 10
+text = "$2000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="CodeLabel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(1, 0.219608, 0.713726, 1)
+
+[node name="Label" type="Label" parent="CodeLabel/ColorRect2"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 50.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 10
+text = "$2010"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect3" type="ColorRect" parent="CodeLabel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(1, 0.219608, 0.713726, 1)
+
+[node name="Label" type="Label" parent="CodeLabel/ColorRect3"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 50.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 10
+text = "$2020"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect4" type="ColorRect" parent="CodeLabel"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+color = Color(1, 0.219608, 0.713726, 1)
+
+[node name="Label" type="Label" parent="CodeLabel/ColorRect4"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 50.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 10
+text = "$2030"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect5" type="ColorRect" parent="CodeLabel"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+color = Color(1, 0.219608, 0.713726, 1)
+
+[node name="Label" type="Label" parent="CodeLabel/ColorRect5"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 50.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 10
+text = "$2040"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect6" type="ColorRect" parent="CodeLabel"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+color = Color(1, 0.218943, 0.715373, 1)
+
+[node name="Label" type="Label" parent="CodeLabel/ColorRect6"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 50.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 10
+text = "$2050"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect7" type="ColorRect" parent="CodeLabel"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+color = Color(1, 0.218943, 0.715373, 1)
+
+[node name="Label" type="Label" parent="CodeLabel/ColorRect7"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 50.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 10
+text = "$2060"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect8" type="ColorRect" parent="CodeLabel"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+color = Color(1, 0.218943, 0.715373, 1)
+
+[node name="Label" type="Label" parent="CodeLabel/ColorRect8"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 50.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 10
+text = "$2070"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect9" type="ColorRect" parent="CodeLabel"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+color = Color(1, 0.218943, 0.715373, 1)
+
+[node name="Label" type="Label" parent="CodeLabel/ColorRect9"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 50.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 10
+text = "$2080"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect10" type="ColorRect" parent="CodeLabel"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+color = Color(1, 0.218943, 0.715373, 1)
+
+[node name="Label" type="Label" parent="CodeLabel/ColorRect10"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 50.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 10
+text = "$2090"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect11" type="ColorRect" parent="CodeLabel"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+color = Color(1, 0.218943, 0.715373, 1)
+
+[node name="Label" type="Label" parent="CodeLabel/ColorRect11"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 50.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 10
+text = "$20A0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StackLabel" type="GridContainer" parent="."]
+offset_left = 660.0
+offset_top = 610.0
+offset_right = 710.0
+offset_bottom = 776.0
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="StackLabel"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+color = Color(0.866897, 0.488597, 0.252559, 1)
+
+[node name="Label" type="Label" parent="StackLabel/ColorRect"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 50.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 10
+text = "$3000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="StackLabel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(0.866667, 0.490196, 0.25098, 1)
+
+[node name="Label" type="Label" parent="StackLabel/ColorRect2"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 50.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 10
+text = "$3010"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect3" type="ColorRect" parent="StackLabel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(0.866667, 0.490196, 0.25098, 1)
+
+[node name="Label" type="Label" parent="StackLabel/ColorRect3"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 50.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 10
+text = "$3020"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OffsetLabel" type="GridContainer" parent="."]
+offset_left = 715.0
+offset_top = 25.0
+offset_right = 1255.0
+offset_bottom = 56.0
+columns = 16
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="OffsetLabel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(0, 0.688021, 0.688021, 1)
+
+[node name="Label" type="Label" parent="OffsetLabel/ColorRect"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 30.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 16
+text = "00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="OffsetLabel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(0, 0.688021, 0.688021, 1)
+
+[node name="Label" type="Label" parent="OffsetLabel/ColorRect2"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 30.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 16
+text = "01"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect3" type="ColorRect" parent="OffsetLabel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(0, 0.688021, 0.688021, 1)
+
+[node name="Label" type="Label" parent="OffsetLabel/ColorRect3"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 30.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 16
+text = "02"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect4" type="ColorRect" parent="OffsetLabel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(0, 0.688021, 0.688021, 1)
+
+[node name="Label" type="Label" parent="OffsetLabel/ColorRect4"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 30.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 16
+text = "03"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect5" type="ColorRect" parent="OffsetLabel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(0, 0.688021, 0.688021, 1)
+
+[node name="Label" type="Label" parent="OffsetLabel/ColorRect5"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 30.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 16
+text = "04"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect6" type="ColorRect" parent="OffsetLabel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(0, 0.688021, 0.688021, 1)
+
+[node name="Label" type="Label" parent="OffsetLabel/ColorRect6"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 30.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 16
+text = "05"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect7" type="ColorRect" parent="OffsetLabel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(0, 0.688021, 0.688021, 1)
+
+[node name="Label" type="Label" parent="OffsetLabel/ColorRect7"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 30.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 16
+text = "06"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect8" type="ColorRect" parent="OffsetLabel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(0, 0.688021, 0.688021, 1)
+
+[node name="Label" type="Label" parent="OffsetLabel/ColorRect8"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 30.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 16
+text = "07"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect9" type="ColorRect" parent="OffsetLabel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(0, 0.688021, 0.688021, 1)
+
+[node name="Label" type="Label" parent="OffsetLabel/ColorRect9"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 30.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 16
+text = "08"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect10" type="ColorRect" parent="OffsetLabel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(0, 0.688021, 0.688021, 1)
+
+[node name="Label" type="Label" parent="OffsetLabel/ColorRect10"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 30.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 16
+text = "09"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect11" type="ColorRect" parent="OffsetLabel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(0, 0.688021, 0.688021, 1)
+
+[node name="Label" type="Label" parent="OffsetLabel/ColorRect11"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 30.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 16
+text = "0A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect12" type="ColorRect" parent="OffsetLabel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(0, 0.688021, 0.688021, 1)
+
+[node name="Label" type="Label" parent="OffsetLabel/ColorRect12"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 30.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 16
+text = "0B"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect13" type="ColorRect" parent="OffsetLabel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(0, 0.688021, 0.688021, 1)
+
+[node name="Label" type="Label" parent="OffsetLabel/ColorRect13"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 30.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 16
+text = "0C"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect14" type="ColorRect" parent="OffsetLabel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(0, 0.688021, 0.688021, 1)
+
+[node name="Label" type="Label" parent="OffsetLabel/ColorRect14"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 30.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 16
+text = "0D"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect15" type="ColorRect" parent="OffsetLabel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(0, 0.688021, 0.688021, 1)
+
+[node name="Label" type="Label" parent="OffsetLabel/ColorRect15"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 30.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 16
+text = "0E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect16" type="ColorRect" parent="OffsetLabel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(0, 0.688021, 0.688021, 1)
+
+[node name="Label" type="Label" parent="OffsetLabel/ColorRect16"]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 30.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_nfsif")
+theme_override_font_sizes/font_size = 16
+text = "0F"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Background" type="TextureRect" parent="."]
 offset_right = 3840.0
 offset_bottom = 2160.0

@@ -36,11 +36,12 @@ public partial class VarsBox : GridContainer
 
 			var label = new RichTextLabel();
 			label.BbcodeEnabled = true;
-			string bbcode = "[center][font=res://Assets/Fonts/dogica/TTF/dogicapixel.ttf][font_size=32]" + 
+			string bbcode = "[center][font=res://Assets/Fonts/dogica/TTF/dogicapixel.ttf][font_size=24]" + 
 				textToSet[i].ToString() + "[/font_size][/font][/center]";
 			label.ParseBbcode(bbcode);
 			label.CustomMinimumSize = new Vector2(boxSize, boxSize);
 			label.Set("theme_override_font_sizes/normal_font_size", 16);
+			label.Position = new Vector2(label.Position.X, label.Position.Y + 5);
 
 			container.AddChild(new ColorRect()
 			{

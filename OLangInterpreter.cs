@@ -187,6 +187,18 @@ public partial class OLangInterpreter : Node
 							lines = arguments.Split(',');
 						}
 
+						// check if int can be parsed first
+						try
+						{
+						  var testParse = lines[1].ToInt();
+						}
+						catch (Exception e)
+						{
+						  Console.WriteLine(e.Message);
+						  UponErrorFound(Constants.Errors.ERR_NO_FUNC);
+						  break;
+						}
+
 						// check the function and send signal
 						if (lines[0] == "open_door")
 						{
@@ -273,11 +285,23 @@ public partial class OLangInterpreter : Node
 		if (retLineParse[0] == '$')
 		{
 			finalRetLine = retLineParse.Remove(0,1).ToString();
-			if (finalRetLine.ToInt() < 2000 || finalRetLine.ToInt() > 2090)
+
+			// check if int can be parsed first
+			try
 			{
-				errorFound = true;
-				// EmitSignal(SignalName.ErrorCommand, "Return Line Error");
-				UponErrorFound(Constants.Errors.ERR_RET_LINE);
+				var testParse = finalRetLine.ToInt();
+				if (testParse < 2000 || testParse > 2090)
+				{
+					errorFound = true;
+					// EmitSignal(SignalName.ErrorCommand, "Return Line Error");
+					UponErrorFound(Constants.Errors.ERR_RET_LINE);
+				}
+			}
+			catch (Exception e)
+			{
+			  Console.WriteLine(e.Message);
+			  UponErrorFound(Constants.Errors.ERR_RET_LINE);
+			  errorFound = true;
 			}
 		}
 		else
@@ -292,11 +316,22 @@ public partial class OLangInterpreter : Node
 		if (argsLineParse[0] == '$')
 		{
 			finalArgsLine = argsLineParse.Remove(0,1).ToString();
-			if (finalArgsLine.ToInt() < 1000 || finalArgsLine.ToInt() > 1040)
+
+			try
 			{
-				errorFound = true;
-				// EmitSignal(SignalName.ErrorCommand, "Args Line Error");
-				UponErrorFound(Constants.Errors.ERR_ARGS_LINE);
+				var testParse = finalArgsLine.ToInt();
+				if (testParse < 1000 || testParse > 1040)
+				{
+					errorFound = true;
+					// EmitSignal(SignalName.ErrorCommand, "Args Line Error");
+					UponErrorFound(Constants.Errors.ERR_ARGS_LINE);
+				}
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			  	UponErrorFound(Constants.Errors.ERR_ARGS_LINE);
+			  	errorFound = true;
 			}
 		}
 		else

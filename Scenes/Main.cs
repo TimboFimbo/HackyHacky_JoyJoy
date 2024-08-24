@@ -59,6 +59,8 @@ public partial class Main : Node
 		playerSprite.ResetPlayer();
 		stackCodeTest = new System.Text.StringBuilder(OLangCode.Code.emptyStack);
 		inputBox.Text = "";
+		TerminalLightOn(false);
+		ExitDoorOpened(false);
 
 		interpreter.ResetEverything();
 
@@ -601,6 +603,7 @@ public partial class Main : Node
 
 		DisplayCode(curLevel, -1); // removes highlighting from grid line
 		interpreter.curCommandNum = 0;
+		TerminalLightOn(false);
 	}
 
 	// *** Local Methods ***
@@ -663,12 +666,93 @@ public partial class Main : Node
 		// GD.Print("Opening door at " + xPos.ToString() + ", " + yPos.ToString());
 	}
 
+	private void TerminalLightOn(bool on=true)
+	{
+		TileMap tileMap = GetNode<TileMap>("map_level1");
+
+		if (curLevel == 2)
+		{
+			tileMap = GetNode<TileMap>("map_level2");
+		}
+		if (curLevel == 3)
+		{
+			tileMap = GetNode<TileMap>("map_level3");
+		}
+		if (curLevel == 4)
+		{
+			tileMap = GetNode<TileMap>("map_level4");
+		}
+		if (curLevel == 5)
+		{
+			tileMap = GetNode<TileMap>("map_level5");
+		}
+
+		for (int i = 0; i < mapSize[0]; i++)
+		{
+			for (int j = 0; j < mapSize[1]; j++)
+			{
+				if (AsciiMaps.Maps.CheckMap(i, j, curLevel) == 'T')
+				{
+					if (on)
+					{
+						tileMap.SetCell(0, new Vector2I(i, j), 1, new Vector2I(12, 0), 0);
+					}
+					else
+					{
+						tileMap.SetCell(0, new Vector2I(i, j), 1, new Vector2I(11, 0), 0);
+					}
+				}
+			}
+		}
+	}
+
+	private void ExitDoorOpened(bool on=true)
+	{
+		TileMap tileMap = GetNode<TileMap>("map_level1");
+
+		if (curLevel == 2)
+		{
+			tileMap = GetNode<TileMap>("map_level2");
+		}
+		if (curLevel == 3)
+		{
+			tileMap = GetNode<TileMap>("map_level3");
+		}
+		if (curLevel == 4)
+		{
+			tileMap = GetNode<TileMap>("map_level4");
+		}
+		if (curLevel == 5)
+		{
+			tileMap = GetNode<TileMap>("map_level5");
+		}
+
+		for (int i = 0; i < mapSize[0]; i++)
+		{
+			for (int j = 0; j < mapSize[1]; j++)
+			{
+				if (AsciiMaps.Maps.CheckMap(i, j, curLevel) == 'E')
+				{
+					if (on)
+					{
+						tileMap.SetCell(0, new Vector2I(i, j), 1, new Vector2I(18, 0), 0);
+					}
+					else
+					{
+						tileMap.SetCell(0, new Vector2I(i, j), 1, new Vector2I(10, 0), 0);
+					}
+				}
+			}
+		}
+	}
+
 	private void ExitSteppedOn()
 	{
 		// GD.Print("You Win!");
 
 		var outputBox = GetNode<RichTextLabel>("output_box");
 		outputBox.Text = "You Win!";
+		ExitDoorOpened(true);
 
 		GetNode<Hud>("HUD").ShowYouWin(curLevel);
 	}
@@ -700,6 +784,7 @@ public partial class Main : Node
 			interpreter.ParseOLang(OLangCode.Code.oLangLevel5);
 		}
 
+		TerminalLightOn(true);
 	}
 
 	private void DisplayCode(int levelNumber, int curLineNumber)

@@ -281,21 +281,21 @@ public partial class Main : Node
 		if (interpreter.currentlyPaused)
 		{
 			interpreter.currentlyPaused = false;
-			outputBox.Text = "           -- PLAY --";
 		}
 		else
 		{
 			interpreter.currentlyPaused = true;
-			outputBox.Text = "          -- PAUSE --";
 		}
 
 		if (interpreter.stackCurrentlyPaused)
 		{
 			interpreter.stackCurrentlyPaused = false;
+			outputBox.Text = "           -- PLAY --";
 		}
 		else
 		{
 			interpreter.stackCurrentlyPaused = true;
+			outputBox.Text = "          -- PAUSE --";
 		}
 	}
 
@@ -527,7 +527,9 @@ public partial class Main : Node
 	public void StackInputCommandReceived(string input, int lineToUpdate, int offset)
 	{
 		int realOffset = lineToUpdate * 16 + offset;
-		EditVars(input, realOffset);
+		var finalInput = input.Substring(0, input.Length - offset);
+
+		EditVars(finalInput, realOffset);
 		DisplayVars();
 		GetNode<OLangInterpreter>("OLangInterpreter").codePausedByStack = true;
 	}
@@ -626,7 +628,7 @@ public partial class Main : Node
 
 		char doorToOpen = AsciiMaps.Maps.CheckMap(xPos, yPos, curLevel);
 
-		tileMap.SetCell(0, new Vector2I(xPos, yPos), 0, new Vector2I(2, 0), 0);
+		tileMap.SetCell(0, new Vector2I(xPos, yPos), 1, new Vector2I(2, 0), 0);
 		walkableBlocks[doorToOpen - '0'] = doorToOpen;
 
 		// GD.Print("Opening door at " + xPos.ToString() + ", " + yPos.ToString());
@@ -655,7 +657,7 @@ public partial class Main : Node
 
 		char doorToClose = AsciiMaps.Maps.CheckMap(xPos, yPos, curLevel);
 
-		tileMap.SetCell(0, new Vector2I(xPos, yPos), 0, new Vector2I(7, 0), 0);
+		tileMap.SetCell(0, new Vector2I(xPos, yPos), 1, new Vector2I(7, 0), 0);
 		walkableBlocks[doorToClose - '0'] = '#';
 
 		// GD.Print("Opening door at " + xPos.ToString() + ", " + yPos.ToString());

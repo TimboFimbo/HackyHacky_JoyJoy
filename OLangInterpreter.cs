@@ -319,6 +319,7 @@ public partial class OLangInterpreter : Node
 
 			try
 			{
+				// TODO add way of parsing hex chars, in case offset includes them
 				var testParse = finalArgsLine.ToInt();
 				if (testParse < 1000 || testParse > 1040)
 				{

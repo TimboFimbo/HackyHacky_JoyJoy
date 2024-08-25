@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cuyk8vy73dj7n"]
+[gd_scene load_steps=33 format=3 uid="uid://cuyk8vy73dj7n"]
 
 [ext_resource type="Script" path="res://Scenes/Player.cs" id="1_rohru"]
 [ext_resource type="Texture2D" uid="uid://ctxq2k4oy3syu" path="res://Assets/Sprites/Snake_Sprite/snake.png" id="1_s3u5q"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://defgoj6ts3cwp" path="res://Assets/Sprites/Snake_Sprite/tile029.png" id="11_hvi0n"]
 [ext_resource type="Texture2D" uid="uid://bm20oll44nuoa" path="res://Assets/Sprites/Snake_Sprite/tile030.png" id="12_agt2o"]
 [ext_resource type="Texture2D" uid="uid://degh5l4l2rs1d" path="res://Assets/Sprites/Particle_Sprite.png" id="13_t7c0i"]
+[ext_resource type="Texture2D" uid="uid://chsnt8h568tcu" path="res://Assets/Sprites/Cat_Sprite/idle.png" id="14_8e3ya"]
+[ext_resource type="Texture2D" uid="uid://bk4rb0peaieo1" path="res://Assets/Sprites/Cat_Sprite/walk.png" id="14_phes3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5y5gb"]
 animations = [{
@@ -62,12 +64,124 @@ initial_velocity_min = 40.0
 initial_velocity_max = 40.0
 gravity = Vector3(0, 98, 0)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmq3c"]
+atlas = ExtResource("14_8e3ya")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmnwq"]
+atlas = ExtResource("14_8e3ya")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jcbml"]
+atlas = ExtResource("14_8e3ya")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dcfhb"]
+atlas = ExtResource("14_8e3ya")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ccfb4"]
+atlas = ExtResource("14_8e3ya")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ywb3e"]
+atlas = ExtResource("14_8e3ya")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v37rm"]
+atlas = ExtResource("14_8e3ya")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rd8c"]
+atlas = ExtResource("14_phes3")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gf7bp"]
+atlas = ExtResource("14_phes3")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83ige"]
+atlas = ExtResource("14_phes3")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8si5"]
+atlas = ExtResource("14_phes3")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_isrvp"]
+atlas = ExtResource("14_phes3")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vcnkr"]
+atlas = ExtResource("14_phes3")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71r6u"]
+atlas = ExtResource("14_phes3")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3nc3r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmq3c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmnwq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jcbml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dcfhb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ccfb4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ywb3e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v37rm")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rd8c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gf7bp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_83ige")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8si5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_isrvp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vcnkr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71r6u")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
 [node name="player" type="Area2D"]
 position = Vector2(48, 48)
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_rohru")
 
 [node name="SnakeSprite" type="AnimatedSprite2D" parent="."]
+visible = false
 sprite_frames = SubResource("SpriteFrames_5y5gb")
 animation = &"walk"
 
@@ -78,3 +192,8 @@ process_material = SubResource("ParticleProcessMaterial_maime")
 texture = ExtResource("13_t7c0i")
 lifetime = 0.5
 one_shot = true
+
+[node name="CatSprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_3nc3r")
+animation = &"idle"

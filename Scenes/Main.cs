@@ -9,7 +9,7 @@ public partial class Main : Node
 	bool printed = false;
 	int[] playerPos = {1, 1};
 	int[] mapSize = {12, 8};
-	Vector2 playerStartPos = new Vector2(89, 104);
+	Vector2 playerStartPos = new Vector2(88, 113);
 	// Vector2 playerSpriteStartPos = new Vector2(80, 80);
 	char[] walkableBlocks = new char[4] {'.', '#', '#', 'E'};
 	bool inputBoxOpen = false;
@@ -65,6 +65,7 @@ public partial class Main : Node
 		SetPlayPauseIcon("play", false);
 		SetPlayPauseIcon("pause", false);
 		currentlyPlaying = false;
+		playerSprite.playerMovingTime = 0;
 
 		interpreter.ResetEverything();
 
@@ -124,8 +125,9 @@ public partial class Main : Node
 		CloseDoorSignalReceived(1);
 		CloseDoorSignalReceived(2);
 
-		var sprite = GetNode<Player>("player").GetNode<AnimatedSprite2D>("SnakeSprite");
-		sprite.Play();
+		// var sprite = GetNode<Player>("player").GetNode<AnimatedSprite2D>("SnakeSprite");
+		var sprite = GetNode<Player>("player").GetNode<AnimatedSprite2D>("CatSprite");
+		sprite.Play("idle");
 	}
 
 	// *** Signal Received Methods ***
@@ -151,13 +153,14 @@ public partial class Main : Node
 		bool moveOk = false;
 		// GD.Print(moveOk);
 
-		var sprite = GetNode<Player>("player").GetNode<AnimatedSprite2D>("SnakeSprite");
+		// var sprite = GetNode<Player>("player").GetNode<AnimatedSprite2D>("SnakeSprite");
+		var sprite = GetNode<Player>("player").GetNode<AnimatedSprite2D>("CatSprite");
 
 		if (direction == "right")
 		{
 			if (playerPos[0] < mapSize[0] - 1)
 			{
-				sprite.FlipH = true;
+				sprite.FlipH = false;
 				char newPos = AsciiMaps.Maps.CheckMap(playerPos[0] + 1, playerPos[1], curLevel);
 
 				// GD.Print("newPos = ", newPos.ToString());
@@ -176,7 +179,7 @@ public partial class Main : Node
 		{
 			if (playerPos[0] > 1)
 			{
-				sprite.FlipH = false;
+				sprite.FlipH = true;
 				char newPos = AsciiMaps.Maps.CheckMap(playerPos[0] - 1, playerPos[1], curLevel);
 
 				// GD.Print("newPos = ", newPos.ToString());

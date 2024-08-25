@@ -45,7 +45,6 @@ offset_bottom = 2115.0
 color = Color(0.466667, 1, 0.843137, 1)
 
 [node name="map_level1" parent="." instance=ExtResource("1_idtn2")]
-visible = false
 position = Vector2(16, 36)
 
 [node name="map_level2" parent="." instance=ExtResource("4_8oab1")]
@@ -65,7 +64,7 @@ visible = false
 position = Vector2(16, 36)
 
 [node name="player" parent="." instance=ExtResource("2_t0eya")]
-position = Vector2(89, 104)
+position = Vector2(92, 113)
 
 [node name="input_box" parent="." instance=ExtResource("4_a5m0f")]
 visible = false

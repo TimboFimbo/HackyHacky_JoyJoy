@@ -1,3 +1,4 @@
+AnimatedSprite2D
 TextureRect
 ColorRect
 Label
@@ -10,5 +11,4 @@ Node
 RichTextLabel
 LineEdit
 TextEdit
-AnimatedSprite2D
 Area2D

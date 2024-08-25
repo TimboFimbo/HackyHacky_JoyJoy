@@ -6,7 +6,7 @@ public partial class Player : Area2D
 	int tileSize = 48;
 	int ScreenSize;
 	int movementSpeed = 1;
-	Vector2 pos = new Vector2(80, 80);
+	Vector2 pos = new Vector2(88, 113);
 	[Signal]
 	public delegate void DirectionPressedEventHandler(string pressed);
 	[Signal]
@@ -19,6 +19,8 @@ public partial class Player : Area2D
 	public delegate void PausePressedEventHandler();
 	[Signal]
 	public delegate void ResetPressedEventHandler();
+	public int playerMovingTime = 0;
+	int timeToIdleAnim = 60;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -102,10 +104,23 @@ public partial class Player : Area2D
 		{
 			EmitSignal(SignalName.CloseDoorPressed, 2);
 		}
+
+		// GD.Print("Player moving time: ", playerMovingTime);
+
+		if (playerMovingTime >= 0) 
+		{
+			playerMovingTime --;
+			
+		}
+		else
+		{
+			GetNode<AnimatedSprite2D>("CatSprite").Play("idle");
+		}
 	}
 
 	public void ResetPlayer()
 	{
+		playerMovingTime = 0;
 		pos = Position;
 		GetNode<GpuParticles2D>("SpawnParticles").Emitting = true;
 	}
@@ -113,10 +128,13 @@ public partial class Player : Area2D
 	async public void MovePlayer(string dir)
 	{
 		var num = movementSpeed;
+		var catSprite = GetNode<AnimatedSprite2D>("CatSprite");
+		catSprite.Play("walk");
+		playerMovingTime = timeToIdleAnim;
 
 		if (dir == "left")
 		{
-			while (num <= tileSize)
+			while (num <= tileSize && playerMovingTime > 0)
 			{
 				pos.X -= movementSpeed;
 				// Position.X -= movementSpeed;
@@ -127,7 +145,7 @@ public partial class Player : Area2D
 		}
 		if (dir == "right")
 		{
-			while (num <= tileSize)
+			while (num <= tileSize && playerMovingTime > 0)
 			{
 				pos.X += movementSpeed;
 				// Position.X -= movementSpeed;
@@ -139,7 +157,7 @@ public partial class Player : Area2D
 		}
 		if (dir == "up")
 		{
-			while (num <= tileSize)
+			while (num <= tileSize && playerMovingTime > 0)
 			{
 				pos.Y -= movementSpeed;
 				// Position.X -= movementSpeed;
@@ -151,7 +169,7 @@ public partial class Player : Area2D
 		}
 		if (dir == "down")
 		{
-			while (num <= tileSize)
+			while (num <= tileSize && playerMovingTime > 0)
 			{
 				pos.Y += movementSpeed;
 				// Position.X -= movementSpeed;
@@ -161,7 +179,6 @@ public partial class Player : Area2D
 				await ToSignal(GetTree().CreateTimer(0.01), SceneTreeTimer.SignalName.Timeout);
 			}
 		}
-		// GD.Print("Square = " + CalculateSquare(Position)[0] + "," + CalculateSquare(Position)[1]);
 	}
 
 	private int[] CalculateSquare(Vector2 pos)

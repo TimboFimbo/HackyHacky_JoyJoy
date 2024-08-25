@@ -13,6 +13,7 @@ public partial class Main : Node
 	// Vector2 playerSpriteStartPos = new Vector2(80, 80);
 	char[] walkableBlocks = new char[4] {'.', '#', '#', 'E'};
 	bool inputBoxOpen = false;
+	bool currentlyPlaying = false;
 	string curInpAddress;
 	int curInpLength;
 	int curLineNum;
@@ -61,6 +62,9 @@ public partial class Main : Node
 		inputBox.Text = "";
 		TerminalLightOn(false);
 		ExitDoorOpened(false);
+		SetPlayPauseIcon("play", false);
+		SetPlayPauseIcon("pause", false);
+		currentlyPlaying = false;
 
 		interpreter.ResetEverything();
 
@@ -232,13 +236,13 @@ public partial class Main : Node
 		else
 		{
 			// GD.Print("Cannot move there.");
-			outputBox.Text = "Cannot Move There";
+			// outputBox.Text = "Cannot Move There";
 		}
 	}
 
 	public void InteractSignalReceived()
 	{
-		if (inputBoxOpen)
+		if (inputBoxOpen || currentlyPlaying)
 		{
 			return;
 		}
@@ -275,7 +279,7 @@ public partial class Main : Node
 
 		// interpreter.currentlyPaused = !interpreter.currentlyPaused;
 
-		if (inputBoxOpen)
+		if (inputBoxOpen || !currentlyPlaying)
 		{
 			return;
 		}
@@ -292,12 +296,16 @@ public partial class Main : Node
 		if (interpreter.stackCurrentlyPaused)
 		{
 			interpreter.stackCurrentlyPaused = false;
-			outputBox.Text = "           -- PLAY --";
+			SetPlayPauseIcon("play", true);
+			SetPlayPauseIcon("pause", false);
+			// outputBox.Text = "           -- PLAY --";
 		}
 		else
 		{
 			interpreter.stackCurrentlyPaused = true;
-			outputBox.Text = "          -- PAUSE --";
+			SetPlayPauseIcon("play", false);
+			SetPlayPauseIcon("pause", true);
+			// outputBox.Text = "          -- PAUSE --";
 		}
 	}
 
@@ -604,6 +612,10 @@ public partial class Main : Node
 		DisplayCode(curLevel, -1); // removes highlighting from grid line
 		interpreter.curCommandNum = 0;
 		TerminalLightOn(false);
+
+		SetPlayPauseIcon("play", false);
+		SetPlayPauseIcon("pause", false);
+		currentlyPlaying = false;
 	}
 
 	// *** Local Methods ***
@@ -785,6 +797,31 @@ public partial class Main : Node
 		}
 
 		TerminalLightOn(true);
+		SetPlayPauseIcon("play", true);
+		SetPlayPauseIcon("pause", false);
+		currentlyPlaying = true;
+		interpreter.currentlyPaused = false;
+		interpreter.codePausedByStack = false;
+	}
+
+	private void SetPlayPauseIcon(string playOrPause, bool on)
+	{
+		float[] iconGrey = {0.3f, 0.3f, 0.3f};
+		float[] iconWhite = {1.0f, 1.0f, 1.0f};
+
+		var playIcon = GetNode<Hud>("HUD").GetNode<TextureRect>("PlayIcon");
+		var pauseIcon = GetNode<Hud>("HUD").GetNode<TextureRect>("PauseIcon");
+
+		if (playOrPause == "play")
+		{
+			if (on) { playIcon.Modulate = new Color(iconWhite[0], iconWhite[1], iconWhite[2]); }
+			else { playIcon.Modulate = new Color(iconGrey[0], iconGrey[1], iconGrey[2]); }
+		}
+		else
+		{
+			if (on) { pauseIcon.Modulate = new Color(iconWhite[0], iconWhite[1], iconWhite[2]); }
+			else { pauseIcon.Modulate = new Color(iconGrey[0], iconGrey[1], iconGrey[2]); }
+		}
 	}
 
 	private void DisplayCode(int levelNumber, int curLineNumber)

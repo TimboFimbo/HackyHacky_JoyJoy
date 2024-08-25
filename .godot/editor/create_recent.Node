@@ -1,9 +1,9 @@
+TextureRect
 ColorRect
 Label
 GridContainer
 Timer
 Button
-TextureRect
 CanvasLayer
 GPUParticles2D
 Node

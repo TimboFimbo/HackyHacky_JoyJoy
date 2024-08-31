@@ -19,6 +19,8 @@ public partial class Player : Area2D
 	public delegate void PausePressedEventHandler();
 	[Signal]
 	public delegate void ResetPressedEventHandler();
+	[Signal]
+	public delegate void HelpPressedEventHandler();
 	public int playerMovingTime = 0;
 	int timeToIdleAnim = 60;
 
@@ -71,6 +73,11 @@ public partial class Player : Area2D
 		if (Input.IsActionJustPressed("reset")) // key 'r'
 		{
 			EmitSignal(SignalName.ResetPressed);
+		}
+
+		if (Input.IsActionJustPressed("help")) // key 'ESC'
+		{
+			EmitSignal(SignalName.HelpPressed);
 		}
 
 		// The following are debug keys and won't be used in-game

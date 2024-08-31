@@ -134,6 +134,7 @@ offset_bottom = 689.0
 [connection signal="StackInputCommand" from="OLangInterpreter" to="." method="StackInputCommandReceived"]
 [connection signal="CloseDoorPressed" from="player" to="." method="CloseDoorSignalReceived"]
 [connection signal="DirectionPressed" from="player" to="." method="DirectionSignalReceived"]
+[connection signal="HelpPressed" from="player" to="." method="HelpSignalReceived"]
 [connection signal="InteractPressed" from="player" to="." method="InteractSignalReceived"]
 [connection signal="OpenDoorPressed" from="player" to="." method="OpenDoorSignalReceived"]
 [connection signal="PausePressed" from="player" to="." method="PauseSignalReceived"]

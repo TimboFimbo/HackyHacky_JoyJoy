@@ -44,7 +44,7 @@ Gameplay
 Elements of the play screen will now be explained. Further details are
 covered later:
 
-[![HHJJ-1-Playfield.png](https://i.postimg.cc/BQCC4NwN/HHJJ-1-Playfield.png)](https://postimg.cc/GHHDjPRs)
+[!ScreenShot](/Readme_Images/HHJJ_1_Playfield.png)
 
 1.  The level that the player must solve. Within it are the terminal,
     which starts the oLang code running, a door, which must be opened,
@@ -144,7 +144,7 @@ The Stack
 The stack is briefly mentioned above, but as it is such an important
 aspect of gameplay, here\'s a slightly more expanded explanation:
 
-[![HHJJ-2-Stack.png](https://i.postimg.cc/Jz45nJf8/HHJJ-2-Stack.png)](https://postimg.cc/kBzbYVMY)
+[!ScreenShot](/Readme_Images/HHJJ_1_Stack.png)
 
 1\. This line (\$3000) contains the string input by the player whenever
 the \'INP\' command is triggered. It can hold up to 16 characters, with
@@ -272,7 +272,7 @@ but is handy if you want an explanation of each step:
 
 ##### Step 1
 
-[![HHJJ-Step1.png](https://i.postimg.cc/QMg6Ks6G/HHJJ-Step1.png)](https://postimg.cc/nszK68b0)
+[!ScreenShot](/Readme_Images/HHJJ_Step1.png)
 
 The first line run is \$2000, and contains the following code:
 
@@ -288,7 +288,7 @@ address \$1000 is this generated code.
 
 ##### Step 2
 
-[![HHJJ-Step2.png](https://i.postimg.cc/tT22DkQB/HHJJ-Step2.png)](https://postimg.cc/bDSxwQvn)
+[!ScreenShot](/Readme_Images/HHJJ_Step2.png)
 
 The next line run is \$2020 and contains the following code:
 
@@ -301,7 +301,7 @@ This is then printed in the Output Box under the playfield.
 
 ##### Step 3
 
-[![HHJJ-Step3.png](https://i.postimg.cc/mDbmQqqc/HHJJ-Step3.png)](https://postimg.cc/xk4GQs9Y)
+[!ScreenShot](/Readme_Images/HHJJ_Step3.png)
 
 The next line run is \$2020 and contains the following code:
 
@@ -316,7 +316,7 @@ will be stored at address \$1010 in the next step.
 
 ##### Step 3.5
 
-[![HHJJ-Step3-5.png](https://i.postimg.cc/7hhXRzqw/HHJJ-Step3-5.png)](https://postimg.cc/q6f8hzt5)
+[!ScreenShot](/Readme_Images/HHJJ_Step3_5.png)
 
 Once the player has entered their code attempt, the Stack grid comes
 into play. The Stack grid is structured in the same way as a real stack
@@ -330,11 +330,11 @@ input from Step 3.
 Once complete, the player input will be stored at address \$1010 then
 the program will return to line \$2030.
 
-[![HHJJ-Step3-5-2.png](https://i.postimg.cc/VsZKCKF6/HHJJ-Step3-5-2.png)](https://postimg.cc/Z03PkF2t)
+[!ScreenShot](/Readme_Images/HHJJ_Step3_5_2.png)
 
 ##### Step 4
 
-[![HHJJ-Step4.png](https://i.postimg.cc/yYJvX0fT/HHJJ-Step4.png)](https://postimg.cc/8jSRTfgF)
+[!ScreenShot](/Readme_Images/HHJJ_Step4.png)
 
 The next line run is \$2030 and contains the following code:
 
@@ -346,7 +346,7 @@ Code\...\' and is displayed in the Output Box.
 
 ##### Step 5
 
-[![HHJJ-Step5.png](https://i.postimg.cc/GhZzM9Vn/HHJJ-Step5.png)](https://postimg.cc/mtyQkZTm)
+[!ScreenShot](/Readme_Images/HHJJ_Step5.png)
 
 The next line run is \$2040 and contains the following code:
 
@@ -366,7 +366,7 @@ the result of a correct code being entered.
 
 ##### Step 6
 
-[![HHJJ-Step6.png](https://i.postimg.cc/NjmDZBv9/HHJJ-Step6.png)](https://postimg.cc/G43vy02d)
+[!ScreenShot](/Readme_Images/HHJJ_Step6.png)
 
 In this instance, the code \'0730\' has been generated in address
 \$1000. Address \$1010 contains the player input, and since they match,

@@ -1,6 +1,7 @@
-AnimatedSprite2D
+RichTextLabel
 TextureRect
 ColorRect
+AnimatedSprite2D
 Label
 GridContainer
 Timer
@@ -8,7 +9,6 @@ Button
 CanvasLayer
 GPUParticles2D
 Node
-RichTextLabel
 LineEdit
 TextEdit
 Area2D

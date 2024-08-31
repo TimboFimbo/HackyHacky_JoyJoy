@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://tr8bdt1jgce6"]
+[gd_scene load_steps=13 format=3 uid="uid://tr8bdt1jgce6"]
 
 [ext_resource type="Script" path="res://Scenes/Hud.cs" id="1_fbqcy"]
 [ext_resource type="Texture2D" uid="uid://c1vi6gkuv77do" path="res://Assets/Sprites/CurcuitBackground.webp" id="1_jf37g"]
 [ext_resource type="FontFile" uid="uid://dxrjai3i55deo" path="res://Assets/Fonts/dogica/TTF/dogicapixel.ttf" id="2_nfsif"]
 [ext_resource type="Texture2D" uid="uid://crp68u6itmt31" path="res://Assets/Sprites/Icons/PlayIconPixel.png" id="3_rnojc"]
 [ext_resource type="Texture2D" uid="uid://coyym71fdk7n" path="res://Assets/Sprites/Icons/PauseIconPixel.png" id="4_a7hl5"]
+[ext_resource type="Texture2D" uid="uid://cyf4cav2eujy5" path="res://Assets/Sprites/CircuitBackground_Pixel.png" id="6_426ka"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_12eby"]
 line_spacing = 20.0
@@ -768,6 +769,101 @@ text = "Level 5"
 [node name="MessageTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="HelpMenu" type="ColorRect" parent="."]
+visible = false
+light_mask = 2
+visibility_layer = 2
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.65098, 0.823529, 1, 1)
+
+[node name="HelpMenu_Front" type="TextureRect" parent="HelpMenu"]
+modulate = Color(0.10748, 0.10748, 0.10748, 1)
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("6_426ka")
+
+[node name="HelpMenu_Title" type="RichTextLabel" parent="HelpMenu"]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 10.0
+offset_right = 1239.0
+offset_bottom = 50.0
+theme_override_fonts/normal_font = ExtResource("2_nfsif")
+theme_override_fonts/italics_font = ExtResource("2_nfsif")
+theme_override_font_sizes/italics_font_size = 16
+theme_override_font_sizes/normal_font_size = 32
+text = "                                Help Menu
+"
+
+[node name="HelpMenu_Text" type="RichTextLabel" parent="HelpMenu"]
+offset_left = 34.0
+offset_top = 100.0
+offset_right = 1234.0
+offset_bottom = 700.0
+theme_override_constants/line_separation = 0
+theme_override_font_sizes/normal_font_size = 16
+text = "Controls:
+
+    Cursor Keys: Move character
+
+    Letter i: Interact with terminals and start oLang running
+
+    Space: Play / Pause running oLang (can still move character)
+
+    Letter r: Reset level
+
+    Esc Key: Show / hide help menu
+
+Debug controls also exist, but using them will allow you to bypass the puzzles:
+
+    Numbers 1 and 2: Open level doors 1 and 2
+
+    Numbers 3 and 4: Close level doors 1 and 2
+
+oLang:
+
+PRT
+
+This is the Print command. It accepts one or two memory addresses and prints the content within them to the Output Box.
+
+INP
+
+This is the Input command. It accepts a memory address and a string length. When triggered, the Input Box will open for the player and they will be prompted to enter something, such as name or password. This will then be stored at the memory address listed, up to the set number of characters.
+
+RUN
+
+This is the Run command, and executes a pre-written function, either directly by name, or by memory address.
+
+    open_door,X : This command accepts a number and opens that door on the level. If it is passed a zero, it will instead open any door that the player is standing next to.
+
+    gen_code,X : This command generates a random code of length X and stores it at memory address $1000.
+
+    check_code,0 : This command checks the strings at memory addresses $1000 and $1010 and opens the level's door if they match.
+
+    null_func,0: This function does nothing. Does it need replacing?..
+
+END
+
+This is the End command and terminates the running program.
+
+Full instructions at https://github.com/TimboFimbo/HackyHacky_JoyJoy
+
+"
+
+[node name="HelpMenu_Hint" type="RichTextLabel" parent="HelpMenu"]
+offset_left = 32.0
+offset_top = 51.0
+offset_right = 1232.0
+offset_bottom = 91.0
+theme_override_fonts/italics_font = ExtResource("2_nfsif")
+theme_override_font_sizes/italics_font_size = 16
+theme_override_font_sizes/normal_font_size = 24
+text = "Level Hint: 
+"
+scroll_active = false
 
 [connection signal="pressed" from="Button_1" to="." method="OnButton1Pressed"]
 [connection signal="pressed" from="Button_2" to="." method="OnButton2Pressed"]

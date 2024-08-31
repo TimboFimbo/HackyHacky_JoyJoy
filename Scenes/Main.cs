@@ -14,6 +14,7 @@ public partial class Main : Node
 	char[] walkableBlocks = new char[4] {'.', '#', '#', 'E'};
 	bool inputBoxOpen = false;
 	bool currentlyPlaying = false;
+	bool helpMenuOpen = false;
 	string curInpAddress;
 	int curInpLength;
 	int curLineNum;
@@ -65,7 +66,6 @@ public partial class Main : Node
 		SetPlayPauseIcon("play", false);
 		SetPlayPauseIcon("pause", false);
 		currentlyPlaying = false;
-		playerSprite.playerMovingTime = 0;
 
 		interpreter.ResetEverything();
 
@@ -320,6 +320,25 @@ public partial class Main : Node
 		}
 
 		ResetLevel(curLevel);
+	}
+
+	public void HelpSignalReceived()
+	{
+		var helpMenu = GetNode<Hud>("HUD").GetNode<ColorRect>("HelpMenu");
+		var hint = GetNode<Hud>("HUD").GetNode<ColorRect>("HelpMenu").GetNode<RichTextLabel>("HelpMenu_Hint");
+
+		if (helpMenuOpen)
+		{
+			helpMenu.Hide();
+			helpMenuOpen = false;
+		}
+
+		else
+		{
+			hint.Text = "Level Hint: " + Constants.Hints.hints[curLevel - 1];
+			helpMenu.Show();
+			helpMenuOpen = true;
+		}
 	}
 
 	public void OpenDoorSignalReceived(int doorNumber)

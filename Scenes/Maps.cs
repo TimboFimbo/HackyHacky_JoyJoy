@@ -8,6 +8,19 @@ namespace AsciiMaps
         static string[] mapLevel1 = 
         {
             "WWWWWWWWWWWWW",
+            "W...WWW..WWWW",
+            "W....W....WWW",
+            "W..........WW",
+            "W...T...WWWWW",
+            "W.......1...W",
+            "WW......W.E.W",
+            "WWWW....W..WW",
+            "WWWWWWWWWWWWW"
+        };
+
+        static string[] mapLevel2 = 
+        {
+            "WWWWWWWWWWWWW",
             "W.......W...W",
             "W.......W...W",
             "W....T..W...W",
@@ -18,7 +31,7 @@ namespace AsciiMaps
             "WWWWWWWWWWWWW"
         };
 
-        static string[] mapLevel2 = 
+        static string[] mapLevel3 = 
         {
             "WWWWWWWWWWWWW",
             "W.........WWW",
@@ -31,7 +44,7 @@ namespace AsciiMaps
             "WWWWWWWWWWWWW"
         };
 
-        static string[] mapLevel3 = 
+        static string[] mapLevel4 = 
         {
             "WWWWWWWWWWWWW",
             "W....WW.W...W",
@@ -41,19 +54,6 @@ namespace AsciiMaps
             "W.......W...W",
             "W.......2.E.W",
             "W.......W...W",
-            "WWWWWWWWWWWWW"
-        };
-
-        static string[] mapLevel4 = 
-        {
-            "WWWWWWWWWWWWW",
-            "W...WWW..WWWW",
-            "W....W....WWW",
-            "W..........WW",
-            "W...T...WWWWW",
-            "W.......1...W",
-            "WW......W.E.W",
-            "WWWW....W..WW",
             "WWWWWWWWWWWWW"
         };
 

@@ -799,6 +799,7 @@ text = "                                Help Menu
 "
 
 [node name="HelpMenu_Text" type="RichTextLabel" parent="HelpMenu"]
+layout_mode = 0
 offset_left = 34.0
 offset_top = 100.0
 offset_right = 1234.0
@@ -854,6 +855,7 @@ Full instructions at https://github.com/TimboFimbo/HackyHacky_JoyJoy
 "
 
 [node name="HelpMenu_Hint" type="RichTextLabel" parent="HelpMenu"]
+layout_mode = 0
 offset_left = 32.0
 offset_top = 51.0
 offset_right = 1232.0

@@ -50,6 +50,7 @@ public partial class Main : Node
 		var tileMap5 = GetNode<TileMap>("map_level5");
 		var playerSprite = GetNode<Player>("player");
 		var inputBox = GetNode<LineEdit>("input_box");
+		var outputBox = GetNode<RichTextLabel>("output_box");
 		var interpreter = GetNode<OLangInterpreter>("OLangInterpreter");
 
 		printed = false;
@@ -61,6 +62,7 @@ public partial class Main : Node
 		playerSprite.ResetPlayer();
 		stackCodeTest = new System.Text.StringBuilder(OLangCode.Code.emptyStack);
 		inputBox.Text = "";
+		outputBox.Text = "Output Box";
 		TerminalLightOn(false);
 		ExitDoorOpened(false);
 		SetPlayPauseIcon("play", false);
@@ -590,6 +592,8 @@ public partial class Main : Node
 	{
 		string s = string.Empty;
 		Random rnd = new Random();
+
+		if (codeLength > 16) { codeLength = 16; }
 
 		for (int i = 0; i < codeLength; i++)
 		{

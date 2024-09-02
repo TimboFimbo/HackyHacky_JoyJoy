@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b4sopualo3alk"]
 
-[ext_resource type="Script" path="res://OLangInterpreter.cs" id="1_gdlq6"]
+[ext_resource type="Script" path="res://Scenes/OLangInterpreter.cs" id="1_gdlq6"]
 
 [node name="OLangInterpreter" type="Node"]
 script = ExtResource("1_gdlq6")

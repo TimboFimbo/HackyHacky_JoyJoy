@@ -27,6 +27,7 @@ public partial class Hud : CanvasLayer
 		// hide background
 		GetNode<TextureRect>("Background").Hide();
 		GetNode<Label>("WinMessage").Hide();
+		GetNode<Label>("Credits").Hide();
 
 		// hide buttons - change to loop
 		GetNode<Button>("Button_1").Hide();
@@ -59,6 +60,8 @@ public partial class Hud : CanvasLayer
 		var message = GetNode<Label>("Message");
     	message.Text = "Hacky Hacky Joy Joy";
     	message.Show();
+
+		GetNode<Label>("Credits").Show();
 
 	    var background = GetNode<TextureRect>("Background");
 		background.Show();
@@ -116,6 +119,7 @@ public partial class Hud : CanvasLayer
 			level4_complete &&
 			level5_complete)
 			{
+				GetNode<Label>("Credits").Hide();
 				GetNode<Label>("WinMessage").Show();
 			}
 	}

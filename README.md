@@ -16,6 +16,15 @@ with no prior knowledge of the topics. It is not meant to showcase my
 programming skills, artistic skills, or puzzle design skills. If I carry
 on with the game, these things will all be improved.
 
+To Run
+--------
+
+There is a Builds folder that contains exported versions. Just download the 
+folder for your appropriate platform and run the executable inside. If there
+isn't one, it doesn't work on your system, or you wish to edit the game,
+download Godot (the .NET version) and import the entire project. You can
+then hit the Play button within the editor to run the game.
+
 Controls
 --------
 

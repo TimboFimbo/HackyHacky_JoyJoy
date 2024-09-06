@@ -1,0 +1,14 @@
+res://Scenes/box_controller.tscn::deb1719335368a46b0ce1baf86c6148f::1723210063::res://.godot/exported/133200997/export-2ab557645e92ee83c383bfa139ea3652-box_controller.scn
+res://Scenes/code_box.tscn::eebbef31087497b48e2b5afcd33b3da6::1723210063::res://.godot/exported/133200997/export-874caccbdc090101e8000430c4c457ca-code_box.scn
+res://Scenes/hud.tscn::3005084dee62279d561ef125666273c0::1725609587::res://.godot/exported/133200997/export-885e17d6a23b453de5b281f1a900d8bb-hud.scn
+res://Scenes/input_box.tscn::1ead1a26aa0292f51e33fcdc15638248::1723210063::res://.godot/exported/133200997/export-b2ec430810b69a020365bfdbf0fc2573-input_box.scn
+res://Scenes/main.tscn::6fa3f04a90fad9bb0059c2231e6bf1aa::1725609587::res://.godot/exported/133200997/export-2ddd04d543d5858e7f20c9299a8b5096-main.scn
+res://Scenes/map_level_1.tscn::41d54d6cdffd605f52dac0a7cc32f03a::1724505877::res://.godot/exported/133200997/export-7f8d8c0d95815852a749a2ff3fc1c530-map_level_1.scn
+res://Scenes/map_level_2.tscn::1373bc9ddf39f7be6aa0ea5c319902bd::1724505877::res://.godot/exported/133200997/export-69aa76ff627e5616eefcaed6dc94de5a-map_level_2.scn
+res://Scenes/map_level_3.tscn::8d1dcca0f73162f429327254bf3c1b02::1725609587::res://.godot/exported/133200997/export-389464166a487a59a0e15e9b282d9153-map_level_3.scn
+res://Scenes/map_level_4.tscn::b51c3183a75b8423c34eaf31ff7a3faa::1725609587::res://.godot/exported/133200997/export-f51e825a17d3a337f376e23be5d55e8e-map_level_4.scn
+res://Scenes/map_level_5.tscn::7d0c99f0983359109739633bd2430dde::1725609587::res://.godot/exported/133200997/export-bafea36ddc9e70e34795f2a51e4a6aa0-map_level_5.scn
+res://Scenes/o_lang_interpreter.tscn::1c34624b828720f1dd5179f6a688f3ce::1725302145::res://.godot/exported/133200997/export-8a67daa17ea35cc685d7f7bc3023faf3-o_lang_interpreter.scn
+res://Scenes/player.tscn::b0bd5becb48897087e881a54ec25ba62::1725609587::res://.godot/exported/133200997/export-1753c997600d68ab5d20ae99fddb15c6-player.scn
+res://Scenes/stack_box.tscn::e3f92fe4455674fb65d7bd2347f8bf65::1725302145::res://.godot/exported/133200997/export-f63fec16b3bd2ae2940ffd6435184b65-stack_box.scn
+res://Scenes/vars_box.tscn::24ab5e1858f2a63214c737c885eaa9f1::1723210063::res://.godot/exported/133200997/export-a9b1e5055d0e9b097847fe56f2a659b4-vars_box.scn
